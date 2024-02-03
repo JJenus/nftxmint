@@ -14,7 +14,8 @@
 			themeMode = defaultThemeMode;
 		}
 
-		KTThemeMode.setMode(themeMode);
+		// KTThemeMode.setMode(themeMode);
+		KTThemeMode.setMode("dark");
 	}
 </script>
 

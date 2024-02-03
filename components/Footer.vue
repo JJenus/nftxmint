@@ -6,27 +6,17 @@
 	<!--begin::Footer container-->
 	<!-- -->
 	<div
-		data-bs-theme="light"
-		style="background-color: #1c325e"
-		class="app-container text-muted container-fluid fs-5 pt-10 mt-10 py-3"
+		style="border-radius: 0"
+		class="app-container card container-fluid fs-5 pt-10 mt-10 py-3"
 	>
 		<div class="row row-cols-md-2 justify-content-between">
 			<!--begin::Copyright-->
-			<div class="col-md-4 text-muted order-2w p-0 m-0 order-md-1w pb-8">
+			<div class="col-md-4 order-2w p-0 m-0 order-md-1w pb-8">
 				<div class="d-flex flex-column align-itemis-center mb-6">
 					<div
 						class="d-flex flex-row align-items-center justify-content-center m-0 mb-3"
 					>
-						<a href="/">
-							<img
-								alt="Logo"
-								src="/assets/media/logos/zipay-logo.png"
-								class="h-60px"
-							/>
-						</a>
-						<span class="fs-1 text-danger ms-3 fw-bold d-none">
-							{{ config.APP }}
-						</span>
+						<NFTexLogo :classes="'h-70px'"/>
 					</div>
 				</div>
 				<p class="text-center p-4">
@@ -40,8 +30,8 @@
 			<div class="col-md-5">
 				<h2 class="fs-2qx text-danger mb-2">Stay informed</h2>
 				<p>
-					Reach us on WhatsApp 
-					<br>
+					Reach us on WhatsApp
+					<br />
 					+1 (228) 888-8515
 				</p>
 				<p class="mb-5">
@@ -49,7 +39,10 @@
 					form below.
 				</p>
 				<div class="d-flex align-items-center">
-					<div class="position-relative my-1 me-3" bis_skin_checked="1">
+					<div
+						class="position-relative my-1 me-3"
+						bis_skin_checked="1"
+					>
 						<i
 							class="ki-outline ki-sms fs-3 position-absolute top-50 translate-middle-y ms-4"
 						></i>
@@ -59,7 +52,7 @@
 							class="form-control w-200px w-lg-300px ps-12"
 							placeholder="Email"
 						/>
-					</div> 
+					</div>
 					<button class="btn btn-light-danger">Subscribe</button>
 				</div>
 			</div>

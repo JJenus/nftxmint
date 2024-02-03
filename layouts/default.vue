@@ -1,32 +1,47 @@
 <script setup>
 	const config = useRuntimeConfig().public;
 
-	const mainNavs = [
+	const route = useRoute();
+	console.log();
+	const currentRoute = ref("overview");
+	const user = userData().data;
+
+	const active = ref('all');
+
+	const navs = [
 		{
-			name: "About Us",
-			path: "/about-us",
+			name: "All",
+			path: "/",
 		},
 		{
-			name: "News",
-			path: "/news",
+			name: "Art",
+			path: "/category/art",
 		},
 		{
-			name: "Investment",
-			path: "/investment",
+			name: "Gaming",
+			path: "/category/gaming",
 		},
 		{
-			name: "Our Banking",
-			path: "/banking",
+			name: "Memberships",
 		},
 		{
-			name: "Contact Us",
-			path: "/contact-us",
+			name: "Photography",
+			path: "/category/photography",
+		},
+		{
+			name: "Music",
+			path: "/category/music",
 		},
 	];
 	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
 	loaded.value = false;
 
-	onMounted(() => {});
+	onMounted(() => {
+		console.log("ROUTE", route.path.split("/"));
+		if (route.path.split("/")[2])
+			active.value = route.path.split("/")[2];
+		else active.value = "all"
+	});
 </script>
 
 <template>
@@ -66,8 +81,45 @@
 								id="kt_app_content"
 								class="app-content flex-column-fluid"
 							>
+								<div class="mb-3 hover-scroll-x container">
+									<ul
+										class="nav nav-tabs nav-pills d-flex flex-nowrap border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
+									>
+										<li
+											v-for="nav in navs"
+											class="nav-item me-08 mb-md-2"
+											@click="active = nav.name"
+										>
+											<NuxtLink
+												class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
+												:class="
+													active == nav.name
+														? 'active'
+														: ''
+												"
+												:to="nav.path"
+											>
+												<span
+													class="d-flex flex-column align-items-start"
+												>
+													<span
+														class="fs-4 fw-bold"
+														>{{ nav.name }}</span
+													>
+												</span>
+											</NuxtLink>
+										</li>
+									</ul>
+								</div>
+
 								<!--begin::Content container-->
-								<slot />
+								<div
+									style="position: relative"
+									id="kt_app_content_container"
+									class="app-container position-relative"
+								>
+									<slot />
+								</div>
 								<!--end::Content container-->
 							</div>
 							<!--end::Content-->

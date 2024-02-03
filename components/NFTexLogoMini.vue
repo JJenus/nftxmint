@@ -28,21 +28,9 @@
 	>
 		<img
 			alt="Logo"
-			src="/assets/media/logos/zipay-logo.png"
+			src="/assets/media/logos/nftex-logo.png"
 			:class="classes"
-			class="me-4"
+			class=""
 		/>
-		<div class="mt-3 h1">
-			<span
-				class="zipay-logo logo-color theme-light-show"
-				:class="appClass"
-				>{{ config.APP }}</span
-			>
-			<span
-				:class="appClassDark"
-				class="text-warning zipay-logo theme-dark-show"
-				>{{ config.APP }}</span
-			>
-		</div>
 	</NuxtLink>
 </template>

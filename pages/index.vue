@@ -1,63 +1,60 @@
 <script setup>
-	const active = "All";
-	const navs = [
-		{
-			name: "All",
-		},
-		{
-			name: "Arts",
-		},
-		{
-			name: "Gaming",
-		},
-		{
-			name: "Memberships",
-		},
-		{
-			name: "Photography",
-		},
-		{
-			name: "Music",
-		},
-	];
+
 </script>
 
 <template>
-	<div id="kt_app_content_container" class="app-container container-fluid">
-		<div class="mb-5">
-			<ul
-				class="nav nav-tabs nav-pills d-flex overflow-scroll border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
-			>
-				<li v-for="nav in navs" class="nav-item me-08 mb-md-2">
-					<a
-						class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
-						data-bs-toggle="tab"
-						:class="active == nav.name ? 'active' : ''"
-						href="#kt_vtab_pane_4"
-					>
-						<span class="d-flex flex-column align-items-start">
-							<span class="fs-4 fw-bold">{{ nav.name }}</span>
-						</span>
-					</a>
-				</li>
-			</ul>
-		</div>
+	<div class="container-fluid">
 		<!--begin::Card-->
-		<div class="card mb-10">
+		<div class="card mb-10 border-0 bg-transparent">
 			<!--begin::Card body-->
-			<div class="card-body min-h-300px"></div>
-			<!--end::Card body-->
-		</div>
-		<div class="card mb-10">
-			<!--begin::Card body-->
-			<div class="card-body min-h-300px"></div>
-			<!--end::Card body-->
-		</div>
-		<div class="card mb-10">
-			<!--begin::Card body-->
-			<div class="card-body min-h-300px"></div>
+			<div class="card-body min-h-300px">
+				<div
+					class="d-flex flex-column flex-md-row justify-content-around align-items-center"
+				>
+					<div class="mw-350px ms-md-4 ms-xl-1">
+						<h1 class="display-4">
+							Discover, collect and sell extraordinary NFTs.
+						</h1>
+						<h6 class="text-muted">
+							Next generation NFTs, art, music, photography, and
+							more.
+						</h6>
+					</div>
+					<div class="text-center ms-auito">
+						<img
+							class="min-w-500 mhi-300px card-rounded"
+							alt=""
+							src="/assets/media/nft/art/art-main.png"
+						/>
+					</div>
+				</div>
+			</div>
 			<!--end::Card body-->
 		</div>
 		<!--end::Card-->
+
+		<div class="mb-4">
+			<SwiperMainSlide />
+		</div>
+
+		<div class="mb-4">
+			<h1 class="fs-1 mb-2">Art NFTs</h1>
+			<SwiperArtShowCase />
+		</div>
+
+		<div class="mb-4">
+			<h1 class="fs-1 mb-2">Music NFTs</h1>
+			<SwiperMusicShowCase />
+		</div>
+
+		<div class="mb-4">
+			<h1 class="fs-1 mb-2">Gaming NFTs</h1>
+			<SwiperGamingShowCase />
+		</div>
+
+		<div class="mb-4">
+			<h1 class="fs-1 mb-2">Photography NFTs</h1>
+			<SwiperPhotographyShowCase />
+		</div>
 	</div>
 </template>

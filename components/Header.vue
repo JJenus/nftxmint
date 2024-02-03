@@ -5,7 +5,7 @@
 <template>
 	<div
 		id="kt_app_header"
-		class="app-header d-flex"
+		class="app-header d-flex border-0"
 		data-kt-sticky="true"
 		data-kt-sticky-name="app-header-sticky"
 		data-kt-sticky-offset="{default: 'false', lg: '300px'}"
@@ -17,33 +17,11 @@
 		>
 			<!--begin::Logo-->
 			<div class="d-flex d-lg-none align-items-center me-auto">
-				<a href="../index.html">
-					<img
-						alt="Logo"
-						src="/assets/media/logos/demo2.svg"
-						class="theme-light-show h-25px"
-					/>
-					<img
-						alt="Logo"
-						src="/assets/media/logos/demo2-dark.svg"
-						class="theme-dark-show h-25px"
-					/>
-				</a>
+				<NFTexLogo :classes="'h-40px ms-n3'" />
 			</div>
 
 			<div class="d-none d-lg-flex align-items-center">
-				<a href="../index.html">
-					<img
-						alt="Logo"
-						src="/assets/media/logos/demo2.svg"
-						class="theme-light-show h-25px"
-					/>
-					<img
-						alt="Logo"
-						src="/assets/media/logos/demo2-dark.svg"
-						class="theme-dark-show h-25px"
-					/>
-				</a>
+				<NFTexLogo :classes="'h-60px'" />
 			</div>
 			<!--end::Logo-->
 
@@ -58,7 +36,7 @@
 				<input
 					type="text"
 					id="kt_filter_search"
-					class="form-control form-control border-body bg-body w-450px ps-10"
+					class="form-control form-control-solid w-450px ps-10"
 					placeholder="Search"
 				/>
 			</div>
@@ -597,3 +575,15 @@
 		<!--end::Header container-->
 	</div>
 </template>
+
+<style>
+	.glass-container {
+		background: rgba(
+			255,
+			255,
+			255,
+			0.2
+		); /* Adjust the alpha value for transparency */
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9); /* Optional: Add a subtle shadow */
+	}
+</style>
