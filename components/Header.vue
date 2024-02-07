@@ -5,7 +5,7 @@
 <template>
 	<div
 		id="kt_app_header"
-		class="app-header d-flex border-0"
+		class="app-header d-flex border-0 py-10"
 		data-kt-sticky="true"
 		data-kt-sticky-name="app-header-sticky"
 		data-kt-sticky-offset="{default: 'false', lg: '300px'}"
@@ -52,12 +52,13 @@
 						class="btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white"
 						data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 						data-kt-menu-attach="parent"
-						data-kt-menu-placement="bottom-end"
+						data-kt-menu-placement="bottom-start"
 					>
-						<i class="ki-outline ki-entrance-left fs-1"></i> Login
+						<i class="ki-outline ki-entrance-left fs-2"></i> Login
 					</div>
-
 					<!--end::Menu wrapper-->
+
+					<LoginMenu class="me-3" style="right: 20px;"/>
 				</div>
 				<!--end::Login-->
 
@@ -80,17 +81,17 @@
 					id="kt_header_user_menu_toggle"
 				>
 					<!--begin::Menu wrapper-->
-					<div
+					<!-- <div
 						class="cursor-pointer d-none symbol symbol-circle ms-2 symbol-35px symbol-lg-50px"
 						data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 						data-kt-menu-attach="parent"
 						data-kt-menu-placement="bottom-end"
 					>
 						<img src="/assets/media/avatars/300-9.jpg" alt="user" />
-					</div>
+					</div> -->
 
 					<div
-						class="app-navbar-item d-none d-lg-flex justify-content-end flex-grow-1 ms-1 ms-lg-3"
+						class="cursor-pointer d-none d-lg-block symbol symbol-circle ms-2 symbol-35px symbol-lg-50px ms-0 ms-lg-3"
 						data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 						data-kt-menu-attach="parent"
 						data-kt-menu-placement="bottom-end"
@@ -98,7 +99,6 @@
 						<!--begin::Drawer toggle-->
 						<div
 							class="btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white btn-icon w-35px h-35px w-md-40px h-md-40px"
-							id="kt_activities_toggle"
 						>
 							<i class="ki-outline ki-profile-circle fs-2x"></i>
 						</div>
@@ -563,12 +563,12 @@
 				class="d-flex d-lg-none align-items-center me-n2 ms-2"
 				title="Show sidebar menu"
 			>
-				<div
+				<button
 					class="btn btn-icon btn-icon-white btn-active-icon-white btn-active-color-white w-35px h-35px"
 					id="kt_app_sidebar_mobile_toggle"
 				>
 					<i class="ki-solid ki-burger-menu-5 fs-3x"></i>
-				</div>
+				</button>
 			</div>
 			<!--end::Sidebar toggle-->
 		</div>

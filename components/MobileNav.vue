@@ -10,91 +10,301 @@
 	const config = useRuntimeConfig().public;
 </script>
 <template>
-	<!--begin::Activities drawer-->
-	<div
-		id="kt_activities"
-		class="bg-body"
-		data-kt-drawer="true"
-		data-kt-drawer-name="activities"
-		data-kt-drawer-activate="true"
-		data-kt-drawer-overlay="true"
-		data-kt-drawer-width="{default:'300px', 'lg': '900px'}"
-		data-kt-drawer-direction="end"
-		data-kt-drawer-toggle="#kt_activities_toggle"
-		data-kt-drawer-close="#kt_activities_close"
-	>
-		<div class="card shadow-none border-0 rounded-0 w-100">
-			<!--begin::Header-->
-			<div class="card-header" id="kt_activities_header">
-				<div class="d-flex d-lg-none align-items-center me-auto">
-					<a href="/">
-						<img
-							alt="Logo"
-							src="/assets/media/logos/zipay-logo.png"
-							class="theme-light-show h-25px"
-						/>
-						<img
-							alt="Logo"
-							src="/assets/media/logos/zipay-logo.png"
-							class="theme-dark-show h-25px"
-						/>
-					</a>
-					<span class="fs-3 mt-1 text-primary ms-3 fw-bold">
-						{{ config.APP }}
-					</span>
-				</div>
+	<!--begin::Wrapper-->
+	<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+		<!--begin::Sidebar-->
+		<div
+			id="kt_app_sidebar"
+			class="app-sidebar flex-column"
+			data-kt-drawer="true"
+			data-kt-drawer-name="app-sidebar"
+			data-kt-drawer-activate="{default: true, lg: false}"
+			data-kt-drawer-overlay="true"
+			data-kt-drawer-width="250px"
+			data-kt-drawer-direction="end"
+			data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle"
+		>
+			<!--begin::Logo-->
+			<div
+				class="app-sidebar-logo mx-auto pt-7 pt-xl-18 mb-xl-9"
+				id="kt_app_sidebar_logo"
+			>
+				<!--begin::Logo image-->
+				<NFTexLogoMini :classes="'h-60px'" />
+				<!--end::Logo image-->
 			</div>
-			<!--end::Header-->
-
-			<!--begin::Body-->
-			<div class="card-body position-relative" id="kt_activities_body">
-				<!--begin::Menu-->
-				<div class="menu menu-column">
-					<!--begin::Menu item-->
-					<div @click="closeDrawer()" class="menu-item">
-						<NuxtLink
-							@click="active = nav.path"
-							:to="nav.path"
-							v-for="nav in mainNavs"
-							:class="
-								nav.path == active
-									? 'text-primary'
-									: 'text-dark'
-							"
-							class="menu-link position-relative"
-						>
-							<!-- <span class="menu-icon">
-								<i class="bi bi-bar-chart fs-3"></i>
-							</span> -->
-							<span class="menu-title fs-2 fw-bold">
-								{{ nav.name }}
-							</span>
-							<!--begin::Line-->
-							<span
-								v-if="nav.path == active"
-								class="d-inline-block position-absolute h-3px bottom-0 end-0 start-0 bg-danger translate rounded"
-							></span>
-							<!--end::Line-->
-						</NuxtLink>
-					</div>
-					<!--end::Menu item-->
-				</div>
-				<!--end::Menu-->
-			</div>
-			<!--end::Body-->
-
-			<!--begin::Footer-->
-			<div class="card-footer py-5 text-center" id="kt_activities_footer">
-				<a
-					href="user-profile/activity.html"
-					class="btn btn-bg-body text-primary"
+			<!--end::Logo-->
+			<!--begin::sidebar menu-->
+			<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+				<!--begin::Menu wrapper-->
+				<div
+					id="kt_app_sidebar_menu_wrapper"
+					class="app-sidebar-wrapper hover-scroll-y my-5 mx-3 mx-xl-11"
+					data-kt-scroll="true"
+					data-kt-scroll-activate="true"
+					data-kt-scroll-height="auto"
+					data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+					data-kt-scroll-wrappers="#kt_app_sidebar_menu"
+					data-kt-scroll-offset="5px"
 				>
-					View All Activities
-					<i class="ki-outline ki-arrow-right fs-3 text-primary"></i>
-				</a>
+					<!--begin::Menu-->
+					<div
+						class="menu menu-column menu-rounded menu-sub-indention menu-active-bg menu- px-3"
+						id="#kt_app_sidebar_menu"
+						data-kt-menu="true"
+						data-kt-menu-expand="false"
+					>
+						<!--begin:Menu item-->
+						<div
+							data-kt-menu-trigger="click"
+							class="menu-item menu-accordion"
+						>
+							<!--begin:Menu link--><span class="menu-link"
+								><span class="menu-icon">
+									<i class="ki-solid fs-2 ki-user">
+										
+									</i>
+								</span>
+								<span class="menu-title">Profile</span>
+							</span>
+						</div>
+						<div
+							data-kt-menu-trigger="click"
+							class="menu-item menu-accordion"
+						>
+							<!--begin:Menu link--><span class="menu-link"
+								><span class="menu-icon">
+									<i class="ki-solid fs-2 ki-pencil">
+									</i>
+								</span>
+								<span class="menu-title">Create</span></span
+							>
+						</div>
+						<!--end:Menu item--><!--begin:Menu item-->
+						<div
+							data-kt-menu-trigger="click"
+							class="menu-item menu-accordion"
+						>
+							<!--begin:Menu link--><span class="menu-link"
+								><span class="menu-icon">
+									<i class="ki-solid fs-2 ki-book">
+									</i>
+								</span>
+								<span class="menu-title">Resources</span></span
+							>
+							<!--end:Menu link--><!--begin:Menu sub-->
+							<div class="menu-sub menu-sub-accordion">
+								<!--begin:Menu item-->
+								<div
+									data-kt-menu-trigger="click"
+									class="menu-item menu-accordion"
+								>
+									<!--begin:Menu link--><span
+										class="menu-link"
+										><span class="menu-bullet"
+											><span
+												class="bullet bullet-dot"
+											></span></span
+										><span class="menu-title"
+											>About NFTex</span
+										><span class="menu-arrow"></span></span
+									><!--end:Menu link--><!--begin:Menu sub-->
+									<div class="menu-sub menu-sub-accordion">
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link--><a
+												class="menu-link"
+												href="../pages/user-profile/overview.html"
+												><span class="menu-bullet"
+													><span
+														class="bullet bullet-dot"
+													></span></span
+												><span class="menu-title"
+													>Overview</span
+												></a
+											><!--end:Menu link-->
+										</div>
+										<!--end:Menu item--><!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link--><a
+												class="menu-link"
+												href="../pages/user-profile/projects.html"
+												><span class="menu-bullet"
+													><span
+														class="bullet bullet-dot"
+													></span></span
+												><span class="menu-title"
+													>Projects</span
+												></a
+											><!--end:Menu link-->
+										</div>
+										<!--end:Menu item--><!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link--><a
+												class="menu-link"
+												href="../pages/user-profile/campaigns.html"
+												><span class="menu-bullet"
+													><span
+														class="bullet bullet-dot"
+													></span></span
+												><span class="menu-title"
+													>Campaigns</span
+												></a
+											><!--end:Menu link-->
+										</div>
+										<!--end:Menu item--><!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link--><a
+												class="menu-link"
+												href="../pages/user-profile/documents.html"
+												><span class="menu-bullet"
+													><span
+														class="bullet bullet-dot"
+													></span></span
+												><span class="menu-title"
+													>Documents</span
+												></a
+											><!--end:Menu link-->
+										</div>
+										<!--end:Menu item--><!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link--><a
+												class="menu-link"
+												href="../pages/user-profile/followers.html"
+												><span class="menu-bullet"
+													><span
+														class="bullet bullet-dot"
+													></span></span
+												><span class="menu-title"
+													>Followers</span
+												></a
+											><!--end:Menu link-->
+										</div>
+										<!--end:Menu item--><!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link--><a
+												class="menu-link"
+												href="../pages/user-profile/activity.html"
+												><span class="menu-bullet"
+													><span
+														class="bullet bullet-dot"
+													></span></span
+												><span class="menu-title"
+													>Activity</span
+												></a
+											><!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+									</div>
+									<!--end:Menu sub-->
+								</div>
+								<!--end:Menu item--><!--begin:Menu item-->
+								<div
+									data-kt-menu-trigger="click"
+									class="menu-item menu-accordion"
+								>
+									<!--begin:Menu link--><span
+										class="menu-link"
+										><span class="menu-bullet"
+											><span
+												class="bullet bullet-dot"
+											></span></span
+										><span class="menu-title"
+											>Contact Us</span
+										>
+									</span>
+								</div>
+								<!--end:Menu item--><!--begin:Menu item-->
+								<div
+									data-kt-menu-trigger="click"
+									class="menu-item menu-accordion"
+								>
+									<!--begin:Menu link--><span
+										class="menu-link"
+										><span class="menu-bullet"
+											><span
+												class="bullet bullet-dot"
+											></span></span
+										><span class="menu-title">
+											What is NFT
+										</span>
+									</span>
+									<!--end:Menu link--><!--begin:Menu sub-->
+
+									<!--end:Menu sub-->
+								</div>
+							</div>
+							<!--end:Menu sub-->
+						</div>
+
+						<div
+							data-kt-menu-trigger="click"
+							class="menu-item menu-accordion"
+						>
+							<!--begin:Menu link--><span class="menu-link">
+								<span class="menu-icon"
+									><i class="ki-duotone fs-2 ki-note">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</span>
+								<span class="menu-title">Languages</span></span
+							>
+							<!--end:Menu link--><!--begin:Menu sub-->
+							<div class="menu-sub menu-sub-accordion">
+								<!--begin:Menu item-->
+								<div
+									data-kt-menu-trigger="click"
+									class="menu-item menu-accordion"
+								>
+									<!--begin:Menu link--><span
+										class="menu-link"
+									>
+										<span class="menu-bullet">
+											<span
+												class="bullet bullet-dot"
+											></span>
+										</span>
+										<span class="menu-title">English</span>
+									</span>
+								</div>
+								<div
+									data-kt-menu-trigger="click"
+									class="menu-item menu-accordion"
+								>
+									<!--begin:Menu link--><span
+										class="menu-link"
+									>
+										<span class="menu-bullet">
+											<span
+												class="bullet bullet-dot"
+											></span>
+										</span>
+										<span class="menu-title">French</span>
+									</span>
+								</div>
+							</div>
+							<!--end:Menu sub-->
+						</div>
+					</div>
+					<!--end::Menu-->
+				</div>
+				<!--end::Menu wrapper-->
 			</div>
+			<!--end::sidebar menu-->
+			<!--begin::Footer-->
+			<div
+				class="app-sidebar-footer flex-column-auto m-9"
+				id="kt_app_sidebar_footer"
+			>
+				<!--begin::Card-->
+				Footer
+				<!--end::Card-->
+			</div>
+
 			<!--end::Footer-->
 		</div>
+		<!--end::Sidebar-->
 	</div>
-	<!--end::Activities drawer-->
+	<!--end::Wrapper-->
 </template>

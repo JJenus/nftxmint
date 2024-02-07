@@ -3,10 +3,9 @@
 
 	const route = useRoute();
 	console.log();
-	const currentRoute = ref("overview");
 	const user = userData().data;
 
-	const active = ref('all');
+	const active = ref("all");
 
 	const navs = [
 		{
@@ -22,9 +21,6 @@
 			path: "/category/gaming",
 		},
 		{
-			name: "Memberships",
-		},
-		{
 			name: "Photography",
 			path: "/category/photography",
 		},
@@ -33,14 +29,14 @@
 			path: "/category/music",
 		},
 	];
+
 	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
 	loaded.value = false;
 
 	onMounted(() => {
 		console.log("ROUTE", route.path.split("/"));
-		if (route.path.split("/")[2])
-			active.value = route.path.split("/")[2];
-		else active.value = "all"
+		if (route.path.split("/")[2]) active.value = route.path.split("/")[2];
+		else active.value = "all";
 	});
 </script>
 
@@ -81,35 +77,39 @@
 								id="kt_app_content"
 								class="app-content flex-column-fluid"
 							>
-								<div class="mb-3 hover-scroll-x container">
-									<ul
-										class="nav nav-tabs nav-pills d-flex flex-nowrap border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
-									>
-										<li
-											v-for="nav in navs"
-											class="nav-item me-08 mb-md-2"
-											@click="active = nav.name"
+								<div class="mb-3 container">
+									<div class="hover-scroll-x hide-scrollbar">
+										<ul
+											class="nav nav-tabs nav-pills d-flex flex-nowrap border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
 										>
-											<NuxtLink
-												class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
-												:class="
-													active == nav.name
-														? 'active'
-														: ''
-												"
-												:to="nav.path"
+											<li
+												v-for="nav in navs"
+												class="nav-item me-08 mb-md-2"
+												@click="active = nav.name"
 											>
-												<span
-													class="d-flex flex-column align-items-start"
+												<NuxtLink
+													class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
+													:class="
+														active == nav.name
+															? 'active'
+															: ''
+													"
+													:to="nav.path"
 												>
 													<span
-														class="fs-4 fw-bold"
-														>{{ nav.name }}</span
+														class="d-flex flex-column align-items-start"
 													>
-												</span>
-											</NuxtLink>
-										</li>
-									</ul>
+														<span
+															class="fs-4 fw-bold"
+															>{{
+																nav.name
+															}}</span
+														>
+													</span>
+												</NuxtLink>
+											</li>
+										</ul>
+									</div>
 								</div>
 
 								<!--begin::Content container-->
@@ -143,5 +143,20 @@
 			<i class="ki-outline ki-arrow-up"></i>
 		</div>
 		<!--end::Scrolltop-->
+
+		<!--begin::View component-->
+		<MobileNav class="d-lg-none" />
+		<!--end::View component-->
 	</div>
 </template>
+
+<style scoped>
+	.hide-scrollbar {
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE and Edge */
+	}
+
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none; /* WebKit (Chrome, Safari, etc.) */
+	}
+</style>
