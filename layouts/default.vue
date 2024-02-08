@@ -32,11 +32,24 @@
 
 	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
 	loaded.value = false;
+	const showNav = ref(false);
 
 	onMounted(() => {
-		console.log("ROUTE", route.path.split("/"));
-		if (route.path.split("/")[2]) active.value = route.path.split("/")[2];
-		else active.value = "all";
+		const paths = route.path.split("/");
+		console.log("ROUTE", paths);
+		if (paths[2]) {
+			console.log("SET PATH");
+
+			active.value = paths[2];
+			showNav.value =
+				active.value == "all" ||
+				active.value == "music" ||
+				active.value == "art" ||
+				active.value == "photography";
+		} else {
+			active.value = "all";
+			showNav.value = true;
+		}
 	});
 </script>
 
@@ -77,7 +90,7 @@
 								id="kt_app_content"
 								class="app-content flex-column-fluid"
 							>
-								<div class="mb-3 container">
+								<div v-if="showNav" class="mb-3 container">
 									<div class="hover-scroll-x hide-scrollbar">
 										<ul
 											class="nav nav-tabs nav-pills d-flex flex-nowrap border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
@@ -90,7 +103,8 @@
 												<NuxtLink
 													class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
 													:class="
-														active == nav.name
+														active ==
+														nav.name.toLowerCase()
 															? 'active'
 															: ''
 													"

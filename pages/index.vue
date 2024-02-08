@@ -33,7 +33,7 @@
 		</div>
 		<!--end::Card-->
 
-		<div class="mb-4">
+		<div class="mb-4 d-none">
 			<SwiperMainSlide />
 		</div>
 

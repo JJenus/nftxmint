@@ -69,7 +69,7 @@
 				</Swiper>
 			</div>
 
-			<div class="d-none d-lg-block">
+			<a href="/asset/aaa" class="d-none d-lg-block">
 				<Swiper
 					:modules="[SwiperAutoplay]"
 					:space-between="10"
@@ -92,7 +92,7 @@
 						</div>
 					</SwiperSlide>
 				</Swiper>
-			</div>
+			</a>
 		</div>
 		<div class="">
 			<h1 class="fs-1 mb-2 mt-7">Art NFTs</h1>
@@ -110,7 +110,10 @@
 									class="w-100 h-200px rounded-top"
 								/>
 							</div>
-							<div class="card-footer p-4 py-5">
+							<NuxtLink
+								:to="'/asset/' + nft.name"
+								class="card-footer p-4 py-5"
+							>
 								<h5 class="mb-2 fs-4 d-flex align-items-center">
 									{{ nft.name }}
 									<i
@@ -134,7 +137,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</NuxtLink>
 						</div>
 					</div>
 				</div>

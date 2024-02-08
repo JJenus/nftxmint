@@ -52,13 +52,13 @@
 						class="btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white"
 						data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 						data-kt-menu-attach="parent"
-						data-kt-menu-placement="bottom-start"
+						data-kt-menu-placement="bottom"
 					>
 						<i class="ki-outline ki-entrance-left fs-2"></i> Login
 					</div>
 					<!--end::Menu wrapper-->
 
-					<LoginMenu class="me-3" style="right: 20px;"/>
+					<LoginMenu />
 				</div>
 				<!--end::Login-->
 
