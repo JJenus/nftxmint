@@ -49,8 +49,8 @@
 						data-kt-menu-expand="false"
 					>
 						<!--begin:Menu item-->
-						<div
-							data-kt-menu-trigger="click"
+						<NuxtLink
+							to="/account"
 							class="menu-item menu-accordion"
 						>
 							<!--begin:Menu link--><span class="menu-link"
@@ -59,7 +59,7 @@
 								</span>
 								<span class="menu-title">Profile</span>
 							</span>
-						</div>
+						</NuxtLink>
 						<div
 							data-kt-menu-trigger="click"
 							class="menu-item menu-accordion"

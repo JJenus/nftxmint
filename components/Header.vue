@@ -6,7 +6,7 @@
 	<div
 		id="kt_app_header"
 		class="app-header d-flex border-0 py-10"
-		data-kt-sticky="true"
+		:data-kt-sticky="true"
 		data-kt-sticky-name="app-header-sticky"
 		data-kt-sticky-offset="{default: 'false', lg: '300px'}"
 	>
