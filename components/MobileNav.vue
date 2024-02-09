@@ -1,10 +1,4 @@
 <script setup>
-	defineProps({
-		mainNavs: {
-			type: Array,
-			required: true,
-		},
-	});
 	const route = useRoute();
 	const active = ref(route.path);
 	const config = useRuntimeConfig().public;
@@ -61,9 +55,7 @@
 						>
 							<!--begin:Menu link--><span class="menu-link"
 								><span class="menu-icon">
-									<i class="ki-solid fs-2 ki-user">
-										
-									</i>
+									<i class="ki-solid fs-2 ki-user"> </i>
 								</span>
 								<span class="menu-title">Profile</span>
 							</span>
@@ -74,8 +66,7 @@
 						>
 							<!--begin:Menu link--><span class="menu-link"
 								><span class="menu-icon">
-									<i class="ki-solid fs-2 ki-pencil">
-									</i>
+									<i class="ki-solid fs-2 ki-pencil"> </i>
 								</span>
 								<span class="menu-title">Create</span></span
 							>
@@ -87,8 +78,7 @@
 						>
 							<!--begin:Menu link--><span class="menu-link"
 								><span class="menu-icon">
-									<i class="ki-solid fs-2 ki-book">
-									</i>
+									<i class="ki-solid fs-2 ki-book"> </i>
 								</span>
 								<span class="menu-title">Resources</span></span
 							>
