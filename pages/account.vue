@@ -64,10 +64,21 @@
 										class="overlay-layer bg-dark bg-opacity-25"
 									>
 										<button
+											data-kt-image-input-action="change"
+											data-bs-toggle="tooltip"
+											data-bs-dismiss="click"
+											title="Change avatar"
 											class="btn btn-sm btn-icon btn-icon-white btn-active-icon-secondary"
 										>
 											<i class="ki-solid ki-pencil fs-1">
 											</i>
+											<input
+												@change="changeImage($event)"
+												class="d-none"
+												type="file"
+												name="avatar"
+												accept=".png, .jpg, .jpeg"
+											/>
 										</button>
 									</div>
 								</div>
