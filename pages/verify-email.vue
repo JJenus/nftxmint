@@ -52,13 +52,7 @@
 					<div class="card-body py-15 py-lg-20">
 						<!--begin::Logo-->
 						<div class="mb-14">
-							<a href="/" class="">
-								<img
-									alt="Logo"
-									src="/assets/media/logos/zipay-logo.png"
-									class="h-40px"
-								/>
-							</a>
+							<NFTexLogo />
 						</div>
 						<!--end::Logo-->
 
