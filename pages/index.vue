@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
 	<div class="container-fluid">
@@ -21,10 +19,11 @@
 						</h6>
 					</div>
 					<div class="text-center ms-auito">
-						<img
+						<NuxtImg
 							class="min-w-500 mhi-300px card-rounded"
 							alt=""
 							src="/assets/media/nft/art/art-main.png"
+							sizes="md:450px"
 						/>
 					</div>
 				</div>
