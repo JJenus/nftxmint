@@ -38,10 +38,11 @@
 		<div class="d-flex flex-column flex-md-row m-0 p-0">
 			<div class="order-2 order-lg-1 m-0 p-0 w-lg-800px me-md-10">
 				<div
-					class="d-flex min-h-lg-500px flex-column container-fluid justify-content-center w-100 align-items-center p-lg-0"
+					class="d-flex min-h-lg-500px flex-column container-fluid justify-content-center w-100 w-lg-75 p-lg-0"
 				>
-					<div
-						class="btn btn-secondary w-300px w-lg-350px h-150px d-flex align-items-center mb-5"
+					<NuxtLink
+						to="create-collection"
+						class="btn btn-secondary w-100 h-125px d-flex align-items-center mb-5"
 					>
 						<div
 							class="d-flex justify-content-between align-items-center w-100"
@@ -60,10 +61,10 @@
 							</div>
 							<i class="ki-solid ki-right fw-bold fs-2x"></i>
 						</div>
-					</div>
+					</NuxtLink>
 
-					<div
-						class="btn btn-secondary w-300px w-lg-350px h-150px d-flex align-items-center"
+					<NuxtLink to="create-nft"
+						class="btn btn-secondary w-100 h-125px d-flex align-items-center"
 					>
 						<div
 							class="d-flex justify-content-between align-items-center w-100"
@@ -77,15 +78,28 @@
 									<h1>Mint an NFT</h1>
 								</div>
 								<span class="fs-5"
-									>Launch your NFT collection</span
+									>Add NFT to your collection</span
 								>
 							</div>
-							<i class="ki-solid ki-right fw-bold fs-2x"></i>
+							<i class="ki-solid ki-plus fw-bold fs-2x"></i>
 						</div>
-					</div>
+					</NuxtLink>
 				</div>
 			</div>
-			<div class="order-1 order-lg-2 mb-5 mb-lg-0 m-0 p-0 ms-n10 ms-lg-0 me-n10 mw-lg-700px">
+			<div
+				class="position-relative order-1 order-lg-2 mb-5 mb-lg-0 m-0 p-0 ms-n10 ms-lg-0 me-n10 mw-lg-700px"
+			>
+				<div
+					style="z-index: 1000"
+					class="d-flex d-md-none align-items-center position-absolute bottom-0 mb-3 start-0 ms-6"
+				>
+					<div
+						class="rounded-circle bg-white ps-1 d-flex justify-content-center h-60px w-60px align-items-center"
+					>
+						<NFTexLogoMini :classes="'h-50px mb-0'" />
+					</div>
+					<h1 class="display-2 ms-3">Create</h1>
+				</div>
 				<Swiper
 					:modules="[SwiperAutoplay]"
 					:space-between="10"

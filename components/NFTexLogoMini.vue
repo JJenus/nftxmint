@@ -24,7 +24,7 @@
 <template>
 	<NuxtLink
 		to="/"
-		class="d-flex align-items-center justify-content-center position-relative"
+		class="d-flex align-items-center justify-content-center position-relative m-0 p-0"
 	>
 		<img
 			alt="Logo"

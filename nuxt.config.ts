@@ -6,6 +6,18 @@ export default defineNuxtConfig({
 	routeRules: {
 		// "/": { redirect: "/about-us" },
 	},
+	image: {
+		// The screen sizes predefined by `@nuxt/image`:
+		screens: {
+			xs: 320,
+			sm: 576,
+			md: 768,
+			lg: 992,
+			xl: 1200,
+			xxl: 1400,
+			"2xl": 1536,
+		},
+	},
 	runtimeConfig: {
 		BE_API: process.env.BE_API || "https://fibre.alwaysdata.net/api",
 		public: {
