@@ -50,15 +50,11 @@
 					<!--begin::Menu- wrapper-->
 					<div
 						class="btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white"
-						data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-						data-kt-menu-attach="parent"
-						data-kt-menu-placement="bottom"
+						data-bs-toggle="modal" data-bs-target="#kt_modal_login"
 					>
 						<i class="ki-outline ki-entrance-left fs-2"></i> Login
 					</div>
 					<!--end::Menu wrapper-->
-
-					<LoginMenu />
 				</div>
 				<!--end::Login-->
 

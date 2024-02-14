@@ -1,48 +1,30 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Account, AccountStatus } from "../utils/interfaces/Account";
-import { IUser } from "../utils/interfaces/IUser";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
+import type { IUser } from "../utils/interfaces/IUser";
 import {
-	INotification,
+	type INotification,
 	NotificationStatus,
 } from "../utils/interfaces/Notification";
 
 export const userData = () => {
-	const initAcc: Account = {
-		id: "",
-		userId: "",
-		currencyId: "",
-		amount: null,
-		status: AccountStatus.ACTIVE,
-	};
 
 	const initUser: IUser = {
 		id: "",
 		name: "",
 		email: "",
-		imgUrl: "/assets/media/svg/avatars/blank.svg",
+		profileImg: "/assets/media/svg/avatars/blank.svg",
 		phone: "",
-		address: "",
-		city: "",
-		country: "",
-		dob: "",
-		verified: false,
-		emailVerified: false,
-		account: {
-			id: "",
-			userId: "",
-			currencyId: "",
-			amount: 0,
-			status: AccountStatus.ACTIVE,
-		},
-		userType: "",
+		status: false,
+		role: "",
 		createdAt: "",
+		ethAddress: "",
+		balance: "",
+		bannerImg: ""
 	};
 
 	const transactions = useState<any[]>("user-transactions", () => []);
 	const notifications = useState<INotification[]>("notifications", () => []);
 	const newNotification = useState<boolean>("new-notifications", () => false);
 	const data = useState<IUser>("userData", () => initUser);
-	const account = useState<Account>("userAccount", () => initAcc);
 	const users = useState<IUser[]>("users", () => []);
 	const active = useState<IUser | null>("active-user");
 
@@ -64,7 +46,7 @@ export const userData = () => {
 			.then((response: AxiosResponse<IUser[], any>) => {
 				users.value = response.data
 					.filter((e) => {
-						return e.userType !== "admin";
+						return e.role !== "admin";
 					})
 					.sort(
 						(a, b) =>
@@ -82,28 +64,6 @@ export const userData = () => {
 				) {
 					// console.log("Access denied");
 				}
-			});
-	};
-
-	const fetchBalance = () => {
-		const axiosConfig = {
-			method: "get",
-			url: `${useRuntimeConfig().public.BE_API}/account/${data.value.id}`,
-			timeout: 15000,
-			headers: {
-				Authorization: "Bearer " + useAuth().userData.value?.token,
-			},
-		};
-
-		axios
-			.request(axiosConfig)
-			.then((response) => {
-				const data = response.data;
-				account.value = data;
-				// console.log(data);
-			})
-			.catch((error) => {
-				// console.log(error);
 			});
 	};
 
@@ -176,7 +136,6 @@ export const userData = () => {
 	};
 
 	return {
-		account,
 		data,
 		users,
 		active,
@@ -184,7 +143,6 @@ export const userData = () => {
 		newNotification,
 		transactions,
 		getUsers,
-		fetchBalance,
 		getNotifications,
 		showNotifications,
 	};

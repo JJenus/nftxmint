@@ -1,4 +1,4 @@
-import { AuthToken } from "../utils/interfaces/AuthToken";
+import type { AuthToken } from "../utils/interfaces/AuthToken";
 
 export const useAuth = () => {
 	const appUser = userData();
@@ -14,13 +14,12 @@ export const useAuth = () => {
 
 		//set essential values
 		appUser.data.value = auth.user;
-		appUser.account.value = auth.user.account;
 
 		authData.value = auth;
 		authenticated.value = true;
 
 		// redirect to appropriate account
-		if (auth.user.userType === "admin") {
+		if (auth.user.role === "admin") {
 			navigateTo("/admin");
 		} else navigateTo("/app");
 	};
@@ -49,7 +48,6 @@ export const useAuth = () => {
 		authData.value = auth.value;
 
 		appUser.data.value = auth.value.user;
-		appUser.account.value = auth.value.user.account;
 
 		return true;
 	};

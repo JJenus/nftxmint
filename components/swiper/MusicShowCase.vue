@@ -1,36 +1,46 @@
 <script setup>
 	const studio = ref([
 		{
+			category: "music",
 			name: "I am me",
 			floor: "91.23 Matic",
 			volume: "11,420",
 			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.avif",
 		},
 		{
+			category: "music",
+
 			name: "Lavrina",
 			floor: "20.23 ETH",
 			volume: "12,21",
 			image: "/assets/media/nft/music/9785f0b062da87518076fa7d8b6a0381.avif",
 		},
 		{
+			category: "music",
+
 			name: "Estadi Magri",
 			floor: "1.23 Matic",
 			volume: "11,420",
 			image: "/assets/media/nft/music/c5c3ff4a66c4c34f1c93333476162631.avif",
 		},
 		{
+			category: "music",
+
 			name: "I am me",
 			floor: "91.23 Matic",
 			volume: "11,420",
 			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.avif",
 		},
 		{
+			category: "music",
+
 			name: "Adingra",
 			floor: "4.23 ETH",
 			volume: "1,000",
 			image: "/assets/media/nft/music/what-are-music-nfts.webp",
 		},
 		{
+			category: "music",
 			name: "Methusa",
 			floor: "2.23 ETH",
 			volume: "17,000",
@@ -68,40 +78,7 @@
 				v-for="(music, index) in studio"
 				:key="index"
 			>
-				<div
-					class="card hover-elevate-up hover-slide card-stretch h-100"
-				>
-					<div class="card-body p-0 h-100">
-						<img
-							:src="music.image"
-							alt=""
-							class="w-100 h-200px rounded-top"
-						/>
-					</div>
-					<div class="card-footer p-4 py-5">
-						<h5 class="mb-2 fs-4 d-flex align-items-center">
-							{{ music.name }}
-							<i
-								class="ki-outline ki-check-circle text-success fs-2 ms-3"
-							>
-							</i>
-						</h5>
-						<div class="d-flex justify-content-between">
-							<div class="d-flex flex-column">
-								<div class="fs-5 text-muted">Floor</div>
-								<div class="fs-4 fw-bold">
-									{{ music.floor }}
-								</div>
-							</div>
-							<div class="d-flex flex-column">
-								<div class="fs-5 text-muted">Volume</div>
-								<div class="fs-4 fw-bold">
-									{{ music.volume }}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<NftCollection :collection="music" />
 			</SwiperSlide>
 		</Swiper>
 	</div>

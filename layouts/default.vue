@@ -44,8 +44,8 @@
 				active.value == "art" ||
 				active.value == "photography";
 
-				console.log("Show navs: "+showNav.value);
-		} else if(!paths[1]) {
+			console.log("Show navs: " + showNav.value);
+		} else if (!paths[1]) {
 			active.value = "all";
 			showNav.value = true;
 		}
@@ -89,7 +89,10 @@
 								id="kt_app_content"
 								class="app-content flex-column-fluid"
 							>
-								<div v-if="showNav === true" class="mb-3 container">
+								<div
+									v-if="showNav === true"
+									class="mb-3 container"
+								>
 									<div class="hover-scroll-x hide-scrollbar">
 										<ul
 											class="nav nav-tabs nav-pills d-flex flex-nowrap border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
@@ -156,6 +159,7 @@
 			<i class="ki-outline ki-arrow-up"></i>
 		</div>
 		<!--end::Scrolltop-->
+		<LoginMenu />
 
 		<!--begin::View component-->
 		<MobileNav class="d-lg-none" />

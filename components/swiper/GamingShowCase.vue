@@ -1,6 +1,7 @@
 <script setup>
 	const games = ref([
 		{
+			category: "gaming",
 			name: "Tour De Pac",
 			floor: "91.23 Matic",
 			volume: "11,420",
@@ -8,29 +9,35 @@
 		},
 		{
 			name: "Again",
+			category: "gaming",
 			floor: "20.23 ETH",
 			volume: "12,21",
 			image: "/assets/media/nft/gaming/20f9fd3c07cb3ed1c085221ee0acdd06.avif",
 		},
 		{
+			category: "gaming",
+
 			name: "Maldiva",
 			floor: "1.23 Matic",
 			volume: "11,420",
 			image: "/assets/media/nft/gaming/dbb8f49a7ee1d7c6d42d35321535f6bc.avif",
 		},
 		{
+			category: "gaming",
 			name: "Greener",
 			floor: "91.23 Matic",
 			volume: "11,420",
 			image: "/assets/media/nft/gaming/GyEkb_tl0e0gXf_Vdce7Pkkc5OBU-ORbYUa4b-iIW4t39Gy5293OvnI5LLcwIxTI4XKO8yg5bHXldgDcPDdSnmrApGFHfLZyfs8V.avif",
 		},
 		{
+			category: "gaming",
 			name: "Melbourn",
 			floor: "4.23 ETH",
 			volume: "1,000",
 			image: "/assets/media/nft/music/what-are-music-nfts.webp",
 		},
 		{
+			category: "gaming",
 			name: "Vice City",
 			floor: "2.23 ETH",
 			volume: "17,000",
@@ -68,40 +75,7 @@
 				v-for="(game, index) in games"
 				:key="index"
 			>
-				<div
-					class="card hover-elevate-up hover-slide card-stretch h-100"
-				>
-					<div class="card-body p-0 h-100">
-						<img
-							:src="game.image"
-							alt=""
-							class="w-100 h-200px rounded-top"
-						/>
-					</div>
-					<div class="card-footer p-4 py-5">
-						<h5 class="mb-2 fs-4 d-flex align-items-center">
-							{{ game.name }}
-							<i
-								class="ki-outline ki-check-circle text-success fs-2 ms-3"
-							>
-							</i>
-						</h5>
-						<div class="d-flex justify-content-between">
-							<div class="d-flex flex-column">
-								<div class="fs-5 text-muted">Floor</div>
-								<div class="fs-4 fw-bold">
-									{{ game.floor }}
-								</div>
-							</div>
-							<div class="d-flex flex-column">
-								<div class="fs-5 text-muted">Volume</div>
-								<div class="fs-4 fw-bold">
-									{{ game.volume }}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<NftCollection :collection="game" />
 			</SwiperSlide>
 		</Swiper>
 	</div>

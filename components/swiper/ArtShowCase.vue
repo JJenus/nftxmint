@@ -65,43 +65,7 @@
 				v-for="(art, index) in arts"
 				:key="index"
 			>
-				<div
-					class="card hover-elevate-up hover-slide card-stretch h-100"
-				>
-					<div class="card-body p-0 h-100">
-						<img
-							@click="open(art.name)"
-							:src="art.image"
-							alt=""
-							class="w-100 h-200px rounded-top"
-						/>
-					</div>
-					<div class="card-footer p-4 py-5">
-						<NuxtLink to="/category/art">
-							<h5 class="mb-2 fs-4 d-flex align-items-center">
-								{{ art.name }}
-								<i
-									class="ki-outline ki-check-circle text-success fs-2 ms-3"
-								>
-								</i>
-							</h5>
-							<div class="d-flex justify-content-between">
-								<div class="d-flex flex-column">
-									<div class="fs-5 text-muted">Floor</div>
-									<div class="fs-4 fw-bold">
-										{{ art.floor }}
-									</div>
-								</div>
-								<div class="d-flex flex-column">
-									<div class="fs-5 text-muted">Volume</div>
-									<div class="fs-4 fw-bold">
-										{{ art.volume }}
-									</div>
-								</div>
-							</div>
-						</NuxtLink>
-					</div>
-				</div>
+				<NftCollection :collection="art"/>
 			</SwiperSlide>
 		</Swiper>
 	</div>
