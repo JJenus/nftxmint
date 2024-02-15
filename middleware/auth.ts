@@ -9,10 +9,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
 	// might get an infinite redirect loop
 	const cookie = useCookie<AuthToken | null | undefined>("auth");
 	if (cookie.value == null || cookie.value == undefined) {
-		return useAuth().logout();
+		return navigateTo('/', { redirectCode: 301 });
 	}
 
 	if (!useAuth().isAuthenticated()) {
-		return useAuth().logout();
+		return navigateTo('/', { redirectCode: 301 });
 	}
 });

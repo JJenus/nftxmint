@@ -8,7 +8,7 @@ export const useAuth = () => {
 		maxAge: 60 * 60 * 24,
 	});
 
-	const login = (auth: AuthToken) => {
+	const login = async (auth: AuthToken) => {
 		//store cookie
 		userAuth.value = auth;
 
@@ -18,19 +18,22 @@ export const useAuth = () => {
 		authData.value = auth;
 		authenticated.value = true;
 
-		navigateTo("/account");
+		// await navigateTo("/account");
+		window.location.href = "/account";
+
 		// redirect to appropriate account
 		// if (auth.user.role === "admin") {
 		// 	navigateTo("/admin");
 		// } else navigateTo("/a");
 	};
 
-	const logout = () => {
+	const logout = async () => {
 		authData.value = null;
 		authenticated.value = false;
 		// storage().remove();
 		useCookie("auth").value = null;
-		navigateTo("/");
+		// await navigateTo('/', { redirectCode: 301 })
+		window.location.href = "/";
 	};
 
 	const isAuthenticated = () => {

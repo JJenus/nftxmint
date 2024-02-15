@@ -1,7 +1,33 @@
 <script setup>
+	import { loadMoonPay } from "@moonpay/moonpay-js";
+	// Browser
+
 	definePageMeta({
 		middleware: "auth",
 	});
+
+
+	const moonPay = await loadMoonPay();
+	
+	const moonPaySdk = moonPay({
+		flow: "buy",
+		environment: "sandbox",
+		variant: "overlay",
+		params: {
+			apiKey: "pk_test_a67kDxbY30ybPbQmezwipwwrF80FaS",
+			theme: "dark",
+			baseCurrencyCode: "usd",
+			baseCurrencyAmount: "100",
+			defaultCurrencyCode: "eth",
+		},
+		debug: true,
+	});
+
+	const buy = () => {
+		moonPaySdk.show();
+	}
+
+
 	onMounted(() => {
 		if (process.client) {
 			const myDropzone = new Dropzone(
@@ -110,7 +136,7 @@
 							<textarea class="form-control"></textarea>
 						</div>
 						<div>
-							<button class="btn btn-primary w-100">
+							<button @click="buy()" class="btn btn-primary w-100">
 								Create NFT
 							</button>
 						</div>

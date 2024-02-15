@@ -17,6 +17,7 @@
 		"nuxt": "^3.6.5"
 	},
 	"dependencies": {
+		"@moonpay/moonpay-js": "^0.4.2",
 		"@nuxt/image": "^1.3.0",
 		"axios": "^1.5.0",
 		"cleave.js": "^1.6.0",

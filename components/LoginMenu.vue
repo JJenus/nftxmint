@@ -7,7 +7,7 @@
 	const form = ref({
 		email: "",
 		password: "",
-		bannerImg: "/assets/media/misc/layout/customizer-header-bg.jpg"
+		bannerImg: "/assets/media/misc/layout/customizer-header-bg.jpg",
 	});
 
 	const authToken: AuthToken = {
@@ -21,6 +21,7 @@
 	const findButton = ref();
 	const loginButton = ref();
 	const regButton = ref();
+	const closeModalBtn = ref();
 
 	const isInvalidCredentials = ref<boolean | null>(null);
 	const passwordType = ref("password");
@@ -104,6 +105,7 @@
 			.then((response) => {
 				authToken.user = response.data;
 				authToken.userId = response.data.id;
+				closeModalBtn.value.click();
 				auth.login(authToken);
 				// successAlert("Welcome!");
 			})
@@ -203,6 +205,7 @@
 
 					<!--begin::Close-->
 					<div
+						ref="closeModalBtn"
 						class="btn btn-icon btn-icon-danger btn-sm btn-active-light-primary ms-2 end-0 position-absolute top-0 m-4"
 						data-bs-dismiss="modal"
 						aria-label="Close"
