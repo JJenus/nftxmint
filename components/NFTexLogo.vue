@@ -22,8 +22,8 @@
 </script>
 
 <template>
-	<NuxtLink
-		to="/"
+	<a
+		href="/"
 		class=""
 	>
 		<img
@@ -38,5 +38,5 @@
 			:class="classes"
 			class="me-4 theme-dark-show"
 		/>
-	</NuxtLink>
+	</a>
 </template>

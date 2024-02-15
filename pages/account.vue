@@ -1,4 +1,16 @@
 <script setup>
+	definePageMeta({
+		layout: ["app"],
+		middleware: "auth",
+	});
+
+	const auth = useAuth();
+	if (!auth.isAuthenticated()) {
+		auth.logout();
+	}
+
+	const user = userData().data;
+
 	const route = useRoute();
 	const active = ref("Collected");
 
@@ -27,17 +39,19 @@
 </script>
 
 <template>
-	<div>
+	<div v-if="auth.isAuthenticated()">
 		<div class="mb-8">
 			<div>
 				<div class="card card-flush mb-9" id="kt_user_profile_panel">
 					<!--begin::Hero nav-->
 					<div
 						class="card-header rounded-top bgi-size-cover h-200px"
-						style="
-							background-position: 100% 50%;
-							background-image: url('/assets/media/misc/profile-head-bg.jpg');
-						"
+						:style="`background-position: 100% 50%;
+							background-image: url('${
+								user.bannerImg
+									? user.bannerImg
+									: '/assets/media/auth/bg11-dark.jpg'
+							}');`"
 					></div>
 					<!--end::Hero nav-->
 
@@ -53,7 +67,7 @@
 									class="overlay overflow-hidden symbol symbol-125px symbol-circle symbol-lg-150px symbol-fixed position-relative mt-n3"
 								>
 									<img
-										src="/assets/media/avatars/300-3.jpg"
+										:src="user.profileImg? user.profileImg:'https://robohash.org/nftexchaing.png'"
 										alt="image"
 										class="overlay-wrapper border border-white border-4 rounded-circle"
 									/>

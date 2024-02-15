@@ -1,5 +1,8 @@
 <script setup>
 	const created = ref([]);
+	definePageMeta({
+		middleware: "auth",
+	});
 </script>
 
 <template>

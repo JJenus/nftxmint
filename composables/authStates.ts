@@ -18,10 +18,11 @@ export const useAuth = () => {
 		authData.value = auth;
 		authenticated.value = true;
 
+		navigateTo("/account");
 		// redirect to appropriate account
-		if (auth.user.role === "admin") {
-			navigateTo("/admin");
-		} else navigateTo("/app");
+		// if (auth.user.role === "admin") {
+		// 	navigateTo("/admin");
+		// } else navigateTo("/a");
 	};
 
 	const logout = () => {
@@ -29,7 +30,7 @@ export const useAuth = () => {
 		authenticated.value = false;
 		// storage().remove();
 		useCookie("auth").value = null;
-		navigateTo("/sign-in");
+		navigateTo("/");
 	};
 
 	const isAuthenticated = () => {

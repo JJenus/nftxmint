@@ -1,4 +1,7 @@
 <script setup>
+	definePageMeta({
+		middleware: "auth",
+	});
 	const NFTs = ref([
 		{
 			name: "Khan",
@@ -63,7 +66,8 @@
 						</div>
 					</NuxtLink>
 
-					<NuxtLink to="create-nft"
+					<NuxtLink
+						to="create-nft"
 						class="btn btn-secondary w-100 h-125px d-flex align-items-center"
 					>
 						<div

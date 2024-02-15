@@ -1,3 +1,9 @@
+<script setup lang="ts">
+	const auth = useAuth();
+	const logout = () => {
+		auth.logout();
+	};
+</script>
 <template>
 	<div
 		class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -8,17 +14,17 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<NuxtLink to="/account/" class="menu-link px-5">
+			<a href="/account/" class="menu-link px-5">
 				My Profile <i class="ki-solid ki-user ms-auto fs-2"></i>
-			</NuxtLink>
+			</a>
 		</div>
 		<!--end::Menu item-->
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<NuxtLink to="/studio/create" class="menu-link px-5">
+			<a href="/studio/create" class="menu-link px-5">
 				Create <i class="ki-solid ki-element-plus ms-auto fs-2"></i>
-			</NuxtLink>
+			</a>
 		</div>
 		<!--end::Menu item-->
 
@@ -26,17 +32,17 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<NuxtLink to="/account/" class="menu-link px-5">
+			<a href="/account/" class="menu-link px-5">
 				Collections <i class="ki-solid ki-element-7 ms-auto fs-2"></i>
-			</NuxtLink>
+			</a>
 		</div>
 		<!--end::Menu item-->
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<NuxtLink to="/account/created" class="menu-link px-5">
+			<a href="/account/created" class="menu-link px-5">
 				Created <i class="ki-solid ki-element-equal ms-auto fs-2"></i>
-			</NuxtLink>
+			</a>
 		</div>
 		<!--end::Menu item-->
 
@@ -237,7 +243,9 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<a role="button" class="menu-link px-5"> Sign Out </a>
+			<a @click="logout()" role="button" class="menu-link px-5">
+				Sign Out
+			</a>
 		</div>
 		<!--end::Menu item-->
 	</div>

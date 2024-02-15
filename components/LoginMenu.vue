@@ -1,19 +1,85 @@
 <script setup lang="ts">
 	import axios from "axios";
+	import type { AuthToken } from "~/utils/interfaces/AuthToken";
 
 	const appConfig = useRuntimeConfig();
+	const auth = useAuth();
 	const form = ref({
 		email: "",
 		password: "",
+		bannerImg: "/assets/media/misc/layout/customizer-header-bg.jpg"
 	});
 
+	const authToken: AuthToken = {
+		userId: "",
+		user: undefined,
+		token: "",
+	};
+
 	const found = ref<boolean | null>(null);
+	const foundUser = ref<any>();
 	const findButton = ref();
 	const loginButton = ref();
 	const regButton = ref();
 
-	const isInvalidCredentials = ref();
+	const isInvalidCredentials = ref<boolean | null>(null);
 	const passwordType = ref("password");
+	const invalidMessage = ref("");
+
+	const validateEmail = (email: string) => {
+		const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return regex.test(email);
+	};
+
+	const validPassword = () => {
+		// Define criteria for password strength
+		const password = form.value.password;
+		const minLength = 6;
+
+		// Regular expressions for character types
+		const upperCaseRegex = /[A-Z]/;
+		const lowerCaseRegex = /[a-z]/;
+		const digitRegex = /[0-9]/;
+		const specialCharRegex = /[^A-Za-z0-9]/; // Anything that's not a letter or digit
+
+		// Check length
+		if (password.length < minLength) {
+			invalidMessage.value = "Password is too short";
+			return false;
+		}
+
+		// Check for uppercase letters
+		else if (!upperCaseRegex.test(password)) {
+			invalidMessage.value =
+				"Password must contain at least one uppercase letter";
+			return false;
+		}
+
+		// Check for lowercase letters
+		else if (!lowerCaseRegex.test(password)) {
+			invalidMessage.value =
+				"Password must contain at least one lowercase letter";
+			return false;
+		}
+
+		// Check for digits
+		else if (!digitRegex.test(password)) {
+			invalidMessage.value = "Password must contain at least one digit";
+			return false;
+		}
+
+		// Check for special characters
+		else if (!specialCharRegex.test(password)) {
+			invalidMessage.value =
+				"Password must contain at least one special character";
+			return false;
+		}
+
+		// If all criteria are met, return a success message
+		invalidMessage.value = "Password is strong";
+
+		return true;
+	};
 
 	const toggleType = () => {
 		if (passwordType.value == "password") {
@@ -25,19 +91,22 @@
 
 	const login = () => {
 		const axiosConfig: any = {
-			method: "get",
-			url: `${useRuntimeConfig().public.BE_API}/auth/login`,
-			timeout: 20000,
-			// headers: {
-			//     Authorization: "Bearer " + useAuth().userData.value?.token,
-			// },
+			method: "post",
+			data: form.value,
+			url: `${appConfig.public.BE_API}/auth/login`,
+			timeout: 15000,
 		};
 
-		regButton.value.setAttribute("data-kt-indicator", "on");
+		loginButton.value.setAttribute("data-kt-indicator", "on");
 
 		axios
 			.request(axiosConfig)
-			.then((response) => {})
+			.then((response) => {
+				authToken.user = response.data;
+				authToken.userId = response.data.id;
+				auth.login(authToken);
+				// successAlert("Welcome!");
+			})
 			.catch((error): void => {
 				const errRes = error.response;
 				console.log("Status: ", errRes?.status);
@@ -45,8 +114,9 @@
 					errRes?.status !== null &&
 					(errRes?.status === 401 || errRes?.status === 404)
 				) {
-					isInvalidCredentials.value = errRes.data.message;
-					console.log(error.message);
+					isInvalidCredentials.value = true;
+					invalidMessage.value = errRes.data.description;
+					console.log(errRes.data);
 				} else errorAlert("Error occurred, check your internet!");
 				console.log(error);
 			})
@@ -57,19 +127,22 @@
 
 	const createAccount = () => {
 		const axiosConfig: any = {
-			method: "get",
-			url: `${useRuntimeConfig().public.BE_API}/auth/login`,
-			timeout: 20000,
-			// headers: {
-			//     Authorization: "Bearer " + useAuth().userData.value?.token,
-			// },
+			method: "post",
+			data: form.value,
+			url: `${appConfig.public.BE_API}/auth/register`,
+			timeout: 30000,
 		};
 
 		regButton.value.setAttribute("data-kt-indicator", "on");
 
 		axios
 			.request(axiosConfig)
-			.then((response) => {})
+			.then((response): void => {
+				console.log(response.data);
+				authToken.user = response.data;
+				authToken.userId = response.data.id;
+				auth.login(authToken);
+			})
 			.catch((error): void => {
 				console.log(error);
 			})
@@ -91,7 +164,9 @@
 		axios
 			.request(axiosConfig)
 			.then((response) => {
+				console.log(response.data);
 				found.value = true;
+				foundUser.value = response.data;
 			})
 			.catch((error): void => {
 				found.value = false;
@@ -150,7 +225,18 @@
 
 				<div class="modal-body">
 					<form v-if="found" @submit.prevent="login()">
+						<div
+							class="d-flex flex-column justify-content-center align-items-center"
+						>
+							<div class="fs-2">Login</div>
+							<div
+								class="fs-6 text-muted mb-5 text-center fw-bold"
+							>
+								Welcome back {{ foundUser.name }}
+							</div>
+						</div>
 						<div class="px-5 menu-item mb-3">
+							<label for="" class="form-label">Email</label>
 							<input
 								disabled
 								type="email"
@@ -162,24 +248,36 @@
 						<div class="px-5 menu-item mb-3">
 							<label for="" class="form-label">Password</label>
 							<div
-								class="d-flex align-items-center position-relative"
+								class="d-flex align-items-center justify-content-center flex-column position-relative"
 								bis_skin_checked="1"
 							>
-								<button
-									class="btn position-absolute ms-3 bg-body"
-								>
-									<i
-										v-if="passwordType == 'password'"
-										class="ki-outline ki-eye fs-3"
-									></i>
-								</button>
 								<input
+									:class="
+										isInvalidCredentials ? 'is-invalid' : ''
+									"
 									:type="passwordType"
-									id="kt_filter_search"
 									class="form-control form-control-solid pe-10 w-100"
 									placeholder="password"
 									v-model="form.password"
 								/>
+								<div class="invalid-feedback">
+									{{ invalidMessage }}
+								</div>
+
+								<button
+									@click.prevent="toggleType()"
+									type="button"
+									class="btn position-absolute btn-active-icon-danger me-3 bg-transparent p-0 end-0"
+								>
+									<i
+										v-if="passwordType == 'password'"
+										class="ki-outline ki-eye fs-3 hover-scale"
+									></i>
+									<i
+										v-else
+										class="ki-outline ki-eye-slash fs-3 hover-scale"
+									></i>
+								</button>
 							</div>
 						</div>
 
@@ -206,7 +304,20 @@
 						v-else-if="found === false"
 						@submit.prevent="createAccount()"
 					>
+						<div
+							class="d-flex justify-content-center align-items-center"
+						>
+							<div>
+								<div class="fs-2">Create New Account</div>
+								<div
+									class="fs-6 text-muted mb-5 text-center fw-bold"
+								>
+									Email doesn't exist
+								</div>
+							</div>
+						</div>
 						<div class="px-5 menu-item mb-3">
+							<label for="" class="form-label">Email</label>
 							<input
 								disabled
 								type="email"
@@ -218,19 +329,33 @@
 						<div class="px-5 menu-item mb-3">
 							<label for="" class="form-label">Password</label>
 							<div
-								class="d-flex align-items-center position-relative"
+								class="d-flex align-items-center justify-content-center flex-column position-relative"
 								bis_skin_checked="1"
 							>
 								<input
+									:class="
+										validPassword() === false
+											? 'is-invalid'
+											: ''
+									"
 									:type="passwordType"
-									id="kt_filter_search"
 									class="form-control form-control-solid pe-10 w-100"
 									placeholder="password"
 									v-model="form.password"
 								/>
+								<div class="invalid-feedback">
+									{{ invalidMessage }}
+								</div>
 
 								<button
 									@click.prevent="toggleType()"
+									:class="
+										!validPassword()
+											? form.password.length >= 6
+												? 'mb-12'
+												: 'mb-10'
+											: ''
+									"
 									type="button"
 									class="btn position-absolute btn-active-icon-danger me-3 bg-transparent p-0 end-0"
 								>
@@ -249,6 +374,7 @@
 						<!--begin::Menu item-->
 						<div class="menu-item px-5">
 							<button
+								:disabled="!validPassword()"
 								ref="regButton"
 								class="btn btn-secondary w-100"
 							>
@@ -271,16 +397,26 @@
 					<form v-if="found == null" @submit.prevent="find()">
 						<div class="px-5 menu-item mb-3">
 							<input
+								:class="
+									!validateEmail(form.email) && form.email
+										? 'is-invalid'
+										: ''
+								"
+								required
 								v-model="form.email"
 								type="email"
 								class="form-control"
 								name="email"
 							/>
+							<div class="invalid-feedback">
+								Invalid email address
+							</div>
 						</div>
 
 						<!--begin::Menu item-->
 						<div class="menu-item px-5">
 							<button
+								:disabled="!validateEmail(form.email)"
 								ref="findButton"
 								class="btn btn-secondary w-100"
 							>

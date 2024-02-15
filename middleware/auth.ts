@@ -1,4 +1,4 @@
-import { AuthToken } from "utils/interfaces/AuthToken";
+import type { AuthToken } from "~/utils/interfaces/AuthToken";
 
 export default defineNuxtRouteMiddleware((to, from) => {
 	// if (to.params.id === "1") {
@@ -12,10 +12,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 		return useAuth().logout();
 	}
 
-	if (
-		!useAuth().isAuthenticated() ||
-		useAuth().userData.value?.user.userType !== "user"
-	) {
+	if (!useAuth().isAuthenticated()) {
 		return useAuth().logout();
 	}
 });

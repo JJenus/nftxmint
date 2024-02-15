@@ -1,4 +1,7 @@
 <script setup>
+	definePageMeta({
+		middleware: "auth",
+	});
 	onMounted(() => {
 		if (process.client) {
 			const myDropzone = new Dropzone(

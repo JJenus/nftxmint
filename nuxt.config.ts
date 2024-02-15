@@ -19,9 +19,9 @@ export default defineNuxtConfig({
 		},
 	},
 	runtimeConfig: {
-		BE_API: process.env.BE_API || "https://fibre.alwaysdata.net/api",
+		BE_API: process.env.BE_API || "https://nftex.alwaysdata.net",
 		public: {
-			BE_API: process.env.BE_API || "https://fibre.alwaysdata.net/api",
+			BE_API: process.env.BE_API || "https://nftex.alwaysdata.net",
 			APP: "NFTex",
 		},
 	},
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 				{
 					name: "twitter:image",
 					content:
-						"https://www.elisafinance.com/assets/media/elisa-logo.png",
+						"/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:title",
@@ -69,11 +69,11 @@ export default defineNuxtConfig({
 				{
 					property: "og:image",
 					content:
-						"https://www.elisafinance.com/assets/media/elisa-logo.png",
+						"/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:url",
-					content: "https://www.elisafinance.com",
+					content: "",
 				},
 			],
 			script: [

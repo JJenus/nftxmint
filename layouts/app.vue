@@ -2,61 +2,43 @@
 	definePageMeta({
 		middleware: ["auth"],
 	});
+	const config = useRuntimeConfig().public;
 
-	if (process.client) {
-		// $crisp.push(["do", "chat:hide"]);
+	const route = useRoute();
+	console.log();
+	const user = userData().data;
 
-		const interval = setInterval(() => {
-			if (window.tidioChatApi) {
-				if (window.tidioChatApi) {
-					tidioChatApi.hide();
-				}
-				clearInterval(interval);
-			}
-		}, 1000);
-	}
+	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
+	loaded.value = false;
+
+	onMounted(() => {});
 </script>
 
 <template>
-	<!--begin::App-->
 	<div
 		id="kt_app_body"
 		data-kt-app-header-fixed-mobile="true"
 		data-kt-app-sidebar-enabled="true"
-		data-kt-app-sidebar-fixed="true"
 		data-kt-app-sidebar-push-header="true"
 		data-kt-app-sidebar-push-toolbar="true"
 		data-kt-app-sidebar-push-footer="true"
-		data-kt-app-aside-enabled="true"
-		data-kt-app-aside-fixed="true"
-		data-kt-app-aside-push-header="true"
-		data-kt-app-aside-push-toolbar="true"
-		data-kt-app-aside-push-footer="true"
-		data-bs-theme-mode="dark"
-		class="app-default"
+		class="app-default w-100 overflow-hidden"
 	>
-		<div
-			class="d-flex flex-column flex-root app-root position-relative"
-			id="kt_app_root"
-		>
+		<!--begin::App-->
+		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
 			<!--begin::Page-->
 			<div
 				class="app-page flex-column flex-column-fluid"
 				id="kt_app_page"
 			>
 				<!--begin::Header-->
-				<AppHeader />
+				<Header />
 				<!--end::Header-->
 				<!--begin::Wrapper-->
 				<div
 					class="app-wrapper flex-column flex-row-fluid"
 					id="kt_app_wrapper"
 				>
-					<!--begin::Sidebar-->
-					<AppSideBar />
-					<!--end::Sidebar-->
-
-					<!-- MAIN VIEW -->
 					<!--begin::Main-->
 					<div
 						class="app-main flex-column flex-row-fluid"
@@ -71,8 +53,9 @@
 							>
 								<!--begin::Content container-->
 								<div
+									style="position: relative"
 									id="kt_app_content_container"
-									class="app-container container-fluid pb-20 pb-lg-10"
+									class="app-container position-relative"
 								>
 									<slot />
 								</div>
@@ -81,41 +64,39 @@
 							<!--end::Content-->
 						</div>
 						<!--end::Content wrapper-->
-					</div>
 
-					<!--begin::aside-->
-					<AppAsideBar />
-					<!--end::aside-->
+						<!--begin::Footer-->
+						<Footer />
+						<!--end::Footer-->
+					</div>
+					<!--end:::Main-->
 				</div>
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
-			<AppMobileNavBar />
 		</div>
 		<!--end::App-->
-		<AppNotifications />
 
-		<!-- To be USED AS NOTIFICATION -->
-		<!--begin::Drawers-->
-
-		<!--end::Drawers-->
-
-		<!--end::Engage toolbar--><!--begin::Scrolltop-->
-		<div
-			style="margin-bottom: 40px"
-			id="kt_scrolltop"
-			class="scrolltop"
-			data-kt-scrolltop="true"
-		>
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			<i class="ki-outline ki-arrow-up"></i>
 		</div>
 		<!--end::Scrolltop-->
+		<LoginMenu />
 
-		<!--begin::Modals-->
-
-		<!--begin::Modal - Upgrade plan-->
-		<AppTopUp />
-
-		<!--end::Modals-->
+		<!--begin::View component-->
+		<MobileNav class="d-lg-none" />
+		<!--end::View component-->
 	</div>
 </template>
+
+<style scoped>
+	.hide-scrollbar {
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE and Edge */
+	}
+
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none; /* WebKit (Chrome, Safari, etc.) */
+	}
+</style>
