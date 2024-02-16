@@ -10,7 +10,7 @@
 	<!--begin::About main-->
 	<div class="d-flex flex-column flex-xl-row">
 		<!--begin::Content-->
-		<div class="card bg-body mb-8 mb-xl-0 pb-lg-18">
+		<div class="card border-0 bg-transparent mb-8 mb-xl-0 pb-lg-18">
 			<div class="card-body pb-lg-20">
 				<!--begin::Blog-->
 				<div class="mb-13">
@@ -30,21 +30,19 @@
 						<div
 							class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-325px"
 							style="
-								background-image: url('https://africanmusings.com/wp-content/uploads/2022/12/12-Digital-Banking-Challenges-and-Opportunities-For-the-Banking-Industry-1.png');
+								background-image: url('/assets/media/auth/bg15.jpg');
 							"
 						></div>
 						<!--end::Image-->
 
 						<!--begin::Links-->
 						<div
-							class="overlay-layer card-rounded bg-dark bg-opacity-25"
+							class="overlay-layer card-rounded d-flex flex-column bg-dark bg-opacity-25"
 						>
+							<NFTexLogo :classes="'h-50px h-lg-100px mb-5'" />
 							<NuxtLink to="/contact-us" class="btn btn-primary">
 								Contact Us
 							</NuxtLink>
-							<a href="sign-up" class="btn btn-light-primary ms-3"
-								>Join Us</a
-							>
 						</div>
 						<!--end::Links-->
 					</div>
@@ -54,19 +52,21 @@
 					<div class="fs-5 fw-semibold text-gray-600 mt-4">
 						<!--begin::Text-->
 						<p class="mb-8">
-							We offer a wide range of bank accounts for your
-							banking needs. Need to deposit a check? Send money
-							to a friend? Pay your bills on time? Explore
-							additional account solutions? Our secure digital
-							banking tools make managing your money fast and
-							easy. Bank online, it's all at your fingertips –
-							right here, right now.
-
-							<a href="sign-up" class="link-primary pe-1"
-								>Sign up</a
-							>
-
-							(yes, create account in seconds)
+							Welcome to {{ config.APP }}, where creativity meets
+							the blockchain! We're a cutting-edge NFT platform
+							empowering artists, collectors, and enthusiasts to
+							explore the limitless possibilities of digital
+							ownership. Dive into a world where art, music,
+							videos, and more are transformed into unique digital
+							assets known as NFTs (Non-Fungible Tokens). Whether
+							you're an artist looking to showcase your work, a
+							collector seeking exclusive pieces, or simply
+							curious about the NFT craze, we've got you covered.
+							Join us on this groundbreaking journey as we
+							redefine the way we create, collect, and connect in
+							the digital age. Start exploring, start collecting,
+							start owning with {{ config.APP }}! (yes, create
+							account in seconds)
 						</p>
 						<!--end::Text-->
 					</div>
@@ -110,7 +110,7 @@
 											class="fw-semibold text-gray-800 text-center lh-lg"
 										>
 											<span class="fw-bolder">
-												Online Banking
+												Create your own NFTs
 											</span>
 										</h1>
 										<!--end::Title-->
@@ -120,16 +120,12 @@
 											class="py-10 text-center"
 											bis_skin_checked="1"
 										>
-											<img
-												src="https://media.istockphoto.com/id/1351373355/vector/online-banking-showing-on-mobile-phone.jpg?s=612x612&w=0&k=20&c=xTd-bloxdTzpZEvX_cc8xQRCvR9ExbzofSizT6GSpng="
-												class="theme-light-show w-200px"
-												alt=""
-											/>
-											<img
-												src="/assets/media/svg/illustrations/easy/2-dark.svg"
-												class="theme-dark-show w-200px"
-												alt=""
-											/>
+											<i
+												class="ki-duotone ki-abstract-15 fs-5x text-success"
+											>
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
 										</div>
 										<!--end::Illustration-->
 									</div>
@@ -182,7 +178,7 @@
 											class="fw-semibold text-gray-800 text-center lh-lg"
 										>
 											<span class="fw-bolder">
-												Current Account
+												Buy NFTs
 											</span>
 										</h1>
 										<!--end::Title-->
@@ -192,16 +188,31 @@
 											class="py-10 text-center"
 											bis_skin_checked="1"
 										>
-											<img
-												src="/assets/media/svg/illustrations/easy/2.svg"
-												class="theme-light-show w-200px"
-												alt=""
-											/>
-											<img
-												src="/assets/media/svg/illustrations/easy/2-dark.svg"
-												class="theme-dark-show w-200px"
-												alt=""
-											/>
+											<i
+												class="ki-duotone ki-color-swatch fs-5x text-warning"
+											>
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+												<span class="path4"></span>
+												<span class="path5"></span>
+												<span class="path6"></span>
+												<span class="path7"></span>
+												<span class="path8"></span>
+												<span class="path9"></span>
+												<span class="path10"></span>
+												<span class="path11"></span>
+												<span class="path12"></span>
+												<span class="path13"></span>
+												<span class="path14"></span>
+												<span class="path15"></span>
+												<span class="path16"></span>
+												<span class="path17"></span>
+												<span class="path18"></span>
+												<span class="path19"></span>
+												<span class="path20"></span>
+												<span class="path21"></span>
+											</i>
 										</div>
 										<!--end::Illustration-->
 									</div>
@@ -254,7 +265,7 @@
 											class="fw-semibold text-gray-800 text-center lh-lg"
 										>
 											<span class="fw-bolder">
-												Money Transfer
+												Sell NFTs
 											</span>
 										</h1>
 										<!--end::Title-->
@@ -264,16 +275,12 @@
 											class="py-10 text-center"
 											bis_skin_checked="1"
 										>
-											<img
-												src="https://assets.materialup.com/uploads/6af2ebb0-dfb9-4dd1-bcdc-0ce058646682/preview.jpg"
-												class="theme-light-show w-200px"
-												alt=""
-											/>
-											<img
-												src="/assets/media/svg/illustrations/easy/2-dark.svg"
-												class="theme-dark-show w-200px"
-												alt=""
-											/>
+											<i
+												class="ki-duotone ki-fasten fs-5x text-danger"
+											>
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
 										</div>
 										<!--end::Illustration-->
 									</div>
@@ -303,6 +310,52 @@
 										<!--end::Link-->
 									</div>
 									<!--end::Links-->
+								</div>
+								<!--end::Body-->
+							</div>
+						</div>
+
+						<div class="col">
+							<div
+								class="card h-md-100"
+								dir="ltr"
+								bis_skin_checked="1"
+							>
+								<!--begin::Body-->
+								<div
+									class="card-body d-flex flex-column flex-center"
+									bis_skin_checked="1"
+								>
+									<!--begin::Heading-->
+									<div class="mb-2" bis_skin_checked="1">
+										<!--begin::Title-->
+										<h1
+											class="fw-semibold text-gray-800 text-center lh-lg"
+										>
+											<span class="fw-bolder">
+												Manage Collections
+											</span>
+										</h1>
+										<!--end::Title-->
+
+										<!--begin::Illustration-->
+										<div
+											class="py-10 text-center"
+											bis_skin_checked="1"
+										>
+											<i
+												class="ki-duotone ki-data fs-5x text-info"
+											>
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+												<span class="path4"></span>
+												<span class="path5"></span>
+											</i>
+										</div>
+										<!--end::Illustration-->
+									</div>
+									<!--end::Heading-->
 								</div>
 								<!--end::Body-->
 							</div>

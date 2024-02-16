@@ -3,6 +3,12 @@
 	if (!auth.isAuthenticated()) {
 		auth.logout();
 	}
+
+	const CONFIG = useRuntimeConfig().public;
+
+	useSeoMeta({
+		title: `${CONFIG.APP} - Studio`,
+	});
 </script>
 
 <template>

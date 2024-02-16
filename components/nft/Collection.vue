@@ -13,7 +13,7 @@
 			:to="'/category/' + collection.category"
 			class="card-body p-0 h-100"
 		>
-			<img
+			<NuxtImg
 				@click="open(collection.name)"
 				:src="collection.image"
 				alt=""

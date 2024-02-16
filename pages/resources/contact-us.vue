@@ -274,7 +274,7 @@
 								<a
 									href="mailto:support@elisafinance.com"
 									class="text-gray-700 text-hover-primary fs-4 fw-bold"
-									>support@elisafinance.com</a
+									>support@nftexchain.com</a
 								>
 							</div>
 							<!--end::Item-->
@@ -318,24 +318,6 @@
 							<!--begin::Link-->
 							<a href="#" class="mb-6">
 								<img
-									src="/assets/media/svg/brand-logos/github.svg"
-									class="h-20px me-2"
-									alt=""
-								/>
-
-								<span
-									class="text-gray-700 text-hover-primary fs-5 mb-6"
-									>Github</span
-								>
-							</a>
-							<!--end::Link-->
-						</div>
-						<!--begin::Items-->
-						<!--begin::Items-->
-						<div class="mb-6">
-							<!--begin::Link-->
-							<a href="#" class="mb-6">
-								<img
 									src="/assets/media/svg/brand-logos/twitter.svg"
 									class="h-20px me-2"
 									alt=""
@@ -344,24 +326,6 @@
 								<span
 									class="text-gray-700 text-hover-primary fs-5 mb-6"
 									>Twitter</span
-								>
-							</a>
-							<!--end::Link-->
-						</div>
-						<!--begin::Items-->
-						<!--begin::Items-->
-						<div class="mb-6">
-							<!--begin::Link-->
-							<a href="#" class="mb-6">
-								<img
-									src="/assets/media/svg/brand-logos/dribbble-icon-1.svg"
-									class="h-20px me-2"
-									alt=""
-								/>
-
-								<span
-									class="text-gray-700 text-hover-primary fs-5 mb-6"
-									>Dribbble</span
 								>
 							</a>
 							<!--end::Link-->

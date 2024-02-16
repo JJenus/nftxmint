@@ -3,6 +3,12 @@
 		middleware: "auth",
 	});
 
+	const CONFIG = useRuntimeConfig().public;
+
+	useSeoMeta({
+		title: `${CONFIG.APP} - Deploy Collection`,
+	});
+
 	const inputSelect = ref();
 	const imageUrl = ref();
 
@@ -71,54 +77,84 @@
 				<div class="card-body">
 					<!--begin::Form-->
 					<form class="form" action="#" method="post">
-						<!--begin::Input group-->
-						<div class="fv-row">
-							<!--begin::Dropzone-->
-							<div
-								@click="inputSelect.click()"
-								class="dropzone w-100 min-h-200px d-flex align-items-center justify-content-center"
-								id="kt_dropzonejs_nft_collection_studio"
-							>
-								<input
-									ref="inputSelect"
-									type="file"
-									class="d-none"
-									@change="previewImage($event)"
-								/>
-								<img
-									v-if="imageUrl"
-									class="h-100"
-									:src="imageUrl"
-									alt=""
-									srcset=""
-								/>
-								<!--begin::Message-->
+						<div class="row g-5">
+							<div class="fv-row col-12 col-lg-8">
+								<!--begin::Dropzone-->
 								<div
-									class="dz-message needsclick position-absolute"
+									@click="inputSelect.click()"
+									class="dropzone w-100 min-h-200px d-flex align-items-center justify-content-center"
+									id="kt_dropzonejs_nft_collection_studio"
 								>
-									<i
-										class="ki-duotone ki-file-up fs-3x text-primary"
-										><span class="path1"></span
-										><span class="path2"></span
-									></i>
+									<input
+										ref="inputSelect"
+										type="file"
+										class="d-none"
+										@change="previewImage($event)"
+									/>
+									<img
+										v-if="imageUrl"
+										class="mh-250px mh-lg-300px mw-300px mw-lg-500px"
+										:src="imageUrl"
+										alt=""
+										srcset=""
+									/>
+									<!--begin::Message-->
+									<div
+										class="dz-message needsclick position-absolute"
+									>
+										<i
+											class="ki-duotone ki-file-up fs-3x text-primary"
+											><span class="path1"></span
+											><span class="path2"></span
+										></i>
 
-									<!--begin::Info-->
-									<div class="ms-4">
-										<h3
-											class="fs-5 fw-bold text-gray-900 mb-1"
-										>
-											Click to upload.
-										</h3>
-										<span
-											class="fs-7 fw-semibold text-gray-500"
-											>Max size: 5mb</span
-										>
+										<!--begin::Info-->
+										<div class="ms-4">
+											<h3
+												class="fs-5 fw-bold text-gray-900 mb-1"
+											>
+												Click to upload.
+											</h3>
+											<span
+												class="fs-7 fw-semibold text-gray-500"
+												>Max size: 5mb</span
+											>
+										</div>
+										<!--end::Info-->
 									</div>
-									<!--end::Info-->
+								</div>
+
+								<!--end::Dropzone-->
+							</div>
+							<div class="col d-flex flex-column">
+								<div class="mb-5 order-lg-1 order-2">
+									<label for="" class="form-label"
+										>Category</label
+									>
+									<select class="form-control" name="" id="">
+										<option value="">Art</option>
+										<option value="">Music</option>
+										<option value="">Photography</option>
+										<option value="">Gaming</option>
+									</select>
+								</div>
+								<div
+									class="border-dashed oder-lg-2 order-1 w-100 p-5 rounded border-primary mb-5 d-flex flex-row justify-content-between align-items-center"
+								>
+									<div>
+										<div class="d-flex flex-column mb-4">
+											<span class="fw-bold"> Fee </span>
+											<div class="fs-2 fw-bold">100</div>
+										</div>
+									</div>
+									<i
+										class="fa-brands fa-ethereum fs-5x text-warning me-4"
+									></i>
 								</div>
 							</div>
-							<!--end::Dropzone-->
 						</div>
+						<!--begin::Input group-->
+
 						<!--end::Input group-->
 						<div class="row my-8">
 							<div class="col-12 col-md-8">

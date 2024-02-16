@@ -94,7 +94,7 @@
 											></span>
 										</span>
 										<span class="menu-title">
-											About {{ $config.app }}
+											About {{ config.app }}
 										</span>
 									</span>
 								</NuxtLink>

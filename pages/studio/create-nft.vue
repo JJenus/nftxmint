@@ -4,11 +4,11 @@
 
 	const CONFIG = useRuntimeConfig().public;
 	const currentPage = "Mint NFT";
-	
+
 	useSeoMeta({
 		title: `${CONFIG.APP} - ${currentPage}`,
 	});
-	
+
 	// const moonPay = await loadMoonPay();
 
 	// const moonPaySdk = moonPay({
@@ -95,9 +95,23 @@
 		</div>
 		<div class="row g-8 justify-content-center">
 			<div class="col-12 col-lg-6">
-				<div class="fs-3 fw-semibold mb-8">
+				<div class="fs-3 fw-semibold mb-5">
 					Once your item is minted you will not be able to change any
 					of its information.
+				</div>
+
+				<div
+					class="border-dashed py-2 oder-lg-2 order-1 w-100 p-5 rounded border-primary mb-5 d-flex flex-row justify-content-between align-items-center"
+				>
+					<div>
+						<div class="d-flex flex-column mb-4">
+							<span class="fw-bold">Minting fee </span>
+							<div class="fs-2 fw-bold">100</div>
+						</div>
+					</div>
+					<i
+						class="fa-brands fa-ethereum fs-3x text-warning me-4"
+					></i>
 				</div>
 
 				<form class="form" action="#" method="post">
@@ -117,13 +131,15 @@
 							/>
 							<img
 								v-if="imageUrl"
-								class="h-100"
+								class="mh-250px mh-lg-300px mw-300px mw-lg-500px"
 								:src="imageUrl"
 								alt=""
 								srcset=""
 							/>
 							<!--begin::Message-->
-							<div class="dz-message needsclick position-absolute">
+							<div
+								class="dz-message needsclick position-absolute"
+							>
 								<i
 									class="ki-duotone ki-file-up fs-3x text-primary"
 									><span class="path1"></span
@@ -131,7 +147,7 @@
 								></i>
 
 								<!--begin::Info-->
-								<div class="ms-4 ">
+								<div class="ms-4">
 									<h3 class="fs-5 fw-bold text-gray-900 mb-1">
 										click to upload.
 									</h3>
@@ -152,7 +168,18 @@
 				>
 					<!--begin::Body-->
 					<div class="card-body">
-						<div class="mb-8">
+						<div class="mb-5 order-lg-1 order-2">
+									<label for="" class="form-label"
+										>Pick Collection</label
+									>
+									<select class="form-control" name="" id="">
+										<option value="">Graffiti</option>
+										<option value="">Melo</option>
+										<option value="">Angelo</option>
+										<option value="">Boom</option>
+									</select>
+								</div>
+						<div class="mb-5">
 							<label for="" class="form-label">Name</label>
 							<input
 								placeholder="Preferred nft name"
@@ -160,7 +187,7 @@
 								class="form-control form-control-solid"
 							/>
 						</div>
-						<div class="mb-8">
+						<div class="mb-5">
 							<label for="" class="form-label"
 								>Items available</label
 							>
@@ -171,7 +198,7 @@
 							/>
 						</div>
 
-						<div class="mb-8">
+						<div class="mb-5">
 							<label for="" class="form-label">Description</label>
 							<textarea class="form-control"></textarea>
 						</div>

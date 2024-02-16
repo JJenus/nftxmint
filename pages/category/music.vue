@@ -10,25 +10,25 @@
 			name: "I am me",
 			floor: "91.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.avif",
+			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
 		},
 		{
 			name: "Lavrina",
 			floor: "20.23 ETH",
 			volume: "12,21",
-			image: "/assets/media/nft/music/9785f0b062da87518076fa7d8b6a0381.avif",
+			image: "/assets/media/nft/music/9785f0b062da87518076fa7d8b6a0381.jpg",
 		},
 		{
 			name: "Estadi Magri",
 			floor: "1.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/music/c5c3ff4a66c4c34f1c93333476162631.avif",
+			image: "/assets/media/nft/music/c5c3ff4a66c4c34f1c93333476162631.jpg",
 		},
 		{
 			name: "I am me",
 			floor: "91.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.avif",
+			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
 		},
 		{
 			name: "Adingra",
@@ -40,7 +40,7 @@
 			name: "Methusa",
 			floor: "2.23 ETH",
 			volume: "17,000",
-			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.avif",
+			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
 		},
 	]);
 </script>

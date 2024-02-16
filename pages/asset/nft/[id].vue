@@ -11,7 +11,7 @@
 	const nft = ref({
 		collectionName: "Amagidon",
 		name: "Ido",
-		floor: 1.23,
+		floor: 1.34,
 		crypto: "Matic",
 		volume: "11,420",
 		image: "/assets/media/nft/art/2757e233bc2708e8d0f5ad3079b39d21.avif",

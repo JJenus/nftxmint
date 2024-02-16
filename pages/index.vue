@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+	const CONFIG = useRuntimeConfig().public;
+
+	useSeoMeta({
+		title: `Welcome to ${CONFIG.APP}`,
+	});
+</script>
 
 <template>
 	<div class="container-fluid">
