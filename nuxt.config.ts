@@ -23,6 +23,9 @@ export default defineNuxtConfig({
 		public: {
 			BE_API: process.env.BE_API || "https://nftex.alwaysdata.net",
 			APP: "NFTex",
+			CLOUD_NAME: "dofakovum",
+			CLOUD_KEY: "989922725678128",
+			CLOUD_SECRETE: "Vzr0P-RNm2NEtKp1-Dyib33di0E",
 		},
 	},
 	devServer: {
@@ -54,8 +57,7 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:image",
-					content:
-						"/assets/media/logos/nftex-logo.png",
+					content: "/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:title",
@@ -68,8 +70,7 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:image",
-					content:
-						"/assets/media/logos/nftex-logo.png",
+					content: "/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:url",

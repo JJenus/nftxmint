@@ -1,4 +1,10 @@
 <script setup>
+	const CONFIG = useRuntimeConfig().public;
+	const currentPage = "Art NFT";
+
+	useSeoMeta({
+		title: `${CONFIG.APP} - ${currentPage}`,
+	});
 	const NFTs = ref([
 		{
 			name: "Khan",

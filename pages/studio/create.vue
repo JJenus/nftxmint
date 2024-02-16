@@ -38,7 +38,7 @@
 
 <template>
 	<div class="m-0 p-0 mt-n6">
-		<div class="d-flex flex-column flex-md-row m-0 p-0">
+		<div class="d-flex flex-column flex-lg-row m-0 p-0">
 			<div class="order-2 order-lg-1 m-0 p-0 w-lg-800px me-md-10">
 				<div
 					class="d-flex min-h-lg-500px flex-column container-fluid justify-content-center w-100 w-lg-75 p-lg-0"
@@ -120,7 +120,7 @@
 								<img
 									:src="nft.image"
 									alt=""
-									class="w-100 h-250px rounded-start h-lg-500px rounded-left"
+									class="w-100 h-250px rounded-start h-md-300px h-lg-500px rounded-left"
 								/>
 							</div>
 						</div>

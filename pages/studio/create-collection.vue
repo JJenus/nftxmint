@@ -2,29 +2,57 @@
 	definePageMeta({
 		middleware: "auth",
 	});
-	onMounted(() => {
-		if (process.client) {
-			const myNftDropzone = new Dropzone(
-				"#kt_dropzonejs_nft_collection_studio",
-				{
-					url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-					paramName: "file", // The name that will be used to transfer the file
-					maxFiles: 1,
-					maxFilesize: 5, // MB
-					addRemoveLinks: true,
-					autoProcessQueue: false,
-					accept: function (file, done) {
-						console.log("Yes");
-						if (file.name == "wow.jpg") {
-							done("Naha, you don't.");
-						} else {
-							done();
-						}
-					},
-				}
-			);
+
+	const inputSelect = ref();
+	const imageUrl = ref();
+
+	const saveFile = (event) => {
+		const file = imageUrl.value;
+		if (!file) {
+			return errorAlert("Select an image");
 		}
-	});
+		const formData = new FormData();
+		formData.append("file", file);
+		formData.append("upload_preset", "ml_default");
+
+		return axios
+			.request({
+				method: "post",
+				url:
+					"https://api.cloudinary.com/v1_1/" +
+					CONFIG.CLOUD_NAME +
+					"/image/upload",
+				data: formData,
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then((response) => {
+				if (response.data && response.data.secure_url) {
+					const imageUrl = response.data.secure_url;
+					console.log("Image uploaded successfully:", imageUrl);
+					return imageUrl;
+				} else {
+					console.error("Failed to upload image:", response.data);
+					return null;
+				}
+			})
+			.catch((error) => {
+				console.error("Error uploading image:", error);
+				return null;
+			});
+	};
+
+	const previewImage = (event) => {
+		const file = event.target.files[0];
+		if (!file) return;
+
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			imageUrl.value = e.target.result;
+		};
+		reader.readAsDataURL(file);
+	};
 </script>
 
 <template>
@@ -47,11 +75,27 @@
 						<div class="fv-row">
 							<!--begin::Dropzone-->
 							<div
-								class="dropzone w-100"
+								@click="inputSelect.click()"
+								class="dropzone w-100 min-h-200px d-flex align-items-center justify-content-center"
 								id="kt_dropzonejs_nft_collection_studio"
 							>
+								<input
+									ref="inputSelect"
+									type="file"
+									class="d-none"
+									@change="previewImage($event)"
+								/>
+								<img
+									v-if="imageUrl"
+									class="h-100"
+									:src="imageUrl"
+									alt=""
+									srcset=""
+								/>
 								<!--begin::Message-->
-								<div class="dz-message needsclick">
+								<div
+									class="dz-message needsclick position-absolute"
+								>
 									<i
 										class="ki-duotone ki-file-up fs-3x text-primary"
 										><span class="path1"></span
@@ -63,7 +107,7 @@
 										<h3
 											class="fs-5 fw-bold text-gray-900 mb-1"
 										>
-											Drop image here or click to upload.
+											Click to upload.
 										</h3>
 										<span
 											class="fs-7 fw-semibold text-gray-500"

@@ -49,18 +49,16 @@
 						data-kt-menu-expand="false"
 					>
 						<!--begin:Menu item-->
-						<NuxtLink
-							to="/account"
-							class="menu-item menu-accordion"
-						>
+						<a href="/account" class="menu-item menu-accordion">
 							<!--begin:Menu link--><span class="menu-link"
 								><span class="menu-icon">
 									<i class="ki-solid fs-2 ki-user"> </i>
 								</span>
 								<span class="menu-title">Profile</span>
 							</span>
-						</NuxtLink>
-						<div
+						</a>
+						<a
+							href="/studio/create"
 							data-kt-menu-trigger="click"
 							class="menu-item menu-accordion"
 						>
@@ -70,7 +68,7 @@
 								</span>
 								<span class="menu-title">Create</span></span
 							>
-						</div>
+						</a>
 						<!--end:Menu item--><!--begin:Menu item-->
 						<div
 							data-kt-menu-trigger="click"
@@ -84,114 +82,25 @@
 							>
 							<!--end:Menu link--><!--begin:Menu sub-->
 							<div class="menu-sub menu-sub-accordion">
-								<!--begin:Menu item-->
-								<div
-									data-kt-menu-trigger="click"
+								<NuxtLink
+									to="/resources/about-us"
 									class="menu-item menu-accordion"
 								>
-									<!--begin:Menu link--><span
-										class="menu-link"
-										><span class="menu-bullet"
-											><span
+									<!--begin:Menu link-->
+									<span class="menu-link">
+										<span class="menu-bullet">
+											<span
 												class="bullet bullet-dot"
-											></span></span
-										><span class="menu-title"
-											>About NFTex</span
-										><span class="menu-arrow"></span></span
-									><!--end:Menu link--><!--begin:Menu sub-->
-									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link--><a
-												class="menu-link"
-												href="../pages/user-profile/overview.html"
-												><span class="menu-bullet"
-													><span
-														class="bullet bullet-dot"
-													></span></span
-												><span class="menu-title"
-													>Overview</span
-												></a
-											><!--end:Menu link-->
-										</div>
-										<!--end:Menu item--><!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link--><a
-												class="menu-link"
-												href="../pages/user-profile/projects.html"
-												><span class="menu-bullet"
-													><span
-														class="bullet bullet-dot"
-													></span></span
-												><span class="menu-title"
-													>Projects</span
-												></a
-											><!--end:Menu link-->
-										</div>
-										<!--end:Menu item--><!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link--><a
-												class="menu-link"
-												href="../pages/user-profile/campaigns.html"
-												><span class="menu-bullet"
-													><span
-														class="bullet bullet-dot"
-													></span></span
-												><span class="menu-title"
-													>Campaigns</span
-												></a
-											><!--end:Menu link-->
-										</div>
-										<!--end:Menu item--><!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link--><a
-												class="menu-link"
-												href="../pages/user-profile/documents.html"
-												><span class="menu-bullet"
-													><span
-														class="bullet bullet-dot"
-													></span></span
-												><span class="menu-title"
-													>Documents</span
-												></a
-											><!--end:Menu link-->
-										</div>
-										<!--end:Menu item--><!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link--><a
-												class="menu-link"
-												href="../pages/user-profile/followers.html"
-												><span class="menu-bullet"
-													><span
-														class="bullet bullet-dot"
-													></span></span
-												><span class="menu-title"
-													>Followers</span
-												></a
-											><!--end:Menu link-->
-										</div>
-										<!--end:Menu item--><!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link--><a
-												class="menu-link"
-												href="../pages/user-profile/activity.html"
-												><span class="menu-bullet"
-													><span
-														class="bullet bullet-dot"
-													></span></span
-												><span class="menu-title"
-													>Activity</span
-												></a
-											><!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-									</div>
-									<!--end:Menu sub-->
-								</div>
-								<!--end:Menu item--><!--begin:Menu item-->
-								<div
-									data-kt-menu-trigger="click"
-									class="menu-item menu-accordion"
+											></span>
+										</span>
+										<span class="menu-title">
+											About {{ $config.app }}
+										</span>
+									</span>
+								</NuxtLink>
+								<NuxtLink
+									to="/resources/contact-us"
+									class="menu-item"
 								>
 									<!--begin:Menu link--><span
 										class="menu-link"
@@ -203,11 +112,11 @@
 											>Contact Us</span
 										>
 									</span>
-								</div>
+								</NuxtLink>
 								<!--end:Menu item--><!--begin:Menu item-->
 								<div
 									data-kt-menu-trigger="click"
-									class="menu-item menu-accordion"
+									class="menu-item d-none menu-accordion"
 								>
 									<!--begin:Menu link--><span
 										class="menu-link"
@@ -284,11 +193,13 @@
 			<!--end::sidebar menu-->
 			<!--begin::Footer-->
 			<div
-				class="app-sidebar-footer flex-column-auto m-9"
+				class="app-sidebar-footer overflow-hidden flex-column-auto m-9"
 				id="kt_app_sidebar_footer"
 			>
 				<!--begin::Card-->
-				Footer
+				<div class="d-flex justify-content-center w-100">
+					<NFTexLogo :classes="'h-30px'" />
+				</div>
 				<!--end::Card-->
 			</div>
 

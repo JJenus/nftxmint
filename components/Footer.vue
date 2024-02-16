@@ -16,7 +16,7 @@
 					<div
 						class="d-flex flex-row align-items-center justify-content-center m-0 mb-3"
 					>
-						<NFTexLogo :classes="'h-70px'"/>
+						<NFTexLogo :classes="'h-70px'" />
 					</div>
 				</div>
 				<p class="text-center p-4">
@@ -35,7 +35,7 @@
 					+1 (228) 888-1615
 				</p>
 				<p class="mb-5">
-					Don’t miss to subscribe to our new feeds, kindly fill the
+					Don’t miss, to subscribe to our new feeds, kindly fill the
 					form below.
 				</p>
 				<div class="d-flex align-items-center">
@@ -72,11 +72,18 @@
 				class="menu menu-gray-600 menu-hover-primary fw-semibold order-1w"
 			>
 				<li class="menu-item">
-					<a target="_blank" class="menu-link px-2">About</a>
+					<NuxtLink
+						to="/resources/about-us"
+						target="_blank"
+						class="menu-link px-2"
+						>About</NuxtLink
+					>
 				</li>
 
 				<li class="menu-item">
-					<a class="menu-link px-2">Support</a>
+					<NuxtLink to="/resources/contact-us" class="menu-link px-2">
+						Contact Us
+					</NuxtLink>
 				</li>
 
 				<li class="menu-item">

@@ -78,7 +78,7 @@
 				<!--end::Login-->
 
 				<!--begin::Search-->
-				<div class="app-navbar-item d-flex d-lg-none ms-5">
+				<div class="app-navbar-item d-flex d-none d-lg-none ms-5">
 					<!--begin::Drawer toggle-->
 					<div
 						class="btn btn-custom fw-bold btn-active-color-white btn-color-white btn-icon w-40px h-40px"
@@ -92,7 +92,7 @@
 
 				<!--begin::User menu-->
 				<div
-					class="app-navbar-item ms-1 ms-lg-1"
+					class="app-navbar-item mx-3 ms-lg-1"
 					id="kt_header_user_menu_toggle"
 				>
 					<!--begin::Menu wrapper-->

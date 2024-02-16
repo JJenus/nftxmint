@@ -3,6 +3,12 @@
 		layout: ["app"],
 		middleware: "auth",
 	});
+	const CONFIG = useRuntimeConfig().public;
+	const currentPage = "User Dashboard";
+
+	useSeoMeta({
+		title: `${CONFIG.APP} - ${currentPage}`,
+	});
 
 	const auth = useAuth();
 	if (!auth.isAuthenticated()) {
@@ -67,7 +73,11 @@
 									class="overlay overflow-hidden symbol symbol-125px symbol-circle symbol-lg-150px symbol-fixed position-relative mt-n3"
 								>
 									<img
-										:src="user.profileImg? user.profileImg:'https://robohash.org/nftexchaing.png'"
+										:src="
+											user.profileImg
+												? user.profileImg
+												: 'https://robohash.org/nftexchaing.png'
+										"
 										alt="image"
 										class="overlay-wrapper border border-white border-4 rounded-circle"
 									/>

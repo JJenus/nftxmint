@@ -1,10 +1,16 @@
 <script setup lang="ts">
-	import axios, { AxiosRequestConfig } from "axios";
+	import axios, { type AxiosRequestConfig } from "axios";
 
 	definePageMeta({
 		layout: "auth",
 	});
 	const appConfig = useRuntimeConfig();
+	const CONFIG = useRuntimeConfig().public;
+	const currentPage = "Verify Account";
+
+	useSeoMeta({
+		title: `${CONFIG.APP} - ${currentPage}`,
+	});
 
 	const id = useRoute().query["id"];
 	console.log(id);

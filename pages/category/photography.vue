@@ -1,4 +1,11 @@
 <script setup>
+	const CONFIG = useRuntimeConfig().public;
+	const currentPage = "Photography NFT";
+
+	useSeoMeta({
+		title: `${CONFIG.APP} - ${currentPage}`,
+	});
+	
 	const NFTs = ref([
 		{
 			name: "Khan",
@@ -110,7 +117,10 @@
 									class="w-100 h-200px rounded-top"
 								/>
 							</div>
-							<NuxtLink :to="'/asset/'+nft.name" class="card-footer p-4 py-5">
+							<NuxtLink
+								:to="'/asset/' + nft.name"
+								class="card-footer p-4 py-5"
+							>
 								<h5 class="mb-2 fs-4 d-flex align-items-center">
 									{{ nft.name }}
 									<i
