@@ -1,4 +1,8 @@
 <script setup lang="ts">
+	const user = userData().data;
+	if (user.value.role !== "admin") {
+		await navigateTo("/account");
+	}
 	const searchText = ref("");
 	const active = userData().active;
 	const foundUsers = ref(userData().users.value.length);

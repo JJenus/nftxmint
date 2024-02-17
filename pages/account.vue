@@ -232,15 +232,12 @@
 								</NuxtLink>
 							</li>
 							<li
+								v-if="user.role === 'admin'"
 								@click="active = 'users'"
 								class="nav-item my-1"
 							>
 								<NuxtLink
-									:class="
-										active == 'users'
-											? 'active'
-											: ''
-									"
+									:class="active == 'users' ? 'active' : ''"
 									to="/account/users"
 									class="btn btn btn-color-gray-600 bg-state-body btn-active-color-gray-800 fw-bolder fw-bold fs-5 fs-lg-base nav-link px-3 px-lg-4 mx-1"
 								>
