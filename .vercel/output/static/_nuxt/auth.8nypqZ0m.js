@@ -1,0 +1,1 @@
+import{e as o,n as t}from"./entry.6-x_fUt2.js";import{u as r}from"./cookie.0dD0VmNt.js";import{u as i}from"./authStates.Ig55YP20.js";import"./swiper-vue.NczeWK1y.js";import"./axios.L6U4YIEh.js";const c=o((u,a)=>{const e=r("auth");if(e.value==null||e.value==null)return t("/",{redirectCode:301});if(!i().isAuthenticated())return t("/",{redirectCode:301})});export{c as default};

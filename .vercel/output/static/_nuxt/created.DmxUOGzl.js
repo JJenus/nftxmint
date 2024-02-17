@@ -1,1 +1,0 @@
-import{a as o,k as e,u as s,J as n,o as t,x as a}from"./swiper-vue.8CwPRiLZ.js";const c={key:0,class:"min-h-300px rounded border border-primary d-flex align-items-center justify-content-center"},d=a("h1",null,"No created items",-1),_=[d],p={__name:"created",setup(i){const r=o([]);return(l,m)=>(t(),e("div",null,[s(r).length<1?(t(),e("div",c,_)):n("",!0)]))}};export{p as default};
