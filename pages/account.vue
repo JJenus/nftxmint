@@ -120,7 +120,12 @@
 										<a
 											href="#"
 											class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
-											>XX magic</a
+										>
+											{{
+												user.name
+													? user.name
+													: "unknown collector"
+											}}</a
 										>
 										<a
 											href="#"
@@ -142,8 +147,9 @@
 									<span
 										class="fw-bold d-none text-gray-600 fs-6 mb-2 d-block"
 									>
-										Design is like a fart. If you have to
-										force it, it’s probably shit.
+										Explore the limitless possibilities of
+										digital ownership. NFTex, where
+										creativity meets the blockchain!
 									</span>
 									<!--end::Text-->
 
@@ -152,21 +158,21 @@
 										class="d-flex align-items-center flex-wrap fw-semibold fs-7 pe-2"
 									>
 										<span
-											class="bullet bullet-dot h-5px w-5px bg-gray-400 mx-3"
+											class="bullet bullet-dot h-5px w-5px bg-gray-400 me-3"
 										></span>
 										<a
 											href="#"
-											class="d-flex align-items-center text-gray-400 text-hover-primary"
+											class="mw-200px mw-lg-400px text-truncate text-info itext-gray-400 text-hover-primary"
 										>
-											0 Created
+											{{ user.ethAddress }}
 										</a>
 
 										<span
-											class="bullet bullet-dot h-5px w-5px bg-gray-400 mx-3"
+											class="bullet bullet-dot h-5px w-5px bg-gray-400 ms-3"
 										></span>
 										<a
 											href="#"
-											class="text-gray-400 text-hover-primary"
+											class="text-gray-400 d-none text-hover-primary"
 										>
 											3,450 Collected
 										</a>
@@ -223,6 +229,22 @@
 									class="btn btn btn-color-gray-600 bg-state-body btn-active-color-gray-800 fw-bolder fw-bold fs-5 fs-lg-base nav-link px-3 px-lg-4 mx-1"
 								>
 									{{ nav.name }}
+								</NuxtLink>
+							</li>
+							<li
+								@click="active = 'users'"
+								class="nav-item my-1"
+							>
+								<NuxtLink
+									:class="
+										active == 'users'
+											? 'active'
+											: ''
+									"
+									to="/account/users"
+									class="btn btn btn-color-gray-600 bg-state-body btn-active-color-gray-800 fw-bolder fw-bold fs-5 fs-lg-base nav-link px-3 px-lg-4 mx-1"
+								>
+									Users
 								</NuxtLink>
 							</li>
 						</ul>

@@ -27,6 +27,7 @@ export default defineNuxtConfig({
 			CLOUD_NAME: "dofakovum",
 			CLOUD_KEY: "989922725678128",
 			CLOUD_SECRETE: "Vzr0P-RNm2NEtKp1-Dyib33di0E",
+			DEFAULT_DP: "https://robohash.org/nftexchaing-user.png",
 		},
 	},
 	devServer: {
@@ -84,6 +85,7 @@ export default defineNuxtConfig({
 				{
 					src: "/assets/plugins/custom/fslightbox/fslightbox.bundle.js",
 				},
+				{ src: "//code.tidio.co/d0e7onzhw4dwaohrjstabmxkpi16bzz1.js" },
 			],
 
 			link: [

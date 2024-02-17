@@ -115,7 +115,7 @@
 							:src="
 								user.profileImg
 									? user.profileImg
-									: 'https://robohash.org/nftexchaing-user.png'
+									: $config.public.DEFAULT_DP
 							"
 							alt="user"
 							class="border border-info border-2"

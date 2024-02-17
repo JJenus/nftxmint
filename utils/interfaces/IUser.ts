@@ -7,7 +7,7 @@ export interface IUser {
 	profileImg: string;
 	bannerImg: string;
 	ethAddress: string;
-	status: boolean;
+	status: string;
 	role: string;
 	balance: string;
 	createdAt: string;

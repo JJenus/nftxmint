@@ -7,31 +7,31 @@
 			name: "Khan",
 			floor: "0.23 ETH",
 			volume: "17,000",
-			image: "/assets/media/nft/art/48f515409362ec557603578c18fd2134.avif",
+			image: "/assets/media/misc/profile-head-bg.jpg",
 		},
 		{
 			name: "Rango",
 			floor: "1.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/gaming/GyEkb_tl0e0gXf_Vdce7Pkkc5OBU-ORbYUa4b-iIW4t39Gy5293OvnI5LLcwIxTI4XKO8yg5bHXldgDcPDdSnmrApGFHfLZyfs8V.avif",
+			image: "/assets/media/auth/welcome-dark.png",
 		},
 		{
 			name: "Ido",
 			floor: "1.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/art/2757e233bc2708e8d0f5ad3079b39d21.avif",
+			image: "/assets/media/auth/bg12.jpg",
 		},
 		{
 			name: "Chi",
 			floor: "4.23 ETH",
 			volume: "1,000",
-			image: "/assets/media/nft/art/198b0fa57beea4256eadfefb74bc1602.avif",
+			image: "/assets/media/auth/coming-soon.png",
 		},
 		{
 			name: "Khan",
 			floor: "2.23 ETH",
 			volume: "17,000",
-			image: "/assets/media/nft/art/turn-digital-arti-into-nft.webp",
+			image: useRuntimeConfig().public.DEFAULT_DP,
 		},
 	]);
 </script>
