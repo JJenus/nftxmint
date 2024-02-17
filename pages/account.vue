@@ -16,6 +16,7 @@
 	}
 
 	const user = userData().data;
+	console.log(user.value);
 
 	const route = useRoute();
 	const active = ref("Collected");
@@ -232,7 +233,7 @@
 								</NuxtLink>
 							</li>
 							<li
-								v-if="user.role === 'admin'"
+								v-if="user.userRole === 'admin'"
 								@click="active = 'users'"
 								class="nav-item my-1"
 							>
