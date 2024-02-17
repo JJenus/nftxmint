@@ -15,6 +15,7 @@
 			volume: "12,21",
 			image: "/assets/media/nft/music/9785f0b062da87518076fa7d8b6a0381.jpg",
 		},
+		
 		{
 			category: "music",
 			name: "Estadi Magri",
