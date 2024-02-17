@@ -16,10 +16,9 @@
 	}
 
 	const user = userData().data;
-	console.log(user.value);
 
 	const route = useRoute();
-	const active = ref("Collected");
+	const active = ref("collected");
 
 	const navs = [
 		{
@@ -36,8 +35,6 @@
 		const paths = route.path.split("/");
 		console.log("ROUTE", paths);
 		if (paths[2]) {
-			console.log("SET PATH");
-
 			active.value = paths[2];
 		} else {
 			active.value = "collected";
@@ -235,6 +232,9 @@
 							<li
 								v-if="user.userRole === 'admin'"
 								@click="active = 'users'"
+								:class="
+									user.userRole !== 'admin' ? 'd-none' : ''
+								"
 								class="nav-item my-1"
 							>
 								<NuxtLink

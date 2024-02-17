@@ -4,19 +4,19 @@
 			name: "Tour De Pac",
 			floor: "91.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/gaming/7d4217892337d4900e2fad175c5c0011.avif",
+			image: "/assets/media/nft/gaming/7d4217892337d4900e2fad175c5c0011.jpg",
 		},
 		{
 			name: "Again",
 			floor: "20.23 ETH",
 			volume: "12,21",
-			image: "/assets/media/nft/art/48f515409362ec557603578c18fd2134.avif",
+			image: "/assets/media/nft/art/48f515409362ec557603578c18fd2134.jpg",
 		},
 		{
 			name: "Maldiva",
 			floor: "1.23 Matic",
 			volume: "11,420",
-			image: "/assets/media/nft/memberships/3cd9c9d97e35a7ff5ee11baf5dca7b90.avif",
+			image: "/assets/media/nft/memberships/3cd9c9d97e35a7ff5ee11baf5dca7b90.jpg",
 		},
 		{
 			name: "Greener",
@@ -34,7 +34,7 @@
 			name: "Vice City",
 			floor: "2.23 ETH",
 			volume: "17,000",
-			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.avif",
+			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
 		},
 	]);
 </script>

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 	const user = userData().data;
-	if (user.value.userRole !== "admin") {
+	if (user.value.userRole == null || user.value.userRole !== "admin") {
 		await navigateTo("/account");
 	}
 	const searchText = ref("");
 	const active = userData().active;
-	const foundUsers = ref(userData().users.value.length);
+	const foundUsers = () => {
+		userData().users.value.length;
+	};
 
 	if (userData().users.value.length === 0) {
 		userData().getUsers();
@@ -39,7 +41,7 @@
 				(user.phone && user.phone.toLowerCase().includes(searchString));
 			return a;
 		});
-		foundUsers.value = users.length;
+
 		return users;
 	}
 
