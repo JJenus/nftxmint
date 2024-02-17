@@ -17,7 +17,6 @@
 		},
 		{
 			category: "music",
-
 			name: "Estadi Magri",
 			floor: "1.23 Matic",
 			volume: "11,420",

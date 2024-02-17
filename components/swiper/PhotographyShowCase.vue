@@ -1,13 +1,14 @@
 <script setup>
 	const album = ref([
 		{
-			category: "music",
+			category: "photography",
 			name: "I am me",
 			floor: "91.23 Matic",
 			volume: "11,420",
 			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
 		},
 		{
+			category: "photography",
 			name: "Lavrina",
 			category: "music",
 			floor: "20.23 ETH",
@@ -15,6 +16,7 @@
 			image: "/assets/media/nft/music/9785f0b062da87518076fa7d8b6a0381.jpg",
 		},
 		{
+			category: "photography",
 			name: "Estadi Magri",
 			category: "music",
 			floor: "1.23 Matic",
@@ -22,6 +24,7 @@
 			image: "/assets/media/nft/music/c5c3ff4a66c4c34f1c93333476162631.jpg",
 		},
 		{
+			category: "photography",
 			name: "I am me",
 			category: "music",
 			floor: "91.23 Matic",
@@ -29,6 +32,7 @@
 			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
 		},
 		{
+			category: "photography",
 			name: "Adingra",
 			category: "music",
 			floor: "4.23 ETH",
@@ -36,6 +40,7 @@
 			image: "/assets/media/nft/music/what-are-music-nfts.webp",
 		},
 		{
+			category: "photography",
 			name: "Methusa",
 			category: "music",
 			floor: "2.23 ETH",
