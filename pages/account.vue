@@ -151,6 +151,17 @@
 									</span>
 									<!--end::Text-->
 
+									<div
+										class="d-flex align-items-center fw-bold fs-2 mb-3"
+									>
+										<i
+											class="fa-brands fa-ethereum fs-2 text-warning me-1"
+										></i>
+										<span class="pb-0">
+											{{ user.balance }} ETH
+										</span>
+									</div>
+
 									<!--begin::Info-->
 									<div
 										class="d-flex align-items-center flex-wrap fw-semibold fs-7 pe-2"
@@ -168,14 +179,16 @@
 										<span
 											class="bullet bullet-dot h-5px w-5px bg-gray-400 ms-3"
 										></span>
-										<a
-											href="#"
-											class="text-gray-400 d-none text-hover-primary"
-										>
-											3,450 Collected
-										</a>
 									</div>
 									<!--end::Info-->
+									<div class="mt-5">
+										<NuxtLink
+											to="/crypto/fund-wallet"
+											class="btn btn-primary w-200px w-lg-350px"
+										>
+											Fund wallet
+										</NuxtLink>
+									</div>
 								</div>
 								<!--end::User-->
 

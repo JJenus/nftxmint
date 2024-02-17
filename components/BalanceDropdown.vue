@@ -15,7 +15,9 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<div class="d-flex flex-row justify-content-between align-items-center">
+			<div
+				class="d-flex flex-row justify-content-between align-items-center"
+			>
 				<div>
 					<div class="d-flex flex-column mb-4">
 						<span class="fw-bold"> Balance </span>
@@ -27,7 +29,7 @@
 					<div class="d-flex flex-column">
 						<span class="fw-bold"> Address </span>
 						<div
-						style="width: 180px;"
+							style="width: 180px"
 							class="rounded shadow p-1 px-5 bg-secondary text-info text-truncate"
 						>
 							{{ user.ethAddress }}
@@ -36,6 +38,9 @@
 				</div>
 				<i class="fa-brands fa-ethereum fs-5x text-warning me-4"></i>
 			</div>
+			<a href="/crypto/fund-wallet" class="btn btn-secondary w-100 mt-5"
+				>Fund Wallet</a
+			>
 		</div>
 		<!--end::Menu item-->
 	</div>

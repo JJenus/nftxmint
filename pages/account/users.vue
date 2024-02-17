@@ -6,7 +6,7 @@
 	const searchText = ref("");
 	const active = userData().active;
 	const foundUsers = () => {
-		userData().users.value.length;
+		return userData().users.value.length;
 	};
 
 	if (userData().users.value.length === 0) {
@@ -65,7 +65,7 @@
 						class="d-block d-flex flex-column align-items-center justify-content-center"
 					>
 						<h1 class="text-center h2 pb-2 fw-bold">
-							Users ({{ foundUsers }})
+							Users ({{ foundUsers() }})
 						</h1>
 						<div
 							class="position-relative my-1"
