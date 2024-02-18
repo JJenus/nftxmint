@@ -1,4 +1,6 @@
 <script setup>
+	import axios from "axios";
+
 	definePageMeta({
 		middleware: "auth",
 	});
@@ -9,19 +11,62 @@
 		title: `${CONFIG.APP} - Deploy Collection`,
 	});
 
+	const loading = ref(false);
+
 	const inputSelect = ref();
 	const imageUrl = ref();
+
+	const form = ref({
+		name: "",
+		symbol: "",
+		category: "",
+		userId: userData().data.value.id,
+		bannerImg: "",
+		contractAddress: userData().data.value.ethAddress,
+	});
+
+	const saveCollection = () => {
+		if (!form.value.bannerImg) {
+			return errorAlert("Image upload error");
+		}
+		axios
+			.request({
+				method: "post",
+				url: `${CONFIG.BE_API}/collections`,
+				data: form.value,
+			})
+			.then((response) => {
+				console.log(response.data);
+				successAlert("Congratulations! Your collection is deployed.");
+			})
+			.catch((error) => {
+				console.error("Error uploading image:", error);
+				loading.value = false;
+				errorAlert("Failed t create collection");
+				return null;
+			})
+			.finally(() => {
+				loading.value = false;
+			});
+	};
 
 	const saveFile = (event) => {
 		const file = imageUrl.value;
 		if (!file) {
 			return errorAlert("Select an image");
 		}
+		if (!form.value.category || !form.value.name || !form.value.symbol) {
+			return errorAlert("All fields are required");
+		}
+		console.log(form.value);
+
 		const formData = new FormData();
 		formData.append("file", file);
 		formData.append("upload_preset", "ml_default");
 
-		return axios
+		loading.value = true;
+
+		axios
 			.request({
 				method: "post",
 				url:
@@ -37,21 +82,31 @@
 				if (response.data && response.data.secure_url) {
 					const imageUrl = response.data.secure_url;
 					console.log("Image uploaded successfully:", imageUrl);
+					form.value.bannerImg = imageUrl;
+					saveCollection();
 					return imageUrl;
 				} else {
+					loading.value = false;
+					errorAlert("Unable to create collection");
 					console.error("Failed to upload image:", response.data);
 					return null;
 				}
 			})
 			.catch((error) => {
 				console.error("Error uploading image:", error);
+				loading.value = false;
+				errorAlert("Failed t create collection");
 				return null;
 			});
 	};
 
 	const previewImage = (event) => {
 		const file = event.target.files[0];
-		if (!file) return;
+
+		if (!file) {
+			// errorAlert("Select an image");
+			return;
+		}
 
 		const reader = new FileReader();
 		reader.onload = (e) => {
@@ -76,13 +131,13 @@
 			<div class="cardi card-stretch me-md-8 mb-8">
 				<div class="card-body">
 					<!--begin::Form-->
-					<form class="form" action="#" method="post">
+					<form class="form" @submit.prevent="saveFile($event)">
 						<div class="row g-5">
 							<div class="fv-row col-12 col-lg-8">
 								<!--begin::Dropzone-->
 								<div
 									@click="inputSelect.click()"
-									class="dropzone w-100 min-h-200px d-flex align-items-center justify-content-center"
+									class="dropzone overflow-hidden w-100 min-h-200px d-flex align-items-center justify-content-center"
 									id="kt_dropzonejs_nft_collection_studio"
 								>
 									<input
@@ -93,7 +148,7 @@
 									/>
 									<img
 										v-if="imageUrl"
-										class="mh-250px mh-lg-300px mw-300px mw-lg-500px"
+										class="mh-250px mh-lg-300px mw-300px mw-lg-350px"
 										:src="imageUrl"
 										alt=""
 										srcset=""
@@ -131,11 +186,18 @@
 									<label for="" class="form-label"
 										>Category</label
 									>
-									<select class="form-control" name="" id="">
-										<option value="">Art</option>
-										<option value="">Music</option>
-										<option value="">Photography</option>
-										<option value="">Gaming</option>
+									<select
+										v-model="form.category"
+										class="form-control"
+										name=""
+										id=""
+									>
+										<option value="art">Art</option>
+										<option value="music">Music</option>
+										<option value="photography">
+											Photography
+										</option>
+										<option value="gaming">Gaming</option>
 									</select>
 								</div>
 								<div
@@ -143,7 +205,9 @@
 								>
 									<div>
 										<div class="d-flex flex-column mb-4">
-											<span class="fw-bold"> Fee </span>
+											<span class="fw-bold"
+												>Gas fee
+											</span>
 											<div class="fs-2 fw-bold">100</div>
 										</div>
 									</div>
@@ -165,6 +229,7 @@
 									placeholder="Avengers"
 									type="text"
 									class="form-control form-control-solid"
+									v-model="form.name"
 								/>
 							</div>
 							<div class="col-12 col-md-4">
@@ -173,12 +238,23 @@
 									placeholder="AVS"
 									type="text"
 									class="form-control form-control-solid"
+									v-model="form.symbol"
 								/>
 							</div>
 						</div>
 						<div>
-							<button class="btn btn-primary w-100">
-								Deploy collection
+							<button
+								:disabled="loading"
+								type="submit"
+								class="btn btn-primary w-100"
+							>
+								<span v-if="!loading">Deploy collection</span>
+								<span v-else class="">
+									Processing...
+									<span
+										class="spinner-border spinner-border-sm ms-2"
+									></span>
+								</span>
 							</button>
 						</div>
 					</form>

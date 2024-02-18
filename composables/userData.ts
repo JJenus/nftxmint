@@ -13,8 +13,8 @@ export const userData = () => {
 		email: "",
 		profileImg: "/assets/media/svg/avatars/blank.svg",
 		phone: "",
-		status: false,
-		role: "",
+		status: "",
+		userRole: "",
 		createdAt: "",
 		ethAddress: "",
 		balance: "",
@@ -46,7 +46,7 @@ export const userData = () => {
 			.then((response: AxiosResponse<IUser[], any>) => {
 				users.value = response.data
 					.filter((e) => {
-						return e.role !== "admin";
+						return e.userRole !== "admin";
 					})
 					.sort(
 						(a, b) =>

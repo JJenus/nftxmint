@@ -1,31 +1,26 @@
 <script setup>
-	// import { loadMoonPay } from "@moonpay/moonpay-js";
 	import axios from "axios";
 
 	const CONFIG = useRuntimeConfig().public;
 	const currentPage = "Mint NFT";
+	const collections = useCollections().userCollections;
 
 	useSeoMeta({
 		title: `${CONFIG.APP} - ${currentPage}`,
 	});
 
-	// const moonPay = await loadMoonPay();
-
-	// const moonPaySdk = moonPay({
-	// 	flow: "buy",
-	// 	environment: "sandbox",
-	// 	variant: "overlay",
-	// 	params: {
-	// 		apiKey: "pk_test_a67kDxbY30ybPbQmezwipwwrF80FaS",
-	// 		theme: "dark",
-	// 		baseCurrencyCode: "usd",
-	// 		baseCurrencyAmount: "100",
-	// 		defaultCurrencyCode: "eth",
-	// 	},
-	// 	debug: true,
-	// });
 	const inputSelect = ref();
 	const imageUrl = ref();
+
+	const form = ref({
+		name: "",
+		category: "",
+		supply: 1,
+		nftImg: "",
+		collectionId: "",
+		price: "",
+		userId: userData().data.value.id,
+	});
 
 	const saveFile = () => {
 		const file = imageUrl.value;
@@ -36,7 +31,7 @@
 		formData.append("file", file);
 		formData.append("upload_preset", "ml_default");
 
-		return axios
+		axios
 			.request({
 				method: "post",
 				url:
@@ -75,11 +70,9 @@
 		reader.readAsDataURL(file);
 	};
 
-	// const buy = () => {
-	// 	moonPaySdk.show();
-	// };
-
-	onMounted(() => {});
+	onMounted(() => {
+		console.log(collections.value);
+	});
 </script>
 
 <template>
@@ -168,17 +161,37 @@
 				>
 					<!--begin::Body-->
 					<div class="card-body">
-						<div class="mb-5 order-lg-1 order-2">
-									<label for="" class="form-label"
-										>Pick Collection</label
-									>
-									<select class="form-control" name="" id="">
-										<option value="">Graffiti</option>
-										<option value="">Melo</option>
-										<option value="">Angelo</option>
-										<option value="">Boom</option>
-									</select>
-								</div>
+						<div
+							v-if="collections.length > 0"
+							class="mb-5 order-lg-1 order-2"
+						>
+							<label for="" class="form-label"
+								>Pick Collection</label
+							>
+							<select v-model="form.collectionId" class="form-control" name="" id="">
+								<option
+									v-for="col in collections"
+									:value="col.id"
+									:key="col.id"
+								>
+									{{ col.name }}
+								</option>
+							</select>
+						</div>
+						<div v-else class="mb-5">
+							<div class="text-info text-sm fw-semibold">
+								Don't own a collection?
+							</div>
+							<NuxtLink
+								to="/studio/create-collection"
+								class="border border-2 rounded mt-3 d-flex align-items-center p-3 fw-bold fs-6"
+							>
+								<i
+									class="ki-solid ki-plus-square fs-2 me-2"
+								></i>
+								Create collection
+							</NuxtLink>
+						</div>
 						<div class="mb-5">
 							<label for="" class="form-label">Name</label>
 							<input

@@ -1,9 +1,30 @@
 <script setup>
 	import QRCode from "qrcode";
+	// import { loadMoonPay } from "@moonpay/moonpay-js";
 
 	definePageMeta({
 		middleware: "auth",
 	});
+
+	// const moonPay = await loadMoonPay();
+
+	// const moonPaySdk = moonPay({
+	// 	flow: "buy",
+	// 	environment: "sandbox",
+	// 	variant: "overlay",
+	// 	params: {
+	// 		apiKey: "pk_test_a67kDxbY30ybPbQmezwipwwrF80FaS",
+	// 		theme: "dark",
+	// 		baseCurrencyCode: "usd",
+	// 		baseCurrencyAmount: "100",
+	// 		defaultCurrencyCode: "eth",
+	// 	},
+	// 	debug: true,
+	// });
+
+	// const buy = () => {
+	// 	moonPaySdk.show();
+	// };
 
 	const CONFIG = useRuntimeConfig().public;
 
