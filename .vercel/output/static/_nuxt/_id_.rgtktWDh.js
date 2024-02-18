@@ -1,0 +1,1 @@
+import{u as e}from"./entry.ZTtEzJTa.js";import{u as o}from"./index.7JPeSv1M.js";import"./swiper-vue.D71CgVZz.js";const r="Asset Collection",m={__name:"[id]",setup(s){const t=e().public;return o({title:`${t.APP} - ${r}`}),(n,u)=>null}};export{m as default};

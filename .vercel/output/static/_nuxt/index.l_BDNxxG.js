@@ -1,0 +1,1 @@
+import{a as n,k as e,u as r,J as s,o as t,x as c}from"./swiper-vue.D71CgVZz.js";const a={key:0,class:"min-h-300px rounded border border-primary d-flex align-items-center justify-content-center"},d=c("h1",null,"No collected found",-1),l=[d],f={__name:"index",setup(_){const o=n([]);return(i,u)=>(t(),e("div",null,[r(o).length<1?(t(),e("div",a,l)):s("",!0)]))}};export{f as default};
