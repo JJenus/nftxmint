@@ -46,7 +46,7 @@ export default defineNuxtConfig({
 				{
 					name: "twitter:card",
 					content:
-						"Top international financial services provided to be accessible to all",
+						"Explore a diverse collection of non-fungible tokens (NFTs) on our platform. From digital art to collectibles, find one-of-a-kind assets created by talented artists and creators. Buy, sell, and trade NFTs securely and easily.",
 				},
 				{
 					name: "twitter:title",
@@ -55,11 +55,11 @@ export default defineNuxtConfig({
 				{
 					name: "twitter:description",
 					content:
-						"Top international financial services provided to be accessible to all",
+						"Explore a diverse collection of non-fungible tokens (NFTs) on our platform. From digital art to collectibles, find one-of-a-kind assets created by talented artists and creators. Buy, sell, and trade NFTs securely and easily.",
 				},
 				{
 					name: "twitter:image",
-					content: "/assets/media/logos/nftex-logo.png",
+					content: "https://www.nftexweb.com/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:title",
@@ -68,15 +68,15 @@ export default defineNuxtConfig({
 				{
 					property: "og:description",
 					content:
-						"Top international financial services provided to be accessible to all",
+						"Explore a diverse collection of non-fungible tokens (NFTs) on our platform. From digital art to collectibles, find one-of-a-kind assets created by talented artists and creators. Buy, sell, and trade NFTs securely and easily.",
 				},
 				{
 					property: "og:image",
-					content: "/assets/media/logos/nftex-logo.png",
+					content: "https://www.nftexweb.com/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:url",
-					content: "",
+					content: "https://nftexweb.com",
 				},
 			],
 			script: [

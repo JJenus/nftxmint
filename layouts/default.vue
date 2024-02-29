@@ -1,6 +1,9 @@
 <script setup>
 	const config = useRuntimeConfig().public;
 
+	if (process.client) {
+		KTThemeMode.setMode("light");
+	}
 	const route = useRoute();
 	console.log();
 	const user = userData().data;
