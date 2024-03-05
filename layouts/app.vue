@@ -8,7 +8,11 @@
 	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
 	loaded.value = false;
 
-	onMounted(() => {});
+	onMounted(() => {
+		if (process.client) {
+			KTThemeMode.setMode("dark");
+		}
+	});
 </script>
 
 <template>

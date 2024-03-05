@@ -95,7 +95,7 @@
 			method: "post",
 			data: form.value,
 			url: `${appConfig.public.BE_API}/auth/login`,
-			timeout: 15000,
+			timeout: 20000,
 		};
 
 		loginButton.value.setAttribute("data-kt-indicator", "on");

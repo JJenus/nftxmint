@@ -11,16 +11,46 @@
 
 	const inputSelect = ref();
 	const imageUrl = ref();
+	const loading = ref(false);
 
 	const form = ref({
 		name: "",
-		category: "",
+		category: "art",
 		supply: 1,
 		nftImg: "",
 		collectionId: "",
 		price: "",
+		desc: "",
 		userId: userData().data.value.id,
+		ownerId: userData().data.value.id,
 	});
+
+	const saveNFT = () => {
+		if (!form.value.nftImg) {
+			return errorAlert("Image upload error");
+		}
+		axios
+			.request({
+				method: "post",
+				url: `${CONFIG.BE_API}/nfts`,
+				data: form.value,
+			})
+			.then((response) => {
+				console.log(response.data);
+				useCollections();
+				userData().loadUser();
+				successAlert("Success!");
+			})
+			.catch((error) => {
+				console.error("Error uploading image:", error);
+				loading.value = false;
+				errorAlert("Failed to create nft");
+				return null;
+			})
+			.finally(() => {
+				loading.value = false;
+			});
+	};
 
 	const saveFile = () => {
 		const file = imageUrl.value;
@@ -30,7 +60,7 @@
 		const formData = new FormData();
 		formData.append("file", file);
 		formData.append("upload_preset", "ml_default");
-
+		loading.value = true;
 		axios
 			.request({
 				method: "post",
@@ -46,7 +76,9 @@
 			.then((response) => {
 				if (response.data && response.data.secure_url) {
 					const imageUrl = response.data.secure_url;
-					console.log("Image uploaded successfully:", imageUrl);
+					console.log("Image uploaded successfully:", response.data);
+					form.value.nftImg = imageUrl;
+					saveNFT();
 					return imageUrl;
 				} else {
 					console.error("Failed to upload image:", response.data);
@@ -54,6 +86,8 @@
 				}
 			})
 			.catch((error) => {
+				loading.value = false;
+
 				console.error("Error uploading image:", error);
 				return null;
 			});
@@ -107,7 +141,7 @@
 					></i>
 				</div>
 
-				<form class="form" action="#" method="post">
+				<div>
 					<!--begin::Input group-->
 					<div class="fv-row">
 						<!--begin::Dropzone-->
@@ -153,7 +187,7 @@
 						</div>
 						<!--end::Dropzone-->
 					</div>
-				</form>
+				</div>
 			</div>
 			<div class="col-12 col-lg-6">
 				<div
@@ -161,68 +195,119 @@
 				>
 					<!--begin::Body-->
 					<div class="card-body">
-						<div
-							v-if="collections.length > 0"
-							class="mb-5 order-lg-1 order-2"
-						>
-							<label for="" class="form-label"
-								>Pick Collection</label
+						<form class="form" @submit.prevent="saveFile()">
+							<div
+								v-if="collections.length > 0"
+								class="mb-5 order-lg-1 order-2"
 							>
-							<select v-model="form.collectionId" class="form-control" name="" id="">
-								<option
-									v-for="col in collections"
-									:value="col.id"
-									:key="col.id"
+								<label for="" class="form-label"
+									>Pick Collection</label
 								>
-									{{ col.name }}
-								</option>
-							</select>
-						</div>
-						<div v-else class="mb-5">
-							<div class="text-info text-sm fw-semibold">
-								Don't own a collection?
+								<select
+									required
+									v-model="form.collectionId"
+									class="form-control"
+									name=""
+								>
+									<option
+										v-for="col in collections"
+										:value="col.id"
+										:key="col.id"
+									>
+										{{ col.name }}
+									</option>
+								</select>
 							</div>
-							<NuxtLink
-								to="/studio/create-collection"
-								class="border border-2 rounded mt-3 d-flex align-items-center p-3 fw-bold fs-6"
-							>
-								<i
-									class="ki-solid ki-plus-square fs-2 me-2"
-								></i>
-								Create collection
-							</NuxtLink>
-						</div>
-						<div class="mb-5">
-							<label for="" class="form-label">Name</label>
-							<input
-								placeholder="Preferred nft name"
-								type="text"
-								class="form-control form-control-solid"
-							/>
-						</div>
-						<div class="mb-5">
-							<label for="" class="form-label"
-								>Items available</label
-							>
-							<input
-								placeholder="Supply"
-								type="text"
-								class="form-control form-control-solid"
-							/>
-						</div>
+							<div v-else class="mb-5">
+								<div class="text-info text-sm fw-semibold">
+									Don't own a collection?
+								</div>
+								<NuxtLink
+									to="/studio/create-collection"
+									class="border border-2 rounded mt-3 d-flex align-items-center p-3 fw-bold fs-6"
+								>
+									<i
+										class="ki-solid ki-plus-square fs-2 me-2"
+									></i>
+									Create collection
+								</NuxtLink>
+							</div>
+							<div class="mb-5">
+								<label for="" class="form-label">Name</label>
+								<input
+									required
+									placeholder="Preferred nft name"
+									type="text"
+									class="form-control form-control-solid"
+									v-model="form.name"
+								/>
+							</div>
+							<div class="mb-5 order-lg-1 order-2">
+								<label for="" class="form-label"
+									>Category</label
+								>
+								<select
+									required
+									v-model="form.category"
+									class="form-control"
+									name=""
+								>
+									<option value="art">Art</option>
+									<option value="music">Music</option>
+									<option value="photography">
+										Photography
+									</option>
+									<option value="gaming">Gaming</option>
+								</select>
+							</div>
+							<div class="mb-5">
+								<label for="" class="form-label"
+									>Items available</label
+								>
+								<input
+									required
+									placeholder="Supply"
+									type="number"
+									class="form-control form-control-solid"
+									v-model="form.supply"
+								/>
+							</div>
+							<div class="mb-5">
+								<label for="" class="form-label">Price</label>
+								<input
+									required
+									placeholder="0.000"
+									type="text"
+									class="form-control form-control-solid"
+									v-model="form.price"
+								/>
+							</div>
 
-						<div class="mb-5">
-							<label for="" class="form-label">Description</label>
-							<textarea class="form-control"></textarea>
-						</div>
-						<div>
-							<button
-								@click="saveFile()"
-								class="btn btn-primary w-100"
-							>
-								Create NFT
-							</button>
-						</div>
+							<div class="mb-5">
+								<label for="" class="form-label"
+									>Description</label
+								>
+								<textarea
+									class="form-control"
+									v-model="form.desc"
+								></textarea>
+							</div>
+							<div>
+								<button
+									:disabled="loading || !form.collectionId"
+									type="submit"
+									class="btn btn-primary w-100"
+								>
+									<span v-if="!loading">Create NFT</span>
+									<span v-else class="">
+										Processing...
+										<span
+											class="spinner-border spinner-border-sm ms-2"
+										></span>
+									</span>
+								</button>
+							</div>
+						</form>
 					</div>
 					<!--end::Body-->
 				</div>

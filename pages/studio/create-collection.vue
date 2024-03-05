@@ -37,6 +37,7 @@
 			})
 			.then((response) => {
 				console.log(response.data);
+				userData().loadUser();
 				successAlert("Congratulations! Your collection is deployed.");
 			})
 			.catch((error) => {
@@ -95,7 +96,7 @@
 			.catch((error) => {
 				console.error("Error uploading image:", error);
 				loading.value = false;
-				errorAlert("Failed t create collection");
+				errorAlert("Failed to create collection");
 				return null;
 			});
 	};

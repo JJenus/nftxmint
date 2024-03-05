@@ -12,39 +12,78 @@
 		<!--begin::Menu separator-->
 		<!--end::Menu separator-->
 
-		<!--begin::Menu item-->
-		<div class="menu-item px-5">
-			<a href="/account/" class="menu-link px-5">
-				My Profile <i class="ki-solid ki-user ms-auto fs-2"></i>
-			</a>
-		</div>
-		<!--end::Menu item-->
+		<div v-if="auth.isAuthenticated()">
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a href="/account/" class="menu-link px-5">
+					My Profile <i class="ki-solid ki-user ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
 
-		<!--begin::Menu item-->
-		<div class="menu-item px-5">
-			<a href="/studio/create" class="menu-link px-5">
-				Create <i class="ki-solid ki-element-plus ms-auto fs-2"></i>
-			</a>
-		</div>
-		<!--end::Menu item-->
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a href="/studio/create" class="menu-link px-5">
+					Create <i class="ki-solid ki-element-plus ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
+			<div class="separator my-2"></div>
 
-		<div class="separator my-2"></div>
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a href="/account/collections" class="menu-link px-5">
+					Collections
+					<i class="ki-solid ki-element-7 ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
 
-		<!--begin::Menu item-->
-		<div class="menu-item px-5">
-			<a href="/account/" class="menu-link px-5">
-				Collections <i class="ki-solid ki-element-7 ms-auto fs-2"></i>
-			</a>
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a href="/account/created" class="menu-link px-5">
+					Created
+					<i class="ki-solid ki-element-equal ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
 		</div>
-		<!--end::Menu item-->
+		<div v-else data-bs-toggle="modal" data-bs-target="#kt_modal_login">
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a role="button" class="menu-link px-5">
+					My Profile <i class="ki-solid ki-user ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
 
-		<!--begin::Menu item-->
-		<div class="menu-item px-5">
-			<a href="/account/created" class="menu-link px-5">
-				Created <i class="ki-solid ki-element-equal ms-auto fs-2"></i>
-			</a>
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a role="button" class="menu-link px-5">
+					Create <i class="ki-solid ki-element-plus ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
+			<div class="separator my-2"></div>
+
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a role="button" class="menu-link px-5">
+					Collections
+					<i class="ki-solid ki-element-7 ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
+
+			<!--begin::Menu item-->
+			<div class="menu-item px-5">
+				<a role="button" class="menu-link px-5">
+					Created
+					<i class="ki-solid ki-element-equal ms-auto fs-2"></i>
+				</a>
+			</div>
+			<!--end::Menu item-->
 		</div>
-		<!--end::Menu item-->
 
 		<!--begin::Menu separator-->
 		<div class="separator my-2"></div>

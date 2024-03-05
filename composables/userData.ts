@@ -6,7 +6,6 @@ import {
 } from "../utils/interfaces/Notification";
 
 export const userData = () => {
-
 	const initUser: IUser = {
 		id: "",
 		name: "",
@@ -18,7 +17,7 @@ export const userData = () => {
 		createdAt: "",
 		ethAddress: "",
 		balance: "",
-		bannerImg: ""
+		bannerImg: "",
 	};
 
 	const transactions = useState<any[]>("user-transactions", () => []);
@@ -135,6 +134,34 @@ export const userData = () => {
 			});
 	};
 
+	const loadUser = () => {
+		const axiosConfig: AxiosRequestConfig = {
+			method: "get",
+			url: `${useRuntimeConfig().public.BE_API}/users/${data.value.id}`,
+			timeout: 20000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response: AxiosResponse<IUser, any>) => {
+				data.value = response.data;
+				// console.log(users.value);
+			})
+			.catch((error) => {
+				// console.log(error);
+				const data = error.response.data;
+				if (
+					data.message.includes("Access denied") ||
+					error.response.status === 401
+				) {
+					console.log("Access denied");
+				}
+			});
+	};
+
 	return {
 		data,
 		users,
@@ -145,5 +172,6 @@ export const userData = () => {
 		getUsers,
 		getNotifications,
 		showNotifications,
+		loadUser,
 	};
 };

@@ -4,6 +4,7 @@ import type { NFTCollection } from "~/utils/interfaces/NFTCollection";
 
 export const useCollections = () => {
 	const all = useState<any[]>("all-transactions", () => []);
+	const allNFTs = useState<any[]>("all-nfts", () => []);
 	const art = useState<any[]>("art-transactions", () => []);
 	const music = useState<any[]>("music-transactions", () => []);
 	const photography = useState<any[]>("pic-transactions", () => []);
@@ -34,12 +35,12 @@ export const useCollections = () => {
 				console.log(error);
 			});
 	};
+	const userID = userData().data.value.id;
 
 	const loadUserCollections = (val: any, url: string) => {
-		const userID = userData().data.value.id;
 		const axiosConfig: any = {
 			method: "get",
-			url: `${useRuntimeConfig().public.BE_API}/users/${userID}${url}`,
+			url: `${useRuntimeConfig().public.BE_API}${url}`,
 			timeout: 20000,
 			// headers: {
 			//     Authorization: "Bearer " + useAuth().userData.value?.token,
@@ -50,14 +51,16 @@ export const useCollections = () => {
 			.request(axiosConfig)
 			.then((response) => {
 				val.value = response.data;
+				// console.log(val.value);
 			})
 			.catch((error): void => {
 				console.log(error);
 			});
 	};
 
-	loadUserCollections(userCollections, "/collections");
-	loadUserCollections(userNFts, "/nfts");
+	loadUserCollections(userCollections, `/users/${userID}/collections`);
+	loadUserCollections(userNFts, `/users/${userID}/nfts`);
+	loadUserCollections(allNFTs, `/nfts`);
 
 	load(all, "");
 	load(art, "/category/art");
@@ -73,5 +76,6 @@ export const useCollections = () => {
 		gaming,
 		userCollections,
 		userNFts,
+		allNFTs,
 	};
 };

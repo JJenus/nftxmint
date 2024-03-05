@@ -1,4 +1,5 @@
 <script setup>
+	const loading = ref(true);
 	if (process.client) {
 		const defaultThemeMode = window.matchMedia(
 			"(prefers-color-scheme: dark)"
@@ -17,11 +18,29 @@
 		// KTThemeMode.setMode(themeMode);
 		KTThemeMode.setMode("dark");
 	}
+
+	onMounted(() => {
+		if (process.client) {
+			var target = document.querySelector("#block-ui");
+			var blockUI = new KTBlockUI(target, {
+				zIndex: "200000",
+				overlayClass: "bg-body bg-opacity-100 vh-100 position-fixed",
+				message:
+					'<div class="blockui-message"><span class="spinner-border text-primary"></span> Loading...</div>',
+			});
+			blockUI.block();
+
+			setTimeout(() => {
+				blockUI.release();
+				loading.value = false;
+			}, 2000);
+		}
+	});
 </script>
 
 <template>
-	<div>
-		<NuxtLayout>
+	<div id="block-ui">
+		<NuxtLayout :class="loading ? 'd-none' : ''">
 			<NuxtPage />
 		</NuxtLayout>
 	</div>

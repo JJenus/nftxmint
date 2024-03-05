@@ -8,6 +8,12 @@ export const useAuth = () => {
 		maxAge: 60 * 60 * 24,
 	});
 
+	const openAuth = useState<string>("authAction", () => "login");
+
+	const openAuthModal = (action: string) => {
+		openAuth.value = action;
+	};
+
 	const login = async (auth: AuthToken) => {
 		//store cookie
 		userAuth.value = auth;

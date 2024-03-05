@@ -38,6 +38,9 @@
 	const showNav = ref(false);
 
 	onMounted(() => {
+		if (process.client) {
+			KTThemeMode.setMode("dark");
+		}
 		const paths = route.path.split("/");
 		if (paths[2]) {
 			active.value = paths[2];

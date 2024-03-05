@@ -50,13 +50,24 @@
 				<!--begin::Login-->
 				<div class="app-navbar-item ms-n3w">
 					<!--begin::Menu- wrapper-->
-					<div
-						v-if="!auth.isAuthenticated()"
-						class="btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white"
-						data-bs-toggle="modal"
-						data-bs-target="#kt_modal_login"
-					>
-						<i class="ki-outline ki-entrance-left fs-2"></i> Login
+					<div v-if="!auth.isAuthenticated()">
+						<div
+							class="theme-dark-show btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white"
+							data-bs-toggle="modal"
+							data-bs-target="#kt_modal_login"
+						>
+							<i class="ki-outline ki-entrance-left fs-2"></i>
+							Login
+						</div>
+
+						<div
+							class="theme-light-show btn-light-primary btn btn-active-color-dark btn-active-light-dark"
+							data-bs-toggle="modal"
+							data-bs-target="#kt_modal_login"
+						>
+							<i class="ki-outline ki-entrance-left fs-2"></i>
+							Login
+						</div>
 					</div>
 
 					<div v-else>
@@ -104,12 +115,24 @@
 						data-kt-menu-placement="bottom-end"
 					>
 						<!--begin::Drawer toggle-->
-						<div
-							v-if="!auth.isAuthenticated()"
-							class="btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white btn-icon w-35px h-35px w-md-40px h-md-40px"
-						>
-							<i class="ki-outline ki-profile-circle fs-2x"></i>
+
+						<div v-if="!auth.isAuthenticated()">
+							<div
+								class="theme-light-show btn-light-primary btn btn-active-light-dark btn-active-color-dark btn-icon w-35px h-35px w-md-40px h-md-40px"
+							>
+								<i
+									class="ki-outline ki-profile-circle fs-2x"
+								></i>
+							</div>
+							<div
+								class="theme-dark-show btn btn-secondary btn-custom fw-bold btn-active-light btn-active-color-white btn-color-white btn-icon w-35px h-35px w-md-40px h-md-40px"
+							>
+								<i
+									class="ki-outline ki-profile-circle fs-2x"
+								></i>
+							</div>
 						</div>
+
 						<img
 							v-else
 							:src="

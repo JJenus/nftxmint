@@ -22,8 +22,12 @@
 
 	const navs = [
 		{
-			name: "Collected",
+			name: "All",
 			path: "/account/",
+		},
+		{
+			name: "Collections",
+			path: "/account/collections",
 		},
 		{
 			name: "Created",
@@ -37,7 +41,7 @@
 		if (paths[2]) {
 			active.value = paths[2];
 		} else {
-			active.value = "collected";
+			active.value = "all";
 		}
 	});
 </script>
@@ -182,12 +186,12 @@
 									</div>
 									<!--end::Info-->
 									<div class="mt-5">
-										<NuxtLink
-											to="/crypto/fund-wallet"
+										<a
+											href="/crypto/fund-wallet"
 											class="btn btn-primary w-200px w-lg-350px"
 										>
 											Fund wallet
-										</NuxtLink>
+										</a>
 									</div>
 								</div>
 								<!--end::User-->

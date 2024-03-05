@@ -6,7 +6,10 @@
 	const fatal = props.error?.statusCode === 404 ? false : true;
 	// console.log(fatal);
 
-	const handleError = () => clearError({ redirect: "/" });
+	const handleError = () => {
+		clearError();
+		window.location.href = "/";
+	};
 </script>
 
 <template>

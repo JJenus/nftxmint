@@ -4,20 +4,35 @@
 	useSeoMeta({
 		title: `${CONFIG.APP} - Asset`,
 	});
+	const nftCollection = useCollections();
 	const route = useRoute();
 
+	console.log("ROUTE: " + route.params.id);
+	const nftID = ref(route.params.id);
+	const nft = ref({});
+	const collection = ref({});
 
-	console.log(route.params.id);
-	const nft = ref({
-		collectionName: "Amagidon",
-		name: "Ido",
-		floor: 1.34,
-		crypto: "Matic",
-		volume: "11,420",
-		image: "/assets/media/nft/art/2757e233bc2708e8d0f5ad3079b39d21.avif",
-		category: "Art",
-		owner: "xyeiry",
+	let nfty = null;
+	nftCollection.allNFTs.value.forEach((e) => {
+		
+		if (nftID.value === e.id) {
+			nft = e;
+		}
 	});
+
+	if (nfty) {
+		nft.value = nfty;
+	} else {
+		throw createError({
+			statusCode: 404,
+			statusMessage: "Page Not Found",
+			fatal: true,
+		});
+	}
+
+	collection.value = useCollections().all.value.find(
+		(e) => nftID.value === e.id
+	);
 
 	const start = ref(false);
 
@@ -45,11 +60,13 @@
 			}
 		});
 	}
+
+	onMounted(() => {});
 </script>
 
 <template>
 	<div class="container-fluid mt-5">
-		<div class="row g-8">
+		<div v-if="nft.name" class="row g-8">
 			<div class="col-12 col-md-4 col-lg-5">
 				<h1 class="display-6 mb-7 d-md-none">
 					{{ nft.name }}
@@ -57,7 +74,7 @@
 						<span class="path1"></span>
 						<span class="path2"></span>
 					</i>
-					{{ nft.collectionName }}
+					{{ collection.name }}
 				</h1>
 				<div class="card">
 					<div
@@ -89,7 +106,7 @@
 						<img
 							class="w-100 mh-450px card-rounded-bottom"
 							alt="nft"
-							:src="nft.image"
+							:src="nft.nftImg"
 						/>
 					</div>
 				</div>
@@ -104,7 +121,7 @@
 							<span class="path1"></span>
 							<span class="path2"></span>
 						</i>
-						{{ nft.collectionName }}
+						{{ collection.name }}
 					</h1>
 
 					<div class="d-flex flex-column flex-md-row">
@@ -113,7 +130,7 @@
 								class="btn p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-primary"
 							>
 								<i class="ki-solid ki-burger-menu-3 fs-3"></i>
-								{{ nft.volume }} items
+								{{ nft.price }} items
 							</button>
 						</div>
 
@@ -150,14 +167,12 @@
 							class="d-flex align-items-center justify-content-between"
 						>
 							<div>
-								<h1 class="display-6">
-									{{ nft.floor }} {{ nft.crypto }}
-								</h1>
+								<h1 class="display-6">{{ nft.price }} ETH</h1>
 								<div class="fw-bold pt-1">
 									Total: {{ nft.floor * counter }}
 									{{ nft.crypto }}
 								</div>
-								<div class="text-muted mt-1">
+								<div class="text-muted mt-1 d-none">
 									Listed by
 									<span
 										class="text-primary fw-bold text-uppercase"

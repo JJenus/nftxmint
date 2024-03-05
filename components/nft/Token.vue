@@ -1,26 +1,23 @@
-<script setup>
-	// const props = defineProps<{ user: IUser }>();
-
-	defineProps({
-		collection: {
-			required: true,
-		},
-	});
+<script setup lang="ts">
+	import type { NFT } from "~/utils/interfaces/NFT";
+	const props = defineProps<{ token: NFT }>();
+	// console.log(props.value.token);
+	const load = () => {
+		window.location.href = "/asset/nft/" + props.token.id;
+	};
 </script>
 <template>
-	<div class="card hover-elevate-up hover-slide card-stretch h-100">
+	<div
+		@click="load()"
+		class="card hover-elevate-up hover-slide card-stretch h-100"
+	>
 		<div class="card-body p-0 h-100">
-			<img
-				@click="open(collection.name)"
-				:src="collection.image"
-				alt=""
-				class="w-100 h-200px rounded-top"
-			/>
+			<img :src="token.nftImg" alt="" class="w-100 h-200px rounded-top" />
 		</div>
 		<div class="card-footer p-4 py-5">
-			<NuxtLink to="/category/collection">
+			<a :href="'/asset/nft/' + token.id">
 				<h5 class="mb-2 fs-4 d-flex align-items-center">
-					{{ collection.name }}
+					{{ token.name }}
 					<i
 						class="ki-outline ki-check-circle text-success fs-2 ms-3"
 					>
@@ -28,19 +25,17 @@
 				</h5>
 				<div class="d-flex justify-content-between">
 					<div class="d-flex flex-column">
-						<div class="fs-5 text-muted">Floor</div>
+						<div class="fs-5 text-muted">Items</div>
 						<div class="fs-4 fw-bold">
-							{{ collection.floor }}
+							{{ token.supply }}
 						</div>
 					</div>
 					<div class="d-flex flex-column">
-						<div class="fs-5 text-muted">Volume</div>
-						<div class="fs-4 fw-bold">
-							{{ collection.volume }}
-						</div>
+						<div class="fs-5 text-muted">Price</div>
+						<div class="fs-4 fw-bold">{{ token.price }} ETH</div>
 					</div>
 				</div>
-			</NuxtLink>
+			</a>
 		</div>
 	</div>
 </template>
