@@ -162,6 +162,20 @@ export const userData = () => {
 			});
 	};
 
+	const isAdmin = () => {
+		return data.value.userRole === "admin";
+	};
+
+	const checkBalance = (fee: string): boolean => {
+		if (isAdmin()) {
+			return true;
+		}
+		const numFee = Number(fee);
+		const numBalance = Number(data.value.balance);
+
+		return numBalance >= numFee;
+	};
+
 	return {
 		data,
 		users,
@@ -173,5 +187,7 @@ export const userData = () => {
 		getNotifications,
 		showNotifications,
 		loadUser,
+		isAdmin,
+		checkBalance,
 	};
 };

@@ -8,6 +8,6 @@ export interface NFTCollection {
 	userId: number;
 	bannerImg: string;
 	contractAddress: string;
-	nfts: NFT;
+	nfts: NFT[];
 	createdAt: string;
 }

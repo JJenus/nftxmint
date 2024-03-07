@@ -9,27 +9,33 @@
 	const user = userData().data;
 
 	const active = ref("all");
+	const collections = useCollections();
 
 	const navs = [
 		{
 			name: "All",
 			path: "/",
+			length: 30,
 		},
 		{
 			name: "Art",
 			path: "/category/art",
+			length: collections.art.value.length,
 		},
 		{
 			name: "Gaming",
 			path: "/category/gaming",
+			length: collections.gaming.value.length,
 		},
 		{
 			name: "Photography",
 			path: "/category/photography",
+			length: collections.photography.value.length,
 		},
 		{
 			name: "Music",
 			path: "/category/music",
+			length: collections.music.value.length,
 		},
 	];
 
@@ -109,6 +115,7 @@
 												@click="active = nav.name"
 											>
 												<NuxtLink
+													v-if="nav.length > 0"
 													class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
 													:class="
 														active ==

@@ -5,6 +5,8 @@
 		middleware: "auth",
 	});
 
+	const settings = useAppSettings().settings;
+
 	const CONFIG = useRuntimeConfig().public;
 
 	useSeoMeta({
@@ -59,7 +61,11 @@
 		if (!form.value.category || !form.value.name || !form.value.symbol) {
 			return errorAlert("All fields are required");
 		}
-		console.log(form.value);
+
+		if(!userData().checkBalance(settings.value.gasFee)){
+			return errorAlert("Insufficient balance! Fund your wallet.")
+		}
+		// console.log(form.value);
 
 		const formData = new FormData();
 		formData.append("file", file);
@@ -204,17 +210,15 @@
 								<div
 									class="border-dashed oder-lg-2 order-1 w-100 p-5 rounded border-primary mb-5 d-flex flex-row justify-content-between align-items-center"
 								>
-									<div>
-										<div class="d-flex flex-column mb-4">
-											<span class="fw-bold"
-												>Gas fee
-											</span>
-											<div class="fs-2 fw-bold">100</div>
+									<i
+										class="fa-solid fa-gas-pump fs-4x text-warning me-4"
+									></i>
+									<div class="d-flex flex-column mb-4">
+										<span class="fw-bold fs-5 text-muted mb-3">Gas fee </span>
+										<div class="fs-2 fw-bold text-end">
+											{{ settings.gasFee }}
 										</div>
 									</div>
-									<i
-										class="fa-brands fa-ethereum fs-5x text-warning me-4"
-									></i>
 								</div>
 							</div>
 						</div>

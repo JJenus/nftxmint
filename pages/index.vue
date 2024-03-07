@@ -38,27 +38,19 @@
 		</div>
 		<!--end::Card-->
 
-		<div class="mb-4 d-none">
-			<SwiperMainSlide />
-		</div>
-
 		<div class="mb-4">
-			<h1 class="fs-1 mb-2">Art NFTs</h1>
 			<SwiperArtShowCase />
 		</div>
 
 		<div class="mb-4">
-			<h1 class="fs-1 mb-2">Music NFTs</h1>
 			<SwiperMusicShowCase />
 		</div>
 
 		<div class="mb-4">
-			<h1 class="fs-1 mb-2">Gaming NFTs</h1>
 			<SwiperGamingShowCase />
 		</div>
 
 		<div class="mb-4">
-			<h1 class="fs-1 mb-2">Photography NFTs</h1>
 			<SwiperPhotographyShowCase />
 		</div>
 	</div>

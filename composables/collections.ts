@@ -3,12 +3,12 @@ import type { NFT } from "~/utils/interfaces/NFT";
 import type { NFTCollection } from "~/utils/interfaces/NFTCollection";
 
 export const useCollections = () => {
-	const all = useState<any[]>("all-transactions", () => []);
+	const all = useState<NFTCollection[]>("all-transactions", () => []);
 	const allNFTs = useState<any[]>("all-nfts", () => []);
-	const art = useState<any[]>("art-transactions", () => []);
-	const music = useState<any[]>("music-transactions", () => []);
-	const photography = useState<any[]>("pic-transactions", () => []);
-	const gaming = useState<any[]>("gaming-transactions", () => []);
+	const art = useState<NFTCollection[]>("art-transactions", () => []);
+	const music = useState<NFTCollection[]>("music-transactions", () => []);
+	const photography = useState<NFTCollection[]>("pic-transactions", () => []);
+	const gaming = useState<NFTCollection[]>("gaming-transactions", () => []);
 	const userCollections = useState<NFTCollection[]>(
 		"user-collections",
 		() => []
@@ -29,13 +29,12 @@ export const useCollections = () => {
 			.request(axiosConfig)
 			.then((response) => {
 				val.value = response.data;
-				// console.log(users.value);
+				// console.log(val.value[0].nfts, val.value);
 			})
 			.catch((error): void => {
 				console.log(error);
 			});
 	};
-	const userID = userData().data.value.id;
 
 	const loadUserCollections = (val: any, url: string) => {
 		const axiosConfig: any = {
@@ -58,9 +57,17 @@ export const useCollections = () => {
 			});
 	};
 
-	loadUserCollections(userCollections, `/users/${userID}/collections`);
-	loadUserCollections(userNFts, `/users/${userID}/nfts`);
-	loadUserCollections(allNFTs, `/nfts`);
+	if (useAuth().isAuthenticated()) {
+		loadUserCollections(
+			userCollections,
+			`/users/${userData().data.value.id}/collections`
+		);
+		loadUserCollections(
+			userNFts,
+			`/users/${userData().data.value.id}/nfts`
+		);
+		loadUserCollections(allNFTs, `/nfts`);
+	}
 
 	load(all, "");
 	load(art, "/category/art");

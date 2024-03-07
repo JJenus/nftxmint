@@ -3,6 +3,7 @@
 		layout: ["app"],
 		middleware: "auth",
 	});
+	
 	const CONFIG = useRuntimeConfig().public;
 	const currentPage = "User Dashboard";
 
@@ -198,8 +199,20 @@
 
 								<!--begin::Actions-->
 								<div class="d-flex">
-									<button
+									<NuxtLink
+										v-if="userData().isAdmin()"
+										to="/account/app-setting"
 										class="btn btn-sm btn-secondary bg-body btn-icon"
+									>
+										<i
+											class="ki-outline ki-setting-2 fs-2"
+										></i>
+
+										<!--end::Indicator progress-->
+									</NuxtLink>
+									<button
+										v-else
+										class="btn btn-sm btn-secondary bg-body btn-icon d-none"
 									>
 										<i
 											class="ki-outline ki-setting-2 fs-2"

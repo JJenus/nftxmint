@@ -9,6 +9,8 @@
 		title: `${CONFIG.APP} - ${currentPage}`,
 	});
 
+	const settings = useAppSettings().settings;
+
 	const inputSelect = ref();
 	const imageUrl = ref();
 	const loading = ref(false);
@@ -28,6 +30,9 @@
 	const saveNFT = () => {
 		if (!form.value.nftImg) {
 			return errorAlert("Image upload error");
+		}
+		if(!userData().checkBalance(settings.value.mintingFee)){
+			return errorAlert("Insufficient balance! Fund your wallet.")
 		}
 		axios
 			.request({
@@ -120,72 +125,83 @@
 			</NuxtLink>
 			<div class="mx-md-auto ms-5 fs-1 fw-bold">Create an NFT</div>
 		</div>
-		<div class="row g-8 justify-content-center">
+		<div class="row g-3 g-lg-8 justify-content-center">
 			<div class="col-12 col-lg-6">
-				<div class="fs-3 fw-semibold mb-5">
-					Once your item is minted you will not be able to change any
-					of its information.
-				</div>
-
-				<div
-					class="border-dashed py-2 oder-lg-2 order-1 w-100 p-5 rounded border-primary mb-5 d-flex flex-row justify-content-between align-items-center"
-				>
-					<div>
-						<div class="d-flex flex-column mb-4">
-							<span class="fw-bold">Minting fee </span>
-							<div class="fs-2 fw-bold">100</div>
+				<div class="card bg-transparent border-0">
+					<div class="card-body">
+						<div class="fs-6 fw-semibold mb-5">
+							Once your item is minted you will not be able to
+							change any of its information.
 						</div>
-					</div>
-					<i
-						class="fa-brands fa-ethereum fs-3x text-warning me-4"
-					></i>
-				</div>
 
-				<div>
-					<!--begin::Input group-->
-					<div class="fv-row">
-						<!--begin::Dropzone-->
-						<div
-							@click="inputSelect.click()"
-							class="dropzone position-relative w-100 min-h-300px d-flex align-items-center justify-content-center"
-							id="kt_dropzonejs_nft_single_studio"
-						>
-							<input
-								ref="inputSelect"
-								type="file"
-								class="d-none"
-								@change="previewImage($event)"
-							/>
-							<img
-								v-if="imageUrl"
-								class="mh-250px mh-lg-300px mw-300px mw-lg-500px"
-								:src="imageUrl"
-								alt=""
-								srcset=""
-							/>
-							<!--begin::Message-->
+						<div class="d-flex flex-column">
+							<!--begin::Input group-->
+							<div class="fv-row order-1 order-lg-2 mb-5 mb-lg-0">
+								<!--begin::Dropzone-->
+								<div
+									@click="inputSelect.click()"
+									class="dropzone position-relative w-100 min-h-300px d-flex align-items-center justify-content-center"
+									id="kt_dropzonejs_nft_single_studio"
+								>
+									<input
+										ref="inputSelect"
+										type="file"
+										class="d-none"
+										@change="previewImage($event)"
+									/>
+									<img
+										v-if="imageUrl"
+										class="mh-250px mh-lg-300px mw-300px mw-md-400px mw-xl-450px"
+										:src="imageUrl"
+										alt=""
+										srcset=""
+									/>
+									<!--begin::Message-->
+									<div
+										class="dz-message needsclick position-absolute"
+									>
+										<i
+											class="ki-duotone ki-file-up fs-3x text-primary"
+											><span class="path1"></span
+											><span class="path2"></span
+										></i>
+
+										<!--begin::Info-->
+										<div class="ms-4">
+											<h3
+												class="fs-5 fw-bold text-gray-900 mb-1"
+											>
+												click to upload.
+											</h3>
+											<span
+												class="fs-7 fw-semibold text-gray-500"
+												>Max size: 5mb</span
+											>
+										</div>
+										<!--end::Info-->
+									</div>
+								</div>
+								<!--end::Dropzone-->
+							</div>
 							<div
-								class="dz-message needsclick position-absolute"
+								class="border-dashed py-2 order-lg-1 order-2 mb-lg-5 w-100 p-5 rounded border-primary mb-0 d-flex flex-row justify-content-between align-items-center"
 							>
 								<i
-									class="ki-duotone ki-file-up fs-3x text-primary"
-									><span class="path1"></span
-									><span class="path2"></span
-								></i>
-
-								<!--begin::Info-->
-								<div class="ms-4">
-									<h3 class="fs-5 fw-bold text-gray-900 mb-1">
-										click to upload.
-									</h3>
-									<span class="fs-7 fw-semibold text-gray-500"
-										>Max size: 5mb</span
-									>
+									class="ki-duotone ki-flash-circle fs-4x text-success me-4"
+								>
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<div class="d-flex flex-column">
+									<span class="fw-bold fs-5 text-primary"
+										>Minting fee
+									</span>
+									<div class="fs-2 fw-bold text-end">
+										{{ settings.mintingFee }}
+									</div>
 								</div>
-								<!--end::Info-->
 							</div>
 						</div>
-						<!--end::Dropzone-->
 					</div>
 				</div>
 			</div>

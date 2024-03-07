@@ -1,53 +1,10 @@
 <script setup>
-	const games = ref([
-		{
-			category: "gaming",
-			name: "Tour De Pac",
-			floor: "91.23 Matic",
-			volume: "11,420",
-			image: "/assets/media/nft/gaming/7d4217892337d4900e2fad175c5c0011.jpg",
-		},
-		{
-			name: "Again",
-			category: "gaming",
-			floor: "20.23 ETH",
-			volume: "12,21",
-			image: "/assets/media/nft/gaming/20f9fd3c07cb3ed1c085221ee0acdd06.jpg",
-		},
-		{
-			category: "gaming",
-
-			name: "Maldiva",
-			floor: "1.23 Matic",
-			volume: "11,420",
-			image: "/assets/media/nft/gaming/dbb8f49a7ee1d7c6d42d35321535f6bc.jpg",
-		},
-		{
-			category: "gaming",
-			name: "Greener",
-			floor: "91.23 Matic",
-			volume: "11,420",
-			image: "/assets/media/nft/gaming/GyEkb_tl0e0gXf_Vdce7Pkkc5OBU-ORbYUa4b-iIW4t39Gy5293OvnI5LLcwIxTI4XKO8yg5bHXldgDcPDdSnmrApGFHfLZyfs8V.jpg",
-		},
-		{
-			category: "gaming",
-			name: "Melbourn",
-			floor: "4.23 ETH",
-			volume: "1,000",
-			image: "/assets/media/nft/music/what-are-music-nfts.webp",
-		},
-		{
-			category: "gaming",
-			name: "Vice City",
-			floor: "2.23 ETH",
-			volume: "17,000",
-			image: "/assets/media/nft/music/ee5c835ca7927237f4dbac8270dc4c0f.jpg",
-		},
-	]);
+	const games = useCollections().gaming;
 </script>
 
 <template>
-	<div>
+	<div v-if="games.length > 0">
+		<h1 class="fs-1 mb-2">Gaming NFTs</h1>
 		<Swiper
 			:modules="[SwiperAutoplay]"
 			:space-between="10"

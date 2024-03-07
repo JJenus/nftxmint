@@ -1,10 +1,13 @@
 <script setup>
 	import QRCode from "qrcode";
+	import axios from "axios";
 	// import { loadMoonPay } from "@moonpay/moonpay-js";
 
 	definePageMeta({
 		middleware: "auth",
 	});
+
+	const settings = useAppSettings().settings;
 
 	// const moonPay = await loadMoonPay();
 
@@ -33,10 +36,15 @@
 	});
 
 	const user = userData().data;
-	const ethAddress = user.value.ethAddress;
+	const ethAddress = ref(settings.value.ethAddress);
 	const copied = ref(false);
+	const loading = ref(false);
 
 	const imageUrl = ref();
+	const form = ref({
+		amount: "",
+		userId: userData().data.value.id,
+	});
 
 	function copyToClipboard() {
 		// Create a temporary textarea element
@@ -59,15 +67,43 @@
 	}
 
 	if (process.client) {
-		QRCode.toDataURL(ethAddress)
-			.then((url) => {
-				console.log(url);
-				imageUrl.value = url;
+		const interval = setInterval(() => {
+			if (settings.value.ethAddress) {
+				QRCode.toDataURL(ethAddress.value)
+					.then((url) => {
+						console.log(url);
+						imageUrl.value = url;
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+				clearInterval(interval);
+			}
+		}, 1000);
+	}
+
+	const confirmPay = () => {
+		if (!form.value.amount) {
+			return errorAlert("Enter a valid amount");
+		}
+
+		const config = {
+			url: `${CONFIG.BE_API}/fund-account`,
+			method: "POST",
+			data: form.value,
+		};
+
+		axios
+			.request(config)
+			.then((res) => {
+				successAlert("Success. Funds will reflect after confirmation.")
 			})
 			.catch((err) => {
-				console.error(err);
-			});
-	}
+				console.log(err);
+				errorAlert("Error occurred");
+			})
+			.finally(() => (loading.value = false));
+	};
 
 	onMounted(() => {});
 </script>
@@ -100,7 +136,7 @@
 							id="qr-code-eth"
 						/>
 						<div class="card card-bordered mt-5">
-							<div class="card-body py-3 px-5">
+							<div class="card-body py-3 px-5 mb-5">
 								<!--begin::Row-->
 								<div
 									class="d-flex align-items-center flex-wrapi"
@@ -136,6 +172,34 @@
 									<!--end::Button-->
 								</div>
 								<!--end::Row-->
+								<div>
+									<p>Send and confirm amount</p>
+
+									<form @submit.prevent="confirmPay()">
+										<div class="mb-4">
+											<label for="confirm-pay"
+												>Enter Amount</label
+											>
+											<input
+												type="text"
+												name="amount"
+												id="confirm-pay"
+												class="form-control"
+											/>
+										</div>
+										<div>
+											<button class="btn btn-primary">
+												<span v-if="!loading"
+													>confirm</span
+												>
+												<span
+													v-else
+													class="spinner-border spinner-border-sm"
+												></span>
+											</button>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 						<!--begin::Message-->
@@ -157,9 +221,12 @@
 						<!--begin::Item-->
 						<div class="mb-8">
 							<div>
-								<button class="btn btn-primary w-100 mb-5">
+								<a
+									href="https://www.moonpay.com/buy/eth"
+									class="btn btn-primary w-100 mb-5"
+								>
 									Fund with Moonpay
-								</button>
+								</a>
 							</div>
 							<!--begin::Title-->
 							<h4 class="text-gray-700 w-bolder mb-8">

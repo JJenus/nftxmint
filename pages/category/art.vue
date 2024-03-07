@@ -1,18 +1,24 @@
 <script setup>
 	const CONFIG = useRuntimeConfig().public;
-	const currentPage = "Art NFT";
+	const nftType = ref("Art");
+	const currentPage = nftType.value + " NFT";
 
 	useSeoMeta({
 		title: `${CONFIG.APP} - ${currentPage}`,
 	});
 	const NFTs = useCollections().art;
+	const all = NFTs.value.reduce((c, p) => {
+		p.nfts.forEach((e) => c.push(e));
+		return c;
+	}, []);
+
 </script>
 
 <template>
 	<div>
 		<div class="px-5 mx-4">
 			<!--begin::Card-->
-			<div class="d-nonie d-lg-none mx-in3">
+			<div class="d-lg-none mx-in3">
 				<Swiper
 					:modules="[
 						SwiperAutoplay,
@@ -34,7 +40,7 @@
 						<div class="card">
 							<div class="card-body p-0">
 								<img
-									:src="nft.image"
+									:src="nft.bannerImg"
 									alt=""
 									class="w-100 h-350px h-lg-350px rounded"
 								/>
@@ -59,7 +65,7 @@
 						<div class="card">
 							<div class="card-body p-0">
 								<img
-									:src="nft.image"
+									:src="nft.bannerImg"
 									alt=""
 									class="w-100 h-350px h-lg-500px rounded"
 								/>
@@ -70,12 +76,12 @@
 			</a>
 		</div>
 		<div class="">
-			<h1 class="fs-1 mb-2 mt-7">Art NFTs</h1>
+			<h1 class="fs-1 mb-2 mt-7">{{ nftType }} NFTs</h1>
 
 			<div class="container-fluid my-4">
 				<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-7">
-					<div v-for="(nft, i) in NFTs" :key="i" class="col">
-						<NftCollection :collection="nft" />
+					<div v-for="nft in all" :key="nft.id" class="col">
+						<NftToken :token="nft" />
 					</div>
 				</div>
 			</div>
