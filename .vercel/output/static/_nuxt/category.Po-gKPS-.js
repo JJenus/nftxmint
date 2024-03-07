@@ -1,0 +1,1 @@
+import{_ as t}from"./entry.24sVpUhz.js";import{_ as c}from"./_plugin-vue_export-helper.x3n3nnut.js";import{B as e,k as r}from"./swiper-vue.YPEZXV01.js";const _={};function n(a,s){const o=t;return r(),e(o)}const i=c(_,[["render",n]]);export{i as default};
