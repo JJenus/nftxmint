@@ -1,1 +1,0 @@
-import{u as a}from"./cookie.-oMtdq_i.js";import{d as t,k as r,l as s,a4 as l}from"./swiper-vue.YPEZXV01.js";import"./entry.Y1R9GXiN.js";const c=t({__name:"auth",setup(n){const e=a("reload",{maxAge:86400});return e.value=!1,(o,m)=>(r(),s("div",null,[l(o.$slots,"default")]))}});export{c as default};

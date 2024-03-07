@@ -12,6 +12,7 @@
 		}
 		const amount = currency(cAmount, {
 			symbol: "",
+			precision: 8,
 		}).format();
 		return amount;
 	};
@@ -128,6 +129,7 @@
 								></span>
 							</div>
 							<!--end::Info-->
+							<div class="fs-2 fw-bold mb-8">ETH {{ balance() }}</div>
 						</div>
 						<!--end::User-->
 

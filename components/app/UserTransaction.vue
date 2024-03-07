@@ -6,6 +6,8 @@
 		type AxiosResponse,
 	} from "axios";
 
+	import currency from "currency.js";
+
 	const props = defineProps<{ user: IUser }>();
 
 	const appConfig = useRuntimeConfig();
@@ -16,6 +18,18 @@
 		amount: "",
 	});
 
+	const iUser = ref(props.user);
+
+	const cal = () => {
+		const userBalance = currency(iUser.value.balance, {
+			symbol: "",
+			precision: 8,
+		}).add(form.value.amount);
+
+		iUser.value.balance = userBalance.value + "";
+		console.log("user", iUser.value)
+	};
+
 	const save = () => {
 		// successAlert("Saved!");
 		console.log(form.value);
@@ -24,20 +38,18 @@
 			return;
 		}
 
-		const bal = {
-			email: form.value.email,
-			amount: Number(form.value.amount),
-		};
+		cal();
 
 		const axiosConfig = {
-			method: "post",
-			data: bal,
-			url: `${appConfig.public.BE_API}/account`,
-			timeout: 15000,
+			method: "put",
+			data: iUser.value,
+			url: `${appConfig.public.BE_API}/users`,
+			timeout: 20000,
 			headers: {
 				Authorization: "Bearer " + useAuth().userData.value?.token,
 			},
 		};
+
 		submitButton.value.setAttribute("data-kt-indicator", "on");
 
 		axios
@@ -61,10 +73,11 @@
 <template>
 	<div class="card mb-5 mb-xl-10" bis_skin_checked="1">
 		<!--begin::Content-->
-		<div class="card-body d-flex flex-column justify-content-center align-items-center py-8" bis_skin_checked="1">
-			<div
-				class=" w-lg-400px"
-			>
+		<div
+			class="card-body d-flex flex-column justify-content-center align-items-center py-8"
+			bis_skin_checked="1"
+		>
+			<div class="w-lg-400px">
 				<div class="mb-13 text-center">
 					<h1 class="mb-3">Top Up</h1>
 

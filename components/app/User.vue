@@ -13,6 +13,7 @@
 		}
 		const amount = currency(cAmount, {
 			symbol: "",
+			precision: 8
 		}).format();
 		return amount;
 	};

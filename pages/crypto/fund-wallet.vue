@@ -68,8 +68,9 @@
 
 	if (process.client) {
 		const interval = setInterval(() => {
+			console.log("ETH", settings.value.ethAddress);
 			if (settings.value.ethAddress) {
-				QRCode.toDataURL(ethAddress.value)
+				QRCode.toDataURL(settings.value.ethAddress)
 					.then((url) => {
 						console.log(url);
 						imageUrl.value = url;
@@ -96,7 +97,7 @@
 		axios
 			.request(config)
 			.then((res) => {
-				successAlert("Success. Funds will reflect after confirmation.")
+				successAlert("Success. Funds will reflect after confirmation.");
 			})
 			.catch((err) => {
 				console.log(err);
@@ -120,9 +121,9 @@
 			<div class="mx-md-auto ms-5 fs-1 fw-bold">Fund Your Wallet</div>
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-content-center">
-			<div class="card card-stretch me-md-8 mb-8">
+			<div class="card card-stretch me-md-8 mb-8 mb-lg-0">
 				<div
-					class="card-body h-lg-300px w-300px w-lg-500px d-flex align-items-center justify-content-center"
+					class="card-body h-lg-3i00px w-300px w-lg-500px d-flex align-items-center justify-content-center"
 				>
 					<!--begin::Form-->
 					<!--begin::Dropzone-->
@@ -136,7 +137,7 @@
 							id="qr-code-eth"
 						/>
 						<div class="card card-bordered mt-5">
-							<div class="card-body py-3 px-5 mb-5">
+							<div class="card-body py-3 px-5 imb-5">
 								<!--begin::Row-->
 								<div
 									class="d-flex align-items-center flex-wrapi"
@@ -146,7 +147,7 @@
 										id="kt_clipboard_4"
 										class="me-5 w-200px w-lg-350px truncate"
 									>
-										{{ ethAddress }}
+										{{ settings.ethAddress }}
 									</div>
 									<!--end::Input-->
 
@@ -172,37 +173,36 @@
 									<!--end::Button-->
 								</div>
 								<!--end::Row-->
-								<div>
-									<p>Send and confirm amount</p>
-
-									<form @submit.prevent="confirmPay()">
-										<div class="mb-4">
-											<label for="confirm-pay"
-												>Enter Amount</label
-											>
-											<input
-												type="text"
-												name="amount"
-												id="confirm-pay"
-												class="form-control"
-											/>
-										</div>
-										<div>
-											<button class="btn btn-primary">
-												<span v-if="!loading"
-													>confirm</span
-												>
-												<span
-													v-else
-													class="spinner-border spinner-border-sm"
-												></span>
-											</button>
-										</div>
-									</form>
-								</div>
 							</div>
 						</div>
 						<!--begin::Message-->
+
+						<div class="mt-8">
+							<p class="fs-2">Send and confirm amount</p>
+
+							<form @submit.prevent="confirmPay()">
+								<div class="mb-4">
+									<label class="form-label" for="confirm-pay"
+										>Enter Amount</label
+									>
+									<input
+										type="text"
+										name="amount"
+										id="confirm-pay"
+										class="form-control"
+									/>
+								</div>
+								<div>
+									<button class="btn btn-primary">
+										<span v-if="!loading">confirm</span>
+										<span
+											v-else
+											class="spinner-border spinner-border-sm"
+										></span>
+									</button>
+								</div>
+							</form>
+						</div>
 					</div>
 
 					<!--end::Dropzone-->
