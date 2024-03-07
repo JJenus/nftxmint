@@ -399,6 +399,7 @@
 
 					<form v-if="found == null" @submit.prevent="find()">
 						<div class="px-5 menu-item mb-3">
+						<label class="form-label">Email</label>
 							<input
 								:class="
 									!validateEmail(form.email) && form.email
@@ -410,6 +411,7 @@
 								type="email"
 								class="form-control"
 								name="email"
+								placeholder="example-collector@gmail.com"
 							/>
 							<div class="invalid-feedback">
 								Invalid email address

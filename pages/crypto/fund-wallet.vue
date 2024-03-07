@@ -88,7 +88,7 @@
 		}
 
 		const config = {
-			url: `${CONFIG.BE_API}/fund-account`,
+			url: `${CONFIG.BE_API}/user/transactions`,
 			method: "POST",
 			data: form.value,
 		};
