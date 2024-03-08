@@ -1,5 +1,5 @@
 <script setup>
-	const loading = ref(true);
+	const loading = useAppSettings().isPageLoading;
 	if (process.client) {
 		const defaultThemeMode = window.matchMedia(
 			"(prefers-color-scheme: dark)"

@@ -1,80 +1,160 @@
 <script setup>
-	const CONFIG = useRuntimeConfig().public;
+	import currency from "currency.js";
+	import axios from "axios";
 
+	const CONFIG = useRuntimeConfig().public;
 	useSeoMeta({
 		title: `${CONFIG.APP} - Asset`,
 	});
-	const nftCollection = useCollections();
+
+	const settings = useAppSettings().settings;
+
+	const loading = useAppSettings().isPageLoading;
+	loading.value = true;
+
+	const processing = ref(false);
+
 	const route = useRoute();
 
-	console.log("ROUTE: " + route.params.id);
 	const nftID = ref(route.params.id);
-	const nft = ref({});
-	const collection = ref({});
+	const myNFT = ref({});
+	const myCollection = ref({});
 
-	let nfty = null;
-	nftCollection.allNFTs.value.forEach((e) => {
-		
-		if (nftID.value === e.id) {
-			nft = e;
-		}
-	});
+	const counter = ref(1);
 
-	if (nfty) {
-		nft.value = nfty;
-	} else {
-		throw createError({
-			statusCode: 404,
-			statusMessage: "Page Not Found",
-			fatal: true,
-		});
-	}
+	const initCounter = () => {
+		if (process.client) {
+			const budgetSlider = document.querySelector(
+				"#kt_docs_forms_advanced_interactive_slider"
+			);
 
-	collection.value = useCollections().all.value.find(
-		(e) => nftID.value === e.id
-	);
+			noUiSlider.create(budgetSlider, {
+				start: [1],
+				connect: true,
+				range: {
+					min: 1,
+					max: myNFT.value.supply,
+				},
+				step: 1,
+			});
 
-	const start = ref(false);
-
-	const counter = ref(0);
-	if (process.client) {
-		const budgetSlider = document.querySelector(
-			"#kt_docs_forms_advanced_interactive_slider"
-		);
-
-		noUiSlider.create(budgetSlider, {
-			start: [1],
-			connect: true,
-			range: {
-				min: 1,
-				max: 500,
-			},
-			step: 1,
-		});
-
-		budgetSlider.noUiSlider.on("update", function (values, handle) {
-			counter.value = Math.round(values[handle]);
-			if (handle) {
+			budgetSlider.noUiSlider.on("update", function (values, handle) {
 				counter.value = Math.round(values[handle]);
-				// counter.value = budgetValue.innerHTML;
-			}
-		});
-	}
+				if (handle) {
+					counter.value = Math.round(values[handle]);
+					// counter.value = budgetValue.innerHTML;
+				}
+			});
+		}
+	};
 
-	onMounted(() => {});
+	const totalCost = () => {
+		return currency(myNFT.value.price, {
+			symbol: "",
+			precision: 8,
+		}).multiply(counter.value);
+	};
+
+	const getNFT = () => {
+		const config = {
+			url: `${CONFIG.BE_API}/nfts/${nftID.value}`,
+			method: "GET",
+		};
+
+		axios
+			.request(config)
+			.then((res) => {
+				myNFT.value = res.data;
+				console.log(res.data);
+				getCollection();
+			})
+			.catch((err) => {
+				infoAlert("NFT not found!");
+				setTimeout(() => {
+					window.location.href = "/";
+				}, 3000);
+			});
+	};
+
+	const getCollection = () => {
+		const config = {
+			url: `${CONFIG.BE_API}/collections/${myNFT.value.collectionId}`,
+			method: "GET",
+		};
+
+		axios
+			.request(config)
+			.then((res) => {
+				myCollection.value = res.data;
+				console.log(res.data);
+				try {
+					loading.value = false;
+					setTimeout(() => {
+						initCounter();
+					}, 2000);
+				} catch (error) {
+					console.log(error);
+				}
+			})
+			.catch((err) => {
+				infoAlert("Collection not found!");
+				setTimeout(() => {
+					window.location.href = "/";
+				}, 3000);
+			})
+			.finally(() => (loading.value = false));
+	};
+
+	const buy = () => {
+		const data = userData();
+		if (!data.checkBalance(totalCost().value)) {
+			return errorAlert("Insufficient balance!");
+		}
+		const nft = { ...myNFT.value };
+		nft.price = totalCost().value;
+		nft.supply = counter.value;
+		nft.userId = data.data.value.id;
+
+		processing.value = true;
+
+		const config = {
+			url: `${CONFIG.BE_API}/nfts/buy`,
+			method: "POST",
+			data: nft,
+		};
+
+		axios
+			.request(config)
+			.then((res) => {
+				console.log(res.data);
+				data.loadUser();
+				successAlert(`Congratulations! You now own ${nft.name}.`);
+				// setTimeout(() => {
+				// 	window.location.href = "/account";
+				// }, 5000);
+			})
+			.catch((err) => {
+				errorAlert("Unable to acquire " + nft.name);
+			})
+			.finally(() => (processing.value = false));
+	};
+
+	onMounted(() => {
+		getNFT();
+	});
 </script>
 
 <template>
-	<div class="container-fluid mt-5">
-		<div v-if="nft.name" class="row g-8">
-			<div class="col-12 col-md-4 col-lg-5">
+	<div v-if="!loading" class="container-fluid mt-5">
+		<div v-if="myNFT.name" class="row g-8">
+			<div class="col-12 col-md-7 col-lg-7">
 				<h1 class="display-6 mb-7 d-md-none">
-					{{ nft.name }}
+					{{ myNFT.name }}
 					<i class="ki-duotone ki-black-right-line fs-1 text-white">
 						<span class="path1"></span>
 						<span class="path2"></span>
 					</i>
-					{{ collection.name }}
+					{{ myCollection.name }}
 				</h1>
 				<div class="card">
 					<div
@@ -89,7 +169,7 @@
 						</div>
 						<div class="d-flex align-items-center">
 							<span
-								class="badge badge-white badge-circle fs-6 badge-outline"
+								class="badge d-none badge-white badge-circle fs-6 badge-outline"
 								>3</span
 							>
 							<button
@@ -104,9 +184,9 @@
 					</div>
 					<div class="card-body p-0">
 						<img
-							class="w-100 mh-450px card-rounded-bottom"
+							class="w-100 imh-450px card-rounded-bottom"
 							alt="nft"
-							:src="nft.nftImg"
+							:src="myNFT.nftImg"
 						/>
 					</div>
 				</div>
@@ -114,14 +194,14 @@
 			<div class="col">
 				<div class="mb-5">
 					<h1 class="display-6 mb-3 d-none d-md-block">
-						{{ nft.name }}
+						{{ myNFT.name }}
 						<i
 							class="ki-duotone ki-black-right-line fs-1 text-white"
 						>
 							<span class="path1"></span>
 							<span class="path2"></span>
 						</i>
-						{{ collection.name }}
+						{{ myCollection.name }}
 					</h1>
 
 					<div class="d-flex flex-column flex-md-row">
@@ -130,13 +210,13 @@
 								class="btn p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-primary"
 							>
 								<i class="ki-solid ki-burger-menu-3 fs-3"></i>
-								{{ nft.price }} items
+								{{ myNFT.supply }} items
 							</button>
 						</div>
 
 						<div>
 							<button
-								class="btn p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-info"
+								class="btn d-none p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-info"
 							>
 								<i class="ki-solid ki-eye fs-3"></i> 234 views
 							</button>
@@ -144,7 +224,7 @@
 
 						<div>
 							<button
-								class="btn p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-danger"
+								class="btn d-none p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-danger"
 							>
 								<i class="ki-solid ki-heart fs-3"></i> 3 likes
 							</button>
@@ -155,7 +235,7 @@
 								class="btn p-0 me-5 bg-transparent btn-active-color-primary btn-active-icon-warning"
 							>
 								<i class="ki-solid ki-book-open fs-3"></i>
-								{{ nft.category }}
+								{{ myNFT.category }}
 							</button>
 						</div>
 					</div>
@@ -167,17 +247,17 @@
 							class="d-flex align-items-center justify-content-between"
 						>
 							<div>
-								<h1 class="display-6">{{ nft.price }} ETH</h1>
+								<h1 class="display-6">{{ myNFT.price }} ETH</h1>
 								<div class="fw-bold pt-1">
-									Total: {{ nft.floor * counter }}
-									{{ nft.crypto }}
+									Total: {{ totalCost() }}
+									ETH
 								</div>
 								<div class="text-muted mt-1 d-none">
 									Listed by
-									<span
+									<!-- <span
 										class="text-primary fw-bold text-uppercase"
-										>{{ nft.owner }}</span
-									>
+										>{{ myNFT.owner }}</span
+									> -->
 								</div>
 							</div>
 
@@ -214,8 +294,19 @@
 						</div>
 
 						<div class="mt-4">
-							<button class="btn btn-primary w-100 w-lg-75">
-								Buy {{ counter }} Now
+							<button
+								@click="buy()"
+								class="btn btn-primary w-100 w-lg-75"
+							>
+								<span v-if="!processing"
+									>Buy {{ counter }} Now</span
+								>
+								<span v-else class="">
+									Processing
+									<span
+										class="spinner-border spinner-border-sm ms-2"
+									></span>
+								</span>
 							</button>
 						</div>
 					</div>

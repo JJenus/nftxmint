@@ -14,6 +14,8 @@ export const useAppSettings = () => {
 
 	const settings = useState<AppSettings>("app-settings", () => init);
 
+	const isPageLoading = useState("load-page", () => true);
+
 	const load = () => {
 		const axiosConfig: any = {
 			method: "get",
@@ -39,6 +41,7 @@ export const useAppSettings = () => {
 
 	return {
 		settings,
+		isPageLoading,
 		load,
 	};
 };

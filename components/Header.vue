@@ -1,7 +1,12 @@
 <script setup lang="ts">
-	const config = useRuntimeConfig().public;
+	import currency from "currency.js";
+
 	const auth = useAuth();
 	const user = userData().data;
+
+	const balance = () => {
+		return currency(user.value.balance, { symbol: "", precision: 2 });
+	};
 </script>
 
 <template>
@@ -80,7 +85,7 @@
 							<i
 								class="fa-brands fa-ethereum fs-2 text-warning me-1"
 							></i>
-							<span class="pb-5"> {{ user.balance }} ETH </span>
+							<span class="pb-5"> {{ balance() }} ETH </span>
 						</div>
 						<BalanceDropdown />
 					</div>

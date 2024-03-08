@@ -1,9 +1,12 @@
 <script setup lang="ts">
+	import currency from "currency.js";
+
 	const auth = useAuth();
 	const user = userData().data;
-	const logout = () => {
-		auth.logout();
-	};
+	
+	const balance = () => {
+		return currency(user.value.balance, {symbol: "", precision: 8})
+	}
 </script>
 <template>
 	<div
@@ -22,7 +25,7 @@
 					<div class="d-flex flex-column mb-4">
 						<span class="fw-bold"> Balance </span>
 						<div class="fs-2 fw-bold">
-							<span class="fs-sm">ETH</span> {{ user.balance }}
+							<span class="fs-sm">ETH</span> {{ balance() }}
 						</div>
 					</div>
 
