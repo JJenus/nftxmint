@@ -1,9 +1,10 @@
 <script setup>
+	import currency from "currency.js";
 	definePageMeta({
 		layout: ["app"],
 		middleware: "auth",
 	});
-	
+
 	const CONFIG = useRuntimeConfig().public;
 	const currentPage = "User Dashboard";
 
@@ -36,6 +37,9 @@
 		},
 	];
 
+	const balance = () => {
+		return currency(user.value.balance, { symbol: "length", precision: 8 });
+	};
 	onMounted(() => {
 		const paths = route.path.split("/");
 		console.log("ROUTE", paths);
@@ -163,7 +167,7 @@
 											class="fa-brands fa-ethereum fs-2 text-warning me-1"
 										></i>
 										<span class="pb-0">
-											{{ user.balance }} ETH
+											{{ balance() }} ETH
 										</span>
 									</div>
 
