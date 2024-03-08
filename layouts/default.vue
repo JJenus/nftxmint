@@ -1,5 +1,6 @@
 <script setup>
 	const config = useRuntimeConfig().public;
+	useCollections();
 
 	if (process.client) {
 		KTThemeMode.setMode("light");
@@ -8,37 +9,6 @@
 	console.log();
 	const user = userData().data;
 
-	const active = ref("all");
-	const collections = useCollections();
-
-	const navs = [
-		{
-			name: "All",
-			path: "/",
-			length: 30,
-		},
-		{
-			name: "Art",
-			path: "/category/art",
-			length: collections.art.value.length,
-		},
-		{
-			name: "Gaming",
-			path: "/category/gaming",
-			length: collections.gaming.value.length,
-		},
-		{
-			name: "Photography",
-			path: "/category/photography",
-			length: collections.photography.value.length,
-		},
-		{
-			name: "Music",
-			path: "/category/music",
-			length: collections.music.value.length,
-		},
-	];
-
 	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
 	loaded.value = false;
 	const showNav = ref(false);
@@ -46,20 +16,6 @@
 	onMounted(() => {
 		if (process.client) {
 			KTThemeMode.setMode("dark");
-		}
-		const paths = route.path.split("/");
-		if (paths[2]) {
-			active.value = paths[2];
-			showNav.value =
-				active.value == "all" ||
-				active.value == "music" ||
-				active.value == "art" ||
-				active.value == "photography";
-
-			console.log("Show navs: " + showNav.value);
-		} else if (!paths[1]) {
-			active.value = "all";
-			showNav.value = true;
 		}
 	});
 </script>
@@ -102,43 +58,9 @@
 								class="app-content flex-column-fluid"
 							>
 								<div
-									v-if="showNav === true"
-									class="mb-3 container"
+]									class="mb-3 container"
 								>
-									<div class="hover-scroll-x hide-scrollbar">
-										<ul
-											class="nav nav-tabs nav-pills d-flex flex-nowrap border-0 me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px"
-										>
-											<li
-												v-for="nav in navs"
-												class="nav-item me-08 mb-md-2"
-												@click="active = nav.name"
-											>
-												<NuxtLink
-													v-if="nav.length > 0"
-													class="nav-link w-100 bg-transparent btn btn-color-white btn-active-color-white btn-active-light btn-sm"
-													:class="
-														active ==
-														nav.name.toLowerCase()
-															? 'active'
-															: ''
-													"
-													:to="nav.path"
-												>
-													<span
-														class="d-flex flex-column align-items-start"
-													>
-														<span
-															class="fs-4 fw-bold"
-															>{{
-																nav.name
-															}}</span
-														>
-													</span>
-												</NuxtLink>
-											</li>
-										</ul>
-									</div>
+									<Navbar />
 								</div>
 
 								<!--begin::Content container-->

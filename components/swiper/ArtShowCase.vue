@@ -1,7 +1,4 @@
 <script setup>
-	const open = (nftPath) => {
-		navigateTo(`/asset/${nftPath}`);
-	};
 	const arts = useCollections().art;
 </script>
 

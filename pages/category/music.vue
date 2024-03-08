@@ -6,7 +6,8 @@
 	useSeoMeta({
 		title: `${CONFIG.APP} - ${currentPage}`,
 	});
-	const NFTs = useCollections().music;
+	const useCollection = useCollections()
+	const NFTs = useCollection.music;
 	const all = NFTs.value.reduce((c, p) => {
 		p.nfts.forEach((e) => c.push(e));
 		return c;
