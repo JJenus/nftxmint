@@ -29,7 +29,6 @@ export const useCollections = () => {
 			.request(axiosConfig)
 			.then((response) => {
 				val.value = response.data;
-				console.log(url, val.value);
 			})
 			.catch((error): void => {
 				console.log(error);

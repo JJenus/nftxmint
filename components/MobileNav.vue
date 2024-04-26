@@ -49,20 +49,18 @@
 						data-kt-menu-expand="false"
 					>
 						<!--begin:Menu item-->
-						<a href="/account" class="menu-item menu-accordion">
-							<!--begin:Menu link--><span class="menu-link"
-								><span class="menu-icon">
+						<a href="/account" class="menu-item">
+							<!--begin:Menu link-->
+							<span class="menu-link">
+								<span class="menu-icon">
 									<i class="ki-solid fs-2 ki-user"> </i>
 								</span>
 								<span class="menu-title">Profile</span>
 							</span>
 						</a>
-						<a
-							href="/studio/create"
-							data-kt-menu-trigger="click"
-							class="menu-item menu-accordion"
-						>
-							<!--begin:Menu link--><span class="menu-link"
+						<a href="/studio/create" class="menu-item">
+							<!--begin:Menu link-->
+							<span class="menu-link"
 								><span class="menu-icon">
 									<i class="ki-solid fs-2 ki-pencil"> </i>
 								</span>

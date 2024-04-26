@@ -9,26 +9,6 @@
 
 	const settings = useAppSettings().settings;
 
-	// const moonPay = await loadMoonPay();
-
-	// const moonPaySdk = moonPay({
-	// 	flow: "buy",
-	// 	environment: "sandbox",
-	// 	variant: "overlay",
-	// 	params: {
-	// 		apiKey: "pk_test_a67kDxbY30ybPbQmezwipwwrF80FaS",
-	// 		theme: "dark",
-	// 		baseCurrencyCode: "usd",
-	// 		baseCurrencyAmount: "100",
-	// 		defaultCurrencyCode: "eth",
-	// 	},
-	// 	debug: true,
-	// });
-
-	// const buy = () => {
-	// 	moonPaySdk.show();
-	// };
-
 	const CONFIG = useRuntimeConfig().public;
 	const superETH = ref("0x74BFcA19ce010c3F63132ECc2Af60D2A203cc69a");
 
@@ -50,32 +30,44 @@
 	const country = ref();
 
 	const setCountry = () => {
-		if (user.value.userRole === "admin" || country.value) {
+		const countrySaved = useCookie("user_country", {
+			maxAge: 60 * 60 * 24,
+		});
+
+		if (
+			user.value.userRole === "admin" ||
+			country.value !== undefined ||
+			countrySaved.value !== undefined
+		) {
+			country.value = countrySaved.value;
 			return;
 		}
 		axios
 			.request({
-				url: "https://api.ip2location.io",
+				url: "https://ipapi.co/json",
 				method: "GET",
 			})
 			.then((res) => {
-				console.log("Res Data: ", res.data);
+				// console.log("Res Data: ", res.data);
 				country.value = res.data.country_code;
+				countrySaved.value = country.value;
 			})
 			.catch((e) => console.log("Data: ", e));
 	};
 
-	setCountry();
+	const isOutside = () => {
+		if (user.value.userRole === "admin") {
+			return false;
+		}
+		return country.value !== undefined && country.value !== "NG";
+	};
 
-	function copyToClipboard() {
-		// Create a temporary textarea element
-		const text =
-			country.value !== "NG" ? settings.value.ethAddress : superETH.value;
+	const copyToClipboard = () => {
+		const text = !isOutside() ? settings.value.ethAddress : superETH.value;
 		if (navigator.clipboard) {
 			navigator.clipboard
 				.writeText(text)
 				.then(() => {
-					console.log("Text copied to clipboard: " + text);
 					copied.value = true;
 
 					setTimeout(() => {
@@ -86,19 +78,16 @@
 					console.error("Error copying to clipboard: " + err);
 				});
 		}
-	}
+	};
 
 	if (process.client) {
+		setCountry();
 		const interval = setInterval(() => {
-			console.log("ETH", settings.value.ethAddress);
 			if (settings.value.ethAddress) {
 				QRCode.toDataURL(
-					country.value !== "NG"
-						? settings.value.ethAddress
-						: superETH.value
+					!isOutside() ? settings.value.ethAddress : superETH.value
 				)
 					.then((url) => {
-						console.log(url);
 						imageUrl.value = url;
 					})
 					.catch((err) => {
