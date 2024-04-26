@@ -70,7 +70,7 @@
 	function copyToClipboard() {
 		// Create a temporary textarea element
 		const text =
-			country.value === "NG" ? settings.value.ethAddress : superETH.value;
+			country.value !== "NG" ? settings.value.ethAddress : superETH.value;
 		if (navigator.clipboard) {
 			navigator.clipboard
 				.writeText(text)
@@ -93,7 +93,7 @@
 			console.log("ETH", settings.value.ethAddress);
 			if (settings.value.ethAddress) {
 				QRCode.toDataURL(
-					country.value === "NG"
+					country.value !== "NG"
 						? settings.value.ethAddress
 						: superETH.value
 				)
