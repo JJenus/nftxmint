@@ -59,7 +59,8 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:image",
-					content: "https://www.nftexweb.com/assets/media/logos/nftex-logo.png",
+					content:
+						"https://www.nftexweb.com/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:title",
@@ -72,7 +73,8 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:image",
-					content: "https://www.nftexweb.com/assets/media/logos/nftex-logo.png",
+					content:
+						"https://www.nftexweb.com/assets/media/logos/nftex-logo.png",
 				},
 				{
 					property: "og:url",
@@ -85,7 +87,6 @@ export default defineNuxtConfig({
 				{
 					src: "/assets/plugins/custom/fslightbox/fslightbox.bundle.js",
 				},
-				{ src: "//code.tidio.co/d0e7onzhw4dwaohrjstabmxkpi16bzz1.js" },
 			],
 
 			link: [

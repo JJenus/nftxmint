@@ -57,9 +57,7 @@
 								id="kt_app_content"
 								class="app-content flex-column-fluid"
 							>
-								<div
-]									class="mb-3 container"
-								>
+								<div ] class="mb-3 container">
 									<Navbar />
 								</div>
 
