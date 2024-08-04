@@ -19,22 +19,6 @@
 		KTThemeMode.setMode("dark");
 	}
 
-	useHead({
-		script: [
-			{
-				type: "text/javascript",
-				innerHTML:
-					"window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}",
-			},
-			{
-				id: "zsiqscript",
-				src: "https://salesiq.zohopublic.com/widget?wc=siqeb37dbc7453e846f9551c3a4e073cf91",
-				defer: true,
-			},
-		],
-		__dangerouslyDisableSanitizers: ["script"],
-	});
-
 	onMounted(() => {
 		if (process.client) {
 			var target = document.querySelector("#block-ui");
